@@ -12,6 +12,7 @@
 #include <vector>
 #include <map>
 #include "tinyxml2.h"
+#include <algorithm>
 
 class CFG{
 public:
@@ -27,6 +28,7 @@ public:
 	void setTerminals(const std::vector<char>& terminals);
 	const std::vector<char>& getVariables() const;
 	void setVariables(const std::vector<char>& variables);
+	friend std::ostream& operator<<(std::ostream& out, CFG& object);
 
 private:
 
@@ -35,6 +37,8 @@ private:
 	std::vector<char> terminals;
 	std::vector<char> variables;
 	char startVariable;
+	std::vector< std::pair<char,std::string> > parseRules(tinyxml2::XMLElement* prNode);
+
 };
 
 

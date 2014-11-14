@@ -40,6 +40,7 @@ void CFG::setVariables(const std::vector<char>& variables) {
 
 CFG::CFG(std::string fileName){
 
+	std::vector<std::pair<char, std::string> > foundRules;
 	std::vector<char> tempTerminals;
 	std::vector<char> tempVariables;
 	char tempStartVar;
@@ -70,13 +71,9 @@ CFG::CFG(std::string fileName){
 
 	if(termNode != NULL){
 		std::string terminalString = termNode->GetText();
-		std::cout << "Terminals: ";
 		for(unsigned int i = 0; i < terminalString.size(); i++){
 			tempTerminals.push_back( terminalString[i] );
-			std::cout << terminalString[i];
-
 		}
-		std::cout << std::endl;
 	}
 
 	else{
@@ -91,13 +88,9 @@ CFG::CFG(std::string fileName){
 
 	if(varNode != NULL){
 		std::string variableString = varNode->GetText();
-		std::cout << "Variables: ";
 		for(unsigned int i = 0; i < variableString.size(); i++){
 			tempVariables.push_back( variableString[i] );
-			std::cout << variableString[i];
-
 		}
-		std::cout << std::endl;
 	}
 
 	else{
@@ -112,13 +105,7 @@ CFG::CFG(std::string fileName){
 
 	if(ssNode != NULL){
 		std::string ssString = ssNode->GetText();
-		std::cout << "Start Symbol: ";
-
 			tempStartVar = ssString[0];
-			std::cout << ssString[0];
-
-
-		std::cout << std::endl;
 	}
 
 	else{
@@ -129,14 +116,129 @@ CFG::CFG(std::string fileName){
 	//load and construct the productions map.
 	/////////////////////////////
 
+	tinyxml2::XMLElement* prNode = root->FirstChildElement( "PRODUCTIONS" );
+	if(prNode != NULL){
 
+		//try to locate and parse all rules via the parseRules function.
+		foundRules = parseRules(prNode);
 
+	}
+	else{
 
+		std::cout << "No productions section found in XML, aborting" << std::endl;
+		return;
 
+	}
+
+	//If we ended up here, all data should be parsed
+	//Initialize all data members and display any info we need to.
+	//////////////////////////////////////////////////////////////
+
+	//Make sure the start variable is in the parsed variables and initialize the member.
+
+	if(std::find(tempVariables.begin(),tempVariables.end(),tempStartVar) != tempVariables.end()){
+
+		setStartVariable(tempStartVar);
+
+	}
+	else{
+		std::cout << "The specified start variable is not in the variable list, aborting..." << std::endl;
+		return;
+	}
+
+	//don't know if I should do checks on the rules and stuff, not doing that for now.
+	setVariables ( tempVariables );
+	setTerminals ( tempTerminals );
+
+	std::multimap<char, std::string> tempProductions;
+
+	for( std::pair<char,std::string>& rule : foundRules ){
+		tempProductions.insert(rule);
+	}
+
+	setProductions(tempProductions);
 
 }
 
 
 
+std::vector<std::pair<char, std::string> > CFG::parseRules(tinyxml2::XMLElement* prNode) {
+	std::vector<std::pair<char, std::string> > returnRules;
+
+	//look for first "HEAD" tag
+	tinyxml2::XMLElement* prChildNode = prNode->FirstChildElement( "HEAD" );
+
+	//there can be multiple of these so loop over them as long as we encounter them.
+	while(prChildNode != NULL){
+
+		//create variables to hold production info
+		std::string headVar;
+		std::string ruleBody;
+
+		//find the attribute containing the HEAD variable.
+		const tinyxml2::XMLAttribute* headVarAttr = prChildNode->FirstAttribute();
+
+		if( headVarAttr != NULL){
+			//extract which variable is in the head
+			headVar = headVarAttr->Value();
+			//try to locate the body of the production
+			tinyxml2::XMLElement* prBodyNode = prChildNode->FirstChildElement( "BODY" );
+
+			if(prBodyNode != NULL){
+				//extract the body from the body node
+				ruleBody = prBodyNode->GetText();
+				//add a new rule with HEAD 'headVar' and body 'ruleBody' to the return Rules
+				returnRules.push_back( std::pair<char, std::string>( headVar[0] , ruleBody) );
+
+			}
+
+			else{
+
+				std::cout << "warning: rule with no body encountered, ignoring..." << std::endl;
 
 
+			}
+
+		}
+		else{
+
+			std::cout << "Warning: Parser encountered a rule with no head variable, ignoring." << std::endl;
+		}
+		prChildNode = prChildNode->NextSiblingElement();
+	}
+
+	return returnRules;
+
+}
+
+std::ostream& operator<<(std::ostream& out, CFG& object) {
+	out<<"___________________________________"<<std::endl;
+	//write terminals to console
+	out<< "TERMINALS: " << std::endl;
+	for(char& t : object.terminals){
+		out << t;
+	}
+	out<< std::endl;
+
+	//write variables to console
+	out<< "VARIABLES: " << std::endl;
+	for(char& v : object.variables){
+		out << v;
+	}
+	out<< std::endl;
+
+	//write start var to console
+	out << "START VAR: " << object.startVariable << std::endl;
+
+	//write transitions to console
+	out << "PRODUCTIONS: " << std::endl;
+	for(std::multimap<char,std::string>::iterator it = object.productions.begin(); it != object.productions.end(); ++it){
+		out << "\t";
+		out << it->first << " -> " << it->second << std::endl;
+	}
+	out<<"=================================="<<std::endl;
+
+
+	return out;
+
+}
