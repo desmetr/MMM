@@ -1,0 +1,3 @@
+moet geplaatst worden in de directory van de executable.
+kan via command line gestart worden met "./Executable_name xml_file.xml"
+bv.   ./CFG example.xml
