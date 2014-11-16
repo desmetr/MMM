@@ -1,0 +1,29 @@
+<CFG>
+
+	<TERMINALS>abcdef</TERMINALS>
+
+	<VARIABLES>XYZ</VARIABLES>
+
+	<STARTVAR>X</STARTVAR>
+
+	<PRODUCTIONS>
+
+		<HEAD var="X">
+			<BODY>abcd</BODY>
+		</HEAD>
+
+		<HEAD var="X">
+			<BODY>aYc</BODY>
+		</HEAD>
+		
+		<HEAD var="X">
+			<BODY></BODY>
+		</HEAD>
+
+		<HEAD var="Y">
+			<BODY>def</BODY>
+		</HEAD>
+
+	</PRODUCTIONS>
+
+</CFG>
