@@ -28,13 +28,13 @@ void State::setTransitions(const std::vector<Transition>& transitions) 	{	this->
 void State::setAcceptState(bool acceptState) 							{	this->acceptState = acceptState;	}
 void State::setBeginState(bool beginState) 								{	this->beginState = beginState;		}
 
-std::string State::toString() {
-	string outputString = "";
+char State::toString() {
+//	string outputString = "";
 
-	for (const auto& transition : this->transitions)	{
-		outputString += stateName + ", ";
-		outputString += transition.toString();
-	}
-
-	return outputString;
+//	for (const auto& transition : this->transitions)	{
+//		outputString += stateName + ", ";
+//		outputString += transition.toString();
+//	}
+	char outputChar = stateName;
+	return outputChar;
 }

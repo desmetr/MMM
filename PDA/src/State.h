@@ -29,7 +29,7 @@ public:
 	void setAcceptState(bool acceptState);
 	void setBeginState(bool beginState);
 
-	std::string toString();
+	char toString();
 
 private:
 	char stateName;

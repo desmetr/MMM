@@ -11,6 +11,7 @@
 #include <stack>
 #include <string>
 #include <set>
+#include <sstream> 
 #include "tinyxml.h"
 #include "tinystr.h"
 #include "State.h"
@@ -27,6 +28,8 @@ public:
 
 	SuccessEnum parseXML(char* fileName);
 
+	void print();
+	
 private:
 	std::stack<std::string> PDAStack;
 	std::vector<State> states;

@@ -14,15 +14,17 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
+	PDA pda;
 	if (argc == 2)	{
 		char* fileName = argv[1];
 		cout << "Opening and parsing " << fileName << endl;
-		PDA pda;
 		pda.parseXML(fileName);
 	}
 	else	{
 		cerr << "Error, no file specified." << endl;
 	}
+	
+	pda.print();
 
 	return 0;
 }
