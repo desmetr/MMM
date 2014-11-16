@@ -11,6 +11,7 @@ int main(int argc, char* argv[]){
 		char* fileName = argv[1];
 		std::cout << "Opening and parsing: " << fileName << std::endl;
 		CFG newCFG(fileName);
+		std::cout << newCFG;
 	}
 	else{
 		std::cout << "error, no file specified." << std::endl;
