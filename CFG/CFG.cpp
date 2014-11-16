@@ -160,7 +160,41 @@ CFG::CFG(std::string fileName){
 
 }
 
+std::vector<std::string> CFG::getBody(const char head) {
+	//returns the body of all rules for a certain variable;
+	//if there is no rule with the variable as head, it'll return the empty vector!
 
+	std::cout << "Productions for " << head <<" => ";
+
+	std::vector<std::string> foundProductions;
+	if(productions.count(head) == 0){
+
+		std::cout << "Warning: variable " << head <<" has no production bodies, returning empty." << std::endl;
+		return foundProductions;
+
+	}
+	else{
+
+		std::pair< std::multimap< char, std::string >::iterator, std::multimap< char, std::string >::iterator> range;
+		range = productions.equal_range(head);
+
+		for(std::multimap<char,std::string>::iterator it = range.first; it != range.second; ++it){
+
+			if(it->first == head){
+
+				foundProductions.push_back(it->second);
+				std::cout << it->second << "  |  ";
+			}
+
+		}
+
+	}
+	std::cout << std::endl;
+	return(foundProductions);
+
+
+
+}
 
 std::vector<std::pair<char, std::string> > CFG::parseRules(tinyxml2::XMLElement* prNode) {
 	std::vector<std::pair<char, std::string> > returnRules;
@@ -242,3 +276,5 @@ std::ostream& operator<<(std::ostream& out, CFG& object) {
 	return out;
 
 }
+
+

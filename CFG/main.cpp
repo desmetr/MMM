@@ -12,6 +12,8 @@ int main(int argc, char* argv[]){
 		std::cout << "Opening and parsing: " << fileName << std::endl;
 		CFG newCFG(fileName);
 		std::cout << newCFG;
+		newCFG.getBody('X');
+		newCFG.getBody('Y');
 	}
 	else{
 		std::cout << "error, no file specified." << std::endl;

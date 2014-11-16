@@ -29,6 +29,9 @@ public:
 	const std::vector<char>& getVariables() const;
 	void setVariables(const std::vector<char>& variables);
 	friend std::ostream& operator<<(std::ostream& out, CFG& object);
+	std::vector<std::string> getBody(char head);
+
+
 
 private:
 
