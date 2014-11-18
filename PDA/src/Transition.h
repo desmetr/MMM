@@ -16,20 +16,27 @@ public:
 	virtual ~Transition();
 
 	const std::string& getInputSymbol() const;
-	void setInputSymbol(const std::string& inputSymbol);
 	const std::string& getStackSymbolToPop() const;
-	void setStackSymbolToPop(const std::string& stackSymbolToPop);
 	const std::string& getStackSymbolToPush() const;
+	const std::string& getBeginState() const;
+	const std::string& getEndState() const;
+	
+	void setInputSymbol(const std::string& inputSymbol);
+	void setStackSymbolToPop(const std::string& stackSymbolToPop);
 	void setStackSymbolToPush(const std::string& stackSymbolToPush);
+	void setBeginState(const std::string& beginState);
+	void setEndState(const std::string& endState);
 
-	// I used a toString method instead of a print method,
-	// because the output of this method will be used in the State class.
+	// I used a toString method instead of a print method, because the output of this method will be used in the State class.
 	std::string toString() const;
 
 private:
 	std::string inputSymbol;
 	std::string stackSymbolToPop;
 	std::string stackSymbolToPush;
+	std::string beginState;
+	std::string endState;
+
 };
 
 #endif /* TRANSITION_H_ */

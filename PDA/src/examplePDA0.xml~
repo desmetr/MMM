@@ -29,7 +29,7 @@
 		<STACK_SYMBOL_TO_PUSH>Z</STACK_SYMBOL_TO_PUSH>
 		<END_STATE>1</END_STATE>
 	</TRANSITION>
-	<TRANSITION numberOfTransition = "0"> 				<!-- NumberOfTransition is 0 because it is the first transition starting from state 1. -->
+	<TRANSITION numberOfTransition = "1">
 		<BEGIN_STATE>1</BEGIN_STATE>
 		<INPUT>a</INPUT>
 		<STACK_SYMBOL_TO_POP>Z</STACK_SYMBOL_TO_POP>

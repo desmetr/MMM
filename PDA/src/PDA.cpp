@@ -46,7 +46,8 @@ SuccessEnum PDA::parseXML(char* fileName) {
 	unsigned int numberOfAcceptStates;
 
 	try	{
-		for (TiXmlElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())	{
+		// Start parsing the general information of the PDA.
+		for (TiXmlElement* elem = root->FirstChildElement(); elem != nullptr; elem = elem->NextSiblingElement())	{
 			string elemName = elem->Value();
 			if (elemName == "STATES")	{
 				string statesString = elem->GetText();
@@ -79,67 +80,139 @@ SuccessEnum PDA::parseXML(char* fileName) {
 			}
 			if (elemName == "START_STACK_SYMBOL")	{
 				startStackSymbol = elem->GetText();
+				PDAStack.push(startStackSymbol);
 			}
 			if (elemName == "ACCEPT_STATES")	{
 				string acceptStatesString = elem->GetText();
 				numberOfAcceptStates = acceptStatesString.size();
-	
+				
 				for (unsigned int i = 0; i < numberOfAcceptStates; i++)	{
-					char acceptStateChar = acceptStatesString[i];
-					int acceptStateInt;
-					stringstream stream(acceptStateChar);
-					stream >> acceptStateInt;
+					char* acceptStateChar = &acceptStatesString[i];
+					int acceptStateInt = atoi(acceptStateChar);
 					states[acceptStateInt].setAcceptState(true);
 				}
-				for (const auto& state : states)	{
-					cout << state.isAcceptState() << " ";
+			}
+			
+			unsigned int currentState = 0;
+			
+			// Start parsing the transitions. This is a level deeper, so we need another for loop.
+			const char* numberOfTransitionChar = elem->Attribute("numberOfTransition");
+			int numberOfTransition = atoi(numberOfTransitionChar);
+			for (TiXmlElement* transElem = elem->FirstChildElement(); transElem != nullptr; transElem = transElem->NextSiblingElement())	{
+				string transElemName = transElem->Value();
+				if (transElemName == "BEGIN_STATE")	{
+					string beginStateString = transElem->GetText();
+					currentState = atoi(beginStateString.c_str());
+					states[currentState].getTransitions()[numberOfTransition].setBeginState(beginStateString);
 				}
-				 cout << endl;
+				if (transElemName == "INPUT")	{
+					states[currentState].getTransitions()[numberOfTransition].setInputSymbol(transElem->GetText());
+				}
+				if (transElemName == "STACK_SYMBOL_TO_POP")	{
+					//cout << typeid(transElem->GetText()).name() << endl;
+					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPop(transElem->GetText());
+				}
+				if (transElemName == "STACK_SYMBOL_TO_PUSH")	{
+					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPush(transElem->GetText());
+				}
+				if (transElemName == "END_STATE")	{
+					string endStateString = transElem->GetText();
+					states[currentState].getTransitions()[numberOfTransition].setEndState(endStateString);
+				}
 			}
 		}
+		
+		doc.Clear();
+		return SUCCESS;
 	}
 	catch (exception& e)	{
 		cout << e.what() << endl;
+		return FAILURE;
 	}
 }
 
 void PDA::print()	{
 	try	{
-//		cout << "Printing a PDA." << endl;
-//		cout << "States: ";
-//		for (unsigned int i = 0; i < states.size(); i++)	{
-//			cout << states[i].toString() << " ";
-//		}
-//		cout << endl;
-//		
-//		cout << "Input alphabet: ";
-//		for (const auto& inputSymbol : inputAlphabet)	{
-//			cout << inputSymbol << " ";
-//		}
-//		cout << endl;
-//		
-//		cout << "Stack alphabet: ";
-//		for (const auto& stackSymbol : stackAlphabet)	{
-//			cout << stackSymbol << " ";
-//		}
-//		cout << endl;
-//		
-//		cout << "Start state: ";
-//		for (unsigned int i = 0; i < states.size(); i++)	{
-//			if (states[i].isBeginState())
-//				cout << states[i].toString() << " ";
-//		}
-//		cout << endl;
-//		
-//		cout << "Start stack symbol: ";
-//		cout << startStackSymbol << endl;
-		
-		cout << "Accept states: ";
+		cout << "Printing the PDA." << endl;
+		cout << "-----------------" << endl;
+		cout << "\tStates: ";
 		for (unsigned int i = 0; i < states.size(); i++)	{
-			if (states[i].isAcceptState())
-				cout << states[i].toString() << " ";
+			cout << "\t" << states[i].toString() << " ";
 		}
 		cout << endl;
+		
+		cout << "\tInput alphabet: ";
+		for (const auto& inputSymbol : inputAlphabet)	{
+			cout << "\t" << inputSymbol << " ";
+		}
+		cout << endl;
+		
+		cout << "\tStack alphabet: ";
+		for (const auto& stackSymbol : stackAlphabet)	{
+			cout << "\t" << stackSymbol << " ";
+		}
+		cout << endl;
+		
+		cout << "\tStart state: ";
+		for (unsigned int i = 0; i < states.size(); i++)	{
+			if (states[i].isBeginState())
+				cout << "\t" << states[i].toString() << " ";
+		}
+		cout << endl;
+		
+		cout << "\tStart stack symbol: ";
+		cout << "\t" << startStackSymbol << endl;
+		
+		cout << "\tAccept states: ";
+		for (unsigned int i = 0; i < states.size(); i++)	{
+			if (states[i].isAcceptState())
+				cout << "\t" << states[i].toString() << " ";
+		}
+		cout << endl << endl;
+		
+		/*cout << "Printing the transitions of the PDA" << endl;
+		cout << "-----------------------------------" << endl;
+		
+		cout << "\tBegin state: ";
+		for (unsigned int i = 0; i < states.size(); i++)	{
+			for (unsigned int j = 0; j < states[i].getTransitions().size(); j++)	{
+				cout << "\t" << states[i].getTransitions()[j].getBeginState() << endl;
+			}
+		}
+		cout << endl;
+		
+		cout << "\tInput to consume: ";
+		for (unsigned int i = 0; i < states.size(); i++)	{
+			for (unsigned int j = 0; j < states[i].getTransitions().size(); j++)	{
+				cout << "\t" << states[i].getTransitions()[j].getInputSymbol() << endl;
+			}
+		}
+		cout << endl;
+		
+		cout << "\tStack symbol to pop: ";
+		for (unsigned int i = 0; i < states.size(); i++)	{
+			for (unsigned int j = 0; j < states[i].getTransitions().size(); j++)	{
+				cout << "\t" << states[i].getTransitions()[j].getStackSymbolToPop() << endl;
+			}
+		}
+		cout << endl;
+		
+		cout << "\tStack symbol to push: ";
+		for (unsigned int i = 0; i < states.size(); i++)	{
+			for (unsigned int j = 0; j < states[i].getTransitions().size(); j++)	{
+				cout << "\t" << states[i].getTransitions()[j].getStackSymbolToPush() << endl;
+			}
+		}
+		cout << endl;
+		
+		cout << "\tEnd state: ";
+		for (unsigned int i = 0; i < states.size(); i++)	{
+			for (unsigned int j = 0; j < states[i].getTransitions().size(); j++)	{
+				cout << "\t" << states[i].getTransitions()[j].getEndState() << endl;
+			}
+		}
+		cout << endl;*/
+		
 	}
 	catch (exception& e)	{
 		cout << e.what() << endl;

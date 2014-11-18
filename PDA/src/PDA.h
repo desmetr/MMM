@@ -12,6 +12,7 @@
 #include <string>
 #include <set>
 #include <sstream> 
+#include <typeinfo>
 #include "tinyxml.h"
 #include "tinystr.h"
 #include "State.h"
@@ -27,7 +28,7 @@ public:
 	void setPdaStack(const std::stack<std::string>& pdaStack);
 
 	SuccessEnum parseXML(char* fileName);
-
+	
 	void print();
 	
 private:
@@ -36,7 +37,7 @@ private:
 	std::set<char> inputAlphabet;
 	std::set<char> stackAlphabet;
 	std::string startStackSymbol;
-
+	
 };
 
 #endif /* PDA_H_ */
