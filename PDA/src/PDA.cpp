@@ -47,7 +47,7 @@ SuccessEnum PDA::parseXML(char* fileName) {
 
 	try	{
 		// Start parsing the general information of the PDA.
-		for (TiXmlElement* elem = root->FirstChildElement(); elem != nullptr; elem = elem->NextSiblingElement())	{
+		for (TiXmlElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())	{
 			string elemName = elem->Value();
 			if (elemName == "STATES")	{
 				string statesString = elem->GetText();
@@ -94,35 +94,38 @@ SuccessEnum PDA::parseXML(char* fileName) {
 			}
 			
 			unsigned int currentState = 0;
-			
 			// Start parsing the transitions. This is a level deeper, so we need another for loop.
 			const char* numberOfTransitionChar = elem->Attribute("numberOfTransition");
-			int numberOfTransition = atoi(numberOfTransitionChar);
-			for (TiXmlElement* transElem = elem->FirstChildElement(); transElem != nullptr; transElem = transElem->NextSiblingElement())	{
+			cout << "########################" << endl;
+			int numberOfTransition = stoi(numberOfTransitionChar);
+			cout << numberOfTransition << endl;
+			for (TiXmlElement* transElem = elem->FirstChildElement(); transElem != NULL; transElem = transElem->NextSiblingElement())	{
 				string transElemName = transElem->Value();
 				if (transElemName == "BEGIN_STATE")	{
+					cout << "in begin state" << endl;
 					string beginStateString = transElem->GetText();
-					currentState = atoi(beginStateString.c_str());
+					cout << beginStateString << endl;
+//					currentState = atoi(beginStateString.c_str());
 //					states[currentState].getTransitions()[numberOfTransition].setBeginState(beginStateString);
-					states[currentState].getTransitions()[numberOfTransition].beginState = beginStateString;
+//					states[currentState].getTransitions()[numberOfTransition].beginState = beginStateString;
 				}
 				if (transElemName == "INPUT")	{
 //					states[currentState].getTransitions()[numberOfTransition].setInputSymbol(transElem->GetText());
-					states[currentState].getTransitions()[numberOfTransition].inputSymbol = transElem->GetText();
+//					states[currentState].getTransitions()[numberOfTransition].inputSymbol = transElem->GetText();
 				}
 				if (transElemName == "STACK_SYMBOL_TO_POP")	{
 					//cout << typeid(transElem->GetText()).name() << endl;
 //					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPop(transElem->GetText());
-					states[currentState].getTransitions()[numberOfTransition].stackSymbolToPop = transElem->GetText();
+//					states[currentState].getTransitions()[numberOfTransition].stackSymbolToPop = transElem->GetText();
 				}
 				if (transElemName == "STACK_SYMBOL_TO_PUSH")	{
 //					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPush(transElem->GetText());
-					states[currentState].getTransitions()[numberOfTransition].stackSymbolToPush = transElem->GetText();
+//					states[currentState].getTransitions()[numberOfTransition].stackSymbolToPush = transElem->GetText();
 				}
 				if (transElemName == "END_STATE")	{
-					string endStateString = transElem->GetText();
+//					string endStateString = transElem->GetText();
 //					states[currentState].getTransitions()[numberOfTransition].setEndState(endStateString);
-					states[currentState].getTransitions()[numberOfTransition].endState = endStateString;
+//					states[currentState].getTransitions()[numberOfTransition].endState = endStateString;
 				}
 			}
 		}
