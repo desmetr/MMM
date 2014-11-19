@@ -20,6 +20,8 @@ public:
 	//returns true when the string is in the language of the CFG.
 	bool testString(string newTest);
 
+	int findIndex(char var);
+
 	//for debug purposes.
 	void visualRepresentation();
 

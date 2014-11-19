@@ -49,12 +49,48 @@ bool CYK::testString(string newTest) {
 		for(multimap<char,string>::iterator it = productions.begin(); it != productions.end(); ++it){
 			for(unsigned int varInd =0; varInd < variables.size(); varInd ++){
 				if(it->first == variables[varInd] && it->second.size() == 1 && it->second[0] == newTest[stringPos]){
-					cout<<"set table entry to true "<<endl;
 					table[stringPos][0][varInd] = true;
 				}
 			}
 		}
 	}
+
+
+
+
+	//Main part of the algorithm
+	// the 5 double nested loop monster aka CYK algorithm
+	//let i be the length of the substring
+	//using X(ij)
+	//starting on row one to stringsize
+	for(unsigned int i = 2; i <= stringSize; i++){
+		//for colum 1 to column stringsize-i
+		for(unsigned int j=1; j <= stringSize-i+1; j++){
+			//possible division positions for substring
+			for(unsigned int k=1; k <= j+i-1; k++){
+				//find good productions
+				for(multimap<char,string>::iterator it = productions.begin(); it != productions.end(); it++){
+					for(unsigned int varInd =0; varInd < variables.size(); varInd ++){
+						if(it->first == variables[varInd] && it->second.size() == 2){
+							int ind1 = findIndex(it->second[0]);
+							int ind2 = findIndex(it->second[1]);
+							cout << "looked at " << j-1 << "," << k-1 << endl;
+							if( table[j-1][k-1][ind1] ){
+								cout<<"hit"<<endl;
+								table[j-1][i-1][varInd] = true;
+							}
+						}
+					}
+				}
+
+
+
+			}
+
+		}
+	}
+
+
 
 
 }
@@ -108,13 +144,19 @@ void CYK::visualRepresentation(){
 	}
 
 }
-/*
- * CYK.cpp
- *
- *  Created on: Nov 16, 2014
- *      Author: jago
- */
 
 
+int CYK::findIndex(char var){
+	vector<char> variables = grammar.getVariables();
+	unsigned int index = 0;
+	for(char v : variables){
+		if(v == var){
+			cout<<"Index for " << var << " is " << index << endl;
+			return index;
+		}
 
-
+		index++;
+	}
+	cout<<"oops at findIndex: index not found";
+	return(-1);
+}
