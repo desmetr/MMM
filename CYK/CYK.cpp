@@ -17,7 +17,11 @@ bool CYK::testString(string newTest) {
 	//generate the table for the algorithm.
 	generateTable(stringSize, symbolSize);
 
+	//get the production map
 	multimap<char,string> productions = grammar.getProductions();
+
+	//get the variables
+	vector<char> variables = grammar.getVariables();
 
 	//SPECIAL CASE [01] :: Empty string
 
@@ -39,14 +43,18 @@ bool CYK::testString(string newTest) {
 
 	}
 
-	//CONTINUE HERE.
-
-
-
-
-
-
-
+	//special case [02] :: first row
+	//todo find more elegant solution ;)
+	for(unsigned int stringPos = 0; stringPos <= stringSize; stringPos++){
+		for(multimap<char,string>::iterator it = productions.begin(); it != productions.end(); ++it){
+			for(unsigned int varInd =0; varInd < variables.size(); varInd ++){
+				if(it->first == variables[varInd] && it->second.size() == 1 && it->second[0] == newTest[stringPos]){
+					cout<<"set table entry to true "<<endl;
+					table[stringPos][0][varInd] = true;
+				}
+			}
+		}
+	}
 
 
 }
@@ -84,7 +92,7 @@ void CYK::generateTable(unsigned int stringSize, unsigned int symbolSize) {
 
 void CYK::visualRepresentation(){
 
-	//TURN YOUR HEAD 90° TO THE RIGHT AND GET A VISUAL REPRESENTATION OF THE TABLE
+	//TURN YOUR HEAD 90 TO THE RIGHT AND GET A VISUAL REPRESENTATION OF THE TABLE
 	//FOR DEBUG + WHEN I INEVITABILY FORGET WHAT THE TABLE LOOKS LIKE
 
 	for(unsigned int i = 0; i < table.size(); i++){
