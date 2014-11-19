@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
 		cerr << "Error, no file specified." << endl;
 	}
 	
-	pda.print();
+//	pda.print();
 
 	return 0;
 }
