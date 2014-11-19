@@ -15,6 +15,12 @@ public:
 	Transition();
 	virtual ~Transition();
 
+	std::string inputSymbol;
+	std::string stackSymbolToPop;
+	std::string stackSymbolToPush;
+	std::string beginState;
+	std::string endState;
+	
 	const std::string& getInputSymbol() const;
 	const std::string& getStackSymbolToPop() const;
 	const std::string& getStackSymbolToPush() const;
@@ -31,12 +37,7 @@ public:
 	std::string toString() const;
 
 private:
-	std::string inputSymbol;
-	std::string stackSymbolToPop;
-	std::string stackSymbolToPush;
-	std::string beginState;
-	std::string endState;
-
+	
 };
 
 #endif /* TRANSITION_H_ */

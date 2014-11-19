@@ -103,21 +103,26 @@ SuccessEnum PDA::parseXML(char* fileName) {
 				if (transElemName == "BEGIN_STATE")	{
 					string beginStateString = transElem->GetText();
 					currentState = atoi(beginStateString.c_str());
-					states[currentState].getTransitions()[numberOfTransition].setBeginState(beginStateString);
+//					states[currentState].getTransitions()[numberOfTransition].setBeginState(beginStateString);
+					states[currentState].getTransitions()[numberOfTransition].beginState = beginStateString;
 				}
 				if (transElemName == "INPUT")	{
-					states[currentState].getTransitions()[numberOfTransition].setInputSymbol(transElem->GetText());
+//					states[currentState].getTransitions()[numberOfTransition].setInputSymbol(transElem->GetText());
+					states[currentState].getTransitions()[numberOfTransition].inputSymbol = transElem->GetText();
 				}
 				if (transElemName == "STACK_SYMBOL_TO_POP")	{
 					//cout << typeid(transElem->GetText()).name() << endl;
-					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPop(transElem->GetText());
+//					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPop(transElem->GetText());
+					states[currentState].getTransitions()[numberOfTransition].stackSymbolToPop = transElem->GetText();
 				}
 				if (transElemName == "STACK_SYMBOL_TO_PUSH")	{
-					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPush(transElem->GetText());
+//					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPush(transElem->GetText());
+					states[currentState].getTransitions()[numberOfTransition].stackSymbolToPush = transElem->GetText();
 				}
 				if (transElemName == "END_STATE")	{
 					string endStateString = transElem->GetText();
-					states[currentState].getTransitions()[numberOfTransition].setEndState(endStateString);
+//					states[currentState].getTransitions()[numberOfTransition].setEndState(endStateString);
+					states[currentState].getTransitions()[numberOfTransition].endState = endStateString;
 				}
 			}
 		}
