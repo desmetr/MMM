@@ -17,6 +17,7 @@ int main(int argc, char* argv[]){
 		char* fileName = argv[1];
 		cout << "Opening and parsing: " << fileName << endl;
 		CFG newCFG(fileName);
+		cout << newCFG << endl;
 		CYK newCYK(newCFG);
 
 
@@ -28,7 +29,7 @@ int main(int argc, char* argv[]){
 
 	}
 	else{
-		cout << "error, no file & no strings specified." << endl;
+		cout << "error, no file or no strings specified." << endl;
 		cout << "Usage: ./CYK filename_of_xml.xml string_to_test1 string_to_test2 ...." << endl;
 
 	}

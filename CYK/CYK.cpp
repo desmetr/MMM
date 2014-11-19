@@ -55,41 +55,48 @@ bool CYK::testString(string newTest) {
 		}
 	}
 
+	for(unsigned int l = 1; l < stringSize; l ++){
+		cout << "ROW : " << l << "=======================================================" << endl;
+		for(unsigned int r = 0; r < stringSize - l; r++){
 
+			for(unsigned int t = 0; t < l; t++){
 
+				for(multimap<char,string>::iterator it = productions.begin(); it != productions.end(); ++it){
 
-	//Main part of the algorithm
-	// the 5 double nested loop monster aka CYK algorithm
-	//let i be the length of the substring
-	//using X(ij)
-	//starting on row one to stringsize
-	for(unsigned int i = 2; i <= stringSize; i++){
-		//for colum 1 to column stringsize-i
-		for(unsigned int j=1; j <= stringSize-i+1; j++){
-			//possible division positions for substring
-			for(unsigned int k=1; k <= j+i-1; k++){
-				//find good productions
-				for(multimap<char,string>::iterator it = productions.begin(); it != productions.end(); it++){
 					for(unsigned int varInd =0; varInd < variables.size(); varInd ++){
-						if(it->first == variables[varInd] && it->second.size() == 2){
-							int ind1 = findIndex(it->second[0]);
-							int ind2 = findIndex(it->second[1]);
-							cout << "looked at " << j-1 << "," << k-1 << endl;
-							if( table[j-1][k-1][ind1] ){
-								cout<<"hit"<<endl;
-								table[j-1][i-1][varInd] = true;
-							}
-						}
-					}
-				}
 
+						if(it->first == variables[varInd] && it->second.size() == 2){
+
+							unsigned int varIndexOne = findIndex(it->second[0]);
+							unsigned int varIndexTwo = findIndex(it->second[1]);
+
+							cout << "X[" << r << "," << l << "]:  ";
+							cout << variables[varInd] << " -> " << variables[varIndexOne] << variables[varIndexTwo] << " renders ";
+
+
+							cout << table[r][t][varIndexOne] << " x " <<  table[r+t+1][l-1][varIndexTwo] << endl;
+
+
+							cout << "Looking in: " << r << "," << t << "," << varIndexOne << "  &&  "<<r+ t+1 << "," << l - 1 << "," << varIndexTwo << endl;
+
+							if( table[r][t][varIndexOne] == true  && table[r+t+1][l - 1 ][varIndexTwo] == true){
+								cout<<"matchu matchu"<<endl;
+								table[r][l][varInd] = true;
+
+							}
+
+						}
+
+					}
+
+				}
 
 
 			}
 
 		}
-	}
 
+	}
 
 
 
@@ -132,7 +139,7 @@ void CYK::visualRepresentation(){
 	//FOR DEBUG + WHEN I INEVITABILY FORGET WHAT THE TABLE LOOKS LIKE
 
 	for(unsigned int i = 0; i < table.size(); i++){
-		cout<< " X[" << i +1  << "]";
+		cout<< " X[" << i  << "]";
 		for(unsigned int j = 0; j < table[i].size(); j++){
 			cout<< " [" << j +1 << "] "  << " {";
 			for(unsigned int k = 0; k < table[i][j].size(); k++){
@@ -151,7 +158,6 @@ int CYK::findIndex(char var){
 	unsigned int index = 0;
 	for(char v : variables){
 		if(v == var){
-			cout<<"Index for " << var << " is " << index << endl;
 			return index;
 		}
 
