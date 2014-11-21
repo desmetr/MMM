@@ -1,39 +1,78 @@
-<PDA>
+<pda>
 	<!-- The following tags contain the general information of the PDA. -->
-	<STATES>012</STATES>
-	<INPUT_ALPHABET>abc</INPUT_ALPHABET>
-	<STACK_ALPHABET>XZ</STACK_ALPHABET>
-	<START_STATE>0</START_STATE>
-	<START_STACK_SYMBOL>X</START_STACK_SYMBOL>
-	<ACCEPT_STATES>2</ACCEPT_STATES>
+	<input-alphabet>abc</input-alphabet>
+	<stack-alphabet>XZ</stack-alphabet>
+	<start-stack-symbol>X</start-stack-symbol>
 	
-	<!-- The following tags contain the transitions between the states. -->
-	<TRANSITION numberOfTransition = "0"> 				<!-- The attribute numberOfTransition indicates the number of the transition PER BEGIN STATE. -->
-		<BEGIN_STATE>0</BEGIN_STATE> 					<!-- The state where the transition starts.-->
-		<INPUT>a</INPUT> 								<!-- Input to consume. -->
-		<STACK_SYMBOL_TO_POP>X</STACK_SYMBOL_TO_POP> 	<!-- Symbol to pop from the stack. -->
-		<STACK_SYMBOL_TO_PUSH>XX</STACK_SYMBOL_TO_PUSH> <!-- Symbol(s) to push on the string. --> 
-		<END_STATE>0</END_STATE> 						<!-- The state where the transition ends. -->
+	<states numberOfStates="3">
+		<state number="0">
+			<transition number="0">
+				<input>a</input> 								
+				<stack-symbol-to-pop>X</stack-symbol-to-pop> 	
+				<stack-symbol-to-push>XX</stack-symbol-to-push>		
+				<end-state>0</end-state>
+			</transition>
+			<transition number="1">
+				<input>b</input>
+				<stack-symbol-to-pop>X</stack-symbol-to-pop>
+				<stack-symbol-to-push>XX</stack-symbol-to-push>
+				<end-state>0</end-state>
+			</transition>
+			<transition number="2">
+				<input>c</input>
+				<stack-symbol-to-pop>X</stack-symbol-to-pop>
+				<stack-symbol-to-push>Z</stack-symbol-to-push>
+				<end-state>1</end-state>
+			</transition>			
+		</state>
+		<state number="1">
+			<transition number="0">
+				<input>a</input>
+				<stack-symbol-to-pop>Z</stack-symbol-to-pop>
+				<stack-symbol-to-push>e</stack-symbol-to-push>  
+				<end-state>2</end-state>
+			</transition>		
+		</state>
+		<state number="2">
+			<transition number="0">
+				<input>c</input>
+				<stack-symbol-to-pop>Z</stack-symbol-to-pop>
+				<stack-symbol-to-push>X</stack-symbol-to-push>  
+				<end-state>3</end-state>
+			</transition>		
+		</state>
+		<state number="3">
+		</state>
+	</states>
+	
+	<!-- The following tags contain the transitions between the states.
+	<TRANSITION numberOfTransition="0"> 				
+		<BEGIN_STATE>0</BEGIN_STATE> 					
+		<INPUT>a</INPUT> 								
+		<STACK_SYMBOL_TO_POP>X</STACK_SYMBOL_TO_POP> 	
+		<STACK_SYMBOL_TO_PUSH>XX</STACK_SYMBOL_TO_PUSH> 
+		 						
 	</TRANSITION>
-	<TRANSITION numberOfTransition = "1"> 				<!-- NumberOfTransition is 1 because it is the second transition starting from state 0. -->
+	<TRANSITION numberOfTransition="1"> 				
 		<BEGIN_STATE>0</BEGIN_STATE>
 		<INPUT>b</INPUT>
 		<STACK_SYMBOL_TO_POP>X</STACK_SYMBOL_TO_POP>
 		<STACK_SYMBOL_TO_PUSH>XX</STACK_SYMBOL_TO_PUSH>
 		<END_STATE>0</END_STATE>
 	</TRANSITION>
-	<TRANSITION numberOfTransition = "2"> 				<!-- NumberOfTransition is 2 because it is the third transition starting from state 0. -->
+	<TRANSITION numberOfTransition="2"> 				
 		<BEGIN_STATE>0</BEGIN_STATE>
 		<INPUT>c</INPUT>
 		<STACK_SYMBOL_TO_POP>X</STACK_SYMBOL_TO_POP>
 		<STACK_SYMBOL_TO_PUSH>Z</STACK_SYMBOL_TO_PUSH>
 		<END_STATE>1</END_STATE>
 	</TRANSITION>
-	<TRANSITION numberOfTransition = "1">
+	<TRANSITION numberOfTransition="0"> 				
 		<BEGIN_STATE>1</BEGIN_STATE>
 		<INPUT>a</INPUT>
 		<STACK_SYMBOL_TO_POP>Z</STACK_SYMBOL_TO_POP>
-		<STACK_SYMBOL_TO_PUSH>e</STACK_SYMBOL_TO_PUSH> <!-- The symbol e is used to represent the empty string epsilon. -->	
+		<STACK_SYMBOL_TO_PUSH>e</STACK_SYMBOL_TO_PUSH>  
 		<END_STATE>2</END_STATE>
 	</TRANSITION>
-</PDA>
+	-->
+</pda>

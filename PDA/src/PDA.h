@@ -16,6 +16,8 @@
 #include "tinyxml.h"
 #include "tinystr.h"
 #include "State.h"
+#include "Utilities.h"
+#include "Transition.h"
 
 enum SuccessEnum {FAILURE, SUCCESS};
 

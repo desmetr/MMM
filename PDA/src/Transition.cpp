@@ -10,6 +10,11 @@
 using namespace std;
 
 Transition::Transition() {
+	inputSymbol = "";
+	stackSymbolToPop = "";
+	stackSymbolToPush = "";
+	beginState = "";
+	endState = "";
 }
 
 Transition::~Transition() {
@@ -21,16 +26,16 @@ const string& Transition::getStackSymbolToPush() const 						{	return stackSymbo
 const string& Transition::getBeginState() const								{	return beginState;			}
 const string& Transition::getEndState() const								{	return endState;			}
 
-void Transition::setInputSymbol(const string& inputSymbol) 					{	this->inputSymbol = inputSymbol;			}
-void Transition::setStackSymbolToPop(const string& stackSymbolToPop) 		{	this->stackSymbolToPop = stackSymbolToPop;	}
-void Transition::setStackSymbolToPush(const string& stackSymbolToPush) 		{	this->stackSymbolToPush = stackSymbolToPush;}
-void Transition::setBeginState(const string& beginState)					{	this->beginState = beginState;				}
-void Transition::setEndState(const string& endState)						{	this->endState = endState;					}
+void Transition::setInputSymbol(string& inputSymbol) 					{	this->inputSymbol = inputSymbol;			}
+void Transition::setStackSymbolToPop(string& stackSymbolToPop) 		{	this->stackSymbolToPop = stackSymbolToPop;	}
+void Transition::setStackSymbolToPush(string& stackSymbolToPush) 		{	this->stackSymbolToPush = stackSymbolToPush;}
+void Transition::setBeginState(string beginState)					{	this->beginState = beginState;				}
+void Transition::setEndState(string& endState)						{	this->endState = endState;					}
 
-/*string Transition::toString() const	{
-	string outputString = "";
+string Transition::toString()	{
+	string outputString = "dhsjfdhs,fgfkfddjskfj";
 
-	outputString += inputSymbol + ", " + stackSymbolToPop + "/" + stackSymbolToPush;
+//	outputString += inputSymbol + ", " + stackSymbolToPop + "/" + stackSymbolToPush;
 
 	return outputString;
-}*/
+}

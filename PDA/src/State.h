@@ -16,23 +16,23 @@
 class State {
 public:
 	State();
-	State(char theStateName);
+	State(std::string theStateName);
 	virtual ~State();
 
-	const char& getStateName() const;
-	const std::vector<Transition>& getTransitions() const;
+	const std::string getStateName() const;
+	const std::vector<Transition> getTransitions();
 	bool isAcceptState() const;
 	bool isBeginState() const;
 
-	void setStateName(const char& stateName);
+	void setStateName(std::string stateName);
 	void setTransitions(const std::vector<Transition>& transitions);
 	void setAcceptState(bool acceptState);
 	void setBeginState(bool beginState);
 
-	char toString();
+	std::string toString();
 
 private:
-	char stateName;
+	std::string stateName;
 	std::vector<Transition> transitions;
 	bool beginState;
 	bool acceptState;

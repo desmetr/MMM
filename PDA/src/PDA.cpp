@@ -54,7 +54,7 @@ SuccessEnum PDA::parseXML(char* fileName) {
 				numberOfStates = statesString.size();
 	
 				for (unsigned int i = 0; i < numberOfStates; i++)	{
-					State localState(statesString[i]);
+					State localState(Utilities::charToString(statesString[i]));
 					states.push_back(localState);
 				}
 			}
@@ -95,35 +95,55 @@ SuccessEnum PDA::parseXML(char* fileName) {
 			
 			unsigned int currentState = 0;
 			// Start parsing the transitions. This is a level deeper, so we need another for loop.
+//			cout << "@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
 			const char* numberOfTransitionChar = elem->Attribute("numberOfTransition");
-			cout << "########################" << endl;
-			int numberOfTransition = stoi(numberOfTransitionChar);
-			cout << numberOfTransition << endl;
+//			cout << "########################" << endl;
+			int numberOfTransition = Utilities::constCharToInt(numberOfTransitionChar);
+//			cout << numberOfTransition << endl;
 			for (TiXmlElement* transElem = elem->FirstChildElement(); transElem != NULL; transElem = transElem->NextSiblingElement())	{
 				string transElemName = transElem->Value();
 				if (transElemName == "BEGIN_STATE")	{
-					cout << "in begin state" << endl;
 					string beginStateString = transElem->GetText();
-					cout << beginStateString << endl;
-//					currentState = atoi(beginStateString.c_str());
-//					states[currentState].getTransitions()[numberOfTransition].setBeginState(beginStateString);
+					currentState = atoi(beginStateString.c_str());
+
+					states[currentState].;
+
+
+
+//					vector<State> temp = states;
+//					cout << temp.size() << endl;
+//					State state = temp[0];
+//					vector<Transition> trans = state.getTransitions();
+//					cout << trans[0].toString() << endl;
+//					trans[0].setBeginState("hello wolrd");
+//					states[currentState].getTransitions()[numberOfTransitions];
+//					cout << states[currentState].getTransitions()[numberOfTransition].toString() << endl;
+//					states[currentState].getTransitions()[numberOfTransition].setBeginState("hello world");
+//					cout << "------------------------" << endl;
 //					states[currentState].getTransitions()[numberOfTransition].beginState = beginStateString;
 				}
 				if (transElemName == "INPUT")	{
-//					states[currentState].getTransitions()[numberOfTransition].setInputSymbol(transElem->GetText());
-//					states[currentState].getTransitions()[numberOfTransition].inputSymbol = transElem->GetText();
+					string inputString = transElem->GetText();
+//					cout << inputString << endl;
+//					states[currentState].getTransitions()[numberOfTransition].setInputSymbol(inputString);
+//					states[currentState].getTransitions()[numberOfTransition].inputSymbol = inputString;
 				}
 				if (transElemName == "STACK_SYMBOL_TO_POP")	{
-					//cout << typeid(transElem->GetText()).name() << endl;
-//					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPop(transElem->GetText());
-//					states[currentState].getTransitions()[numberOfTransition].stackSymbolToPop = transElem->GetText();
+					string stackSymbolToPopString = transElem->GetText();
+//					cout << stackSymbolToPopString << endl;
+//					cout << typeid(transElem->GetText()).name() << endl;
+//					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPop(stackSymbolToPopString);
+//					states[currentState].getTransitions()[numberOfTransition].stackSymbolToPop = stackSymbolToPopString;
 				}
 				if (transElemName == "STACK_SYMBOL_TO_PUSH")	{
-//					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPush(transElem->GetText());
-//					states[currentState].getTransitions()[numberOfTransition].stackSymbolToPush = transElem->GetText();
+					string stackSymbolToPushString = transElem->GetText();
+//					cout << stackSymbolToPushString << endl;
+//					states[currentState].getTransitions()[numberOfTransition].setStackSymbolToPush(stackSymbolToPushString);
+//					states[currentState].getTransitions()[numberOfTransition].stackSymbolToPush = stackSymbolToPushString;
 				}
 				if (transElemName == "END_STATE")	{
-//					string endStateString = transElem->GetText();
+					string endStateString = transElem->GetText();
+//					cout << endStateString << endl;
 //					states[currentState].getTransitions()[numberOfTransition].setEndState(endStateString);
 //					states[currentState].getTransitions()[numberOfTransition].endState = endStateString;
 				}
@@ -143,38 +163,38 @@ void PDA::print()	{
 	try	{
 		cout << "Printing the PDA." << endl;
 		cout << "-----------------" << endl;
-		cout << "\tStates: ";
+		cout << "\tStates:\t";
 		for (unsigned int i = 0; i < states.size(); i++)	{
-			cout << "\t" << states[i].toString() << " ";
+			cout << states[i].toString() << " ";
 		}
 		cout << endl;
 		
-		cout << "\tInput alphabet: ";
+		cout << "\tInput alphabet:\t";
 		for (const auto& inputSymbol : inputAlphabet)	{
-			cout << "\t" << inputSymbol << " ";
+			cout << inputSymbol << " ";
 		}
 		cout << endl;
 		
-		cout << "\tStack alphabet: ";
+		cout << "\tStack alphabet:\t";
 		for (const auto& stackSymbol : stackAlphabet)	{
-			cout << "\t" << stackSymbol << " ";
+			cout << stackSymbol << " ";
 		}
 		cout << endl;
 		
-		cout << "\tStart state: ";
+		cout << "\tStart state:\t";
 		for (unsigned int i = 0; i < states.size(); i++)	{
 			if (states[i].isBeginState())
-				cout << "\t" << states[i].toString() << " ";
+				cout << states[i].toString() << " ";
 		}
 		cout << endl;
 		
 		cout << "\tStart stack symbol: ";
 		cout << "\t" << startStackSymbol << endl;
 		
-		cout << "\tAccept states: ";
+		cout << "\tAccept states:\t";
 		for (unsigned int i = 0; i < states.size(); i++)	{
 			if (states[i].isAcceptState())
-				cout << "\t" << states[i].toString() << " ";
+				cout << states[i].toString() << " ";
 		}
 		cout << endl << endl;
 		

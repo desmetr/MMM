@@ -9,7 +9,9 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <typeinfo>
 #include "PDA.h"
+#include "Utilities.h"
 
 using namespace std;
 

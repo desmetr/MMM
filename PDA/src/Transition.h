@@ -9,6 +9,7 @@
 #define TRANSITION_H_
 
 #include <string>
+#include <iostream>
 
 class Transition {
 public:
@@ -21,14 +22,14 @@ public:
 	const std::string& getBeginState() const;
 	const std::string& getEndState() const;
 	
-	void setInputSymbol(const std::string& inputSymbol);
-	void setStackSymbolToPop(const std::string& stackSymbolToPop);
-	void setStackSymbolToPush(const std::string& stackSymbolToPush);
-	void setBeginState(const std::string& beginState);
-	void setEndState(const std::string& endState);
+	void setInputSymbol(std::string& inputSymbol);
+	void setStackSymbolToPop(std::string& stackSymbolToPop);
+	void setStackSymbolToPush(std::string& stackSymbolToPush);
+	void setBeginState(std::string beginState);
+	void setEndState(std::string& endState);
 
 	// I used a toString method instead of a print method, because the output of this method will be used in the State class.
-	std::string toString() const;
+	std::string toString();
 
 private:
 	std::string inputSymbol;
