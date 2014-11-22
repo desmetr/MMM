@@ -25,6 +25,8 @@ class PDA {
 public:
 	PDA();
 	virtual ~PDA();
+	
+	std::vector<State> states;
 
 	const std::stack<std::string>& getPdaStack() const;
 	void setPdaStack(const std::stack<std::string>& pdaStack);
@@ -35,11 +37,12 @@ public:
 	
 private:
 	std::stack<std::string> PDAStack;
-	std::vector<State> states;
 	std::set<char> inputAlphabet;
 	std::set<char> stackAlphabet;
 	std::string startStackSymbol;
 	
 };
+
+std::ostream& operator<< (std::ostream& out, PDA& pda);
 
 #endif /* PDA_H_ */

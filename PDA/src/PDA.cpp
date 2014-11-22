@@ -157,12 +157,32 @@ void PDA::print()	{
 		cout << " " << startStackSymbol << endl;
 		
 		cout << "\nStates:\n";
-		for (unsigned int i = 0; i < states.size(); i++)	{
-			cout << "\t" << states[i].toString() << endl;
+		for (auto& state : states)	{
+			cout << "\t" << state.toString() << endl;
 		}
 		cout << endl;
 	}
 	catch (exception& e)	{
 		cout << e.what() << endl;
 	}
+}
+
+ostream& operator<< (ostream& out, PDA& pda)	{
+	out << "digraph PDA {" << endl;
+	out << "\trankdir=LR;" << endl;
+	
+	for (auto& state : pda.states)	{
+		if (state.getType() == "accept")	{
+			out << "\t" << state.getStateName() << " [shape=doublecircle];" << endl;
+		}
+		else	{
+			out << "\t" << state.getStateName() << " [shape=circle];" << endl;
+		}
+		for (const auto& transition : state.transitions)	{
+			out << "\t" << state.getStateName() << " -> " << transition.getEndState() << " [label=\"";
+			out << transition.getInputSymbol() << ", " << transition.getStackSymbolToPop() << "/" << transition.getStackSymbolToPush() << "\"]" << endl;
+		}
+	}
+	out << "}";
+	return out;
 }
