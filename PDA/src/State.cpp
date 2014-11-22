@@ -11,30 +11,33 @@ using namespace std;
 State::State() {
 }
 
-State::State(string theStateName) {
+State::State(string theStateName, string theType) {
 	stateName = theStateName;
+	type = theType;
 }
 
 State::~State() {
 }
 
 const string State::getStateName() const 								{	return stateName;	}
-const std::vector<Transition> State::getTransitions() 					{	return transitions;	}
-bool State::isAcceptState() const 										{	return acceptState;	}
-bool State::isBeginState() const 										{	return beginState;	}
+const string State::getType() const										{	return type;		}
 
 void State::setStateName(const string stateName) 						{	this->stateName = stateName;		}
-void State::setTransitions(const std::vector<Transition>& transitions) 	{	this->transitions = transitions;	}
-void State::setAcceptState(bool acceptState) 							{	this->acceptState = acceptState;	}
-void State::setBeginState(bool beginState) 								{	this->beginState = beginState;		}
+void State::setTransitions(const vector<Transition>& transitions) 		{	this->transitions = transitions;	}
+void State::setType(string theType)										{	this->type = theType;				}
 
 string State::toString() {
-//	string outputString = "";
-
-//	for (const auto& transition : this->transitions)	{
-//		outputString += stateName + ", ";
-//		outputString += transition.toString();
-//	}
-	string outputString = stateName;
+	string outputString = "";
+	outputString += "(";
+	outputString += stateName;
+	outputString += ", ";
+	outputString += type;
+	outputString += ")\t";
+	
+	for (auto& transition : this->transitions)	{
+		outputString += "";
+		outputString += transition.toString();
+	}
+	
 	return outputString;
 }

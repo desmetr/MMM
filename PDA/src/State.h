@@ -16,26 +16,23 @@
 class State {
 public:
 	State();
-	State(std::string theStateName);
+	State(std::string theStateName, std::string theType);
 	virtual ~State();
+	
+	std::vector<Transition> transitions;
 
 	const std::string getStateName() const;
-	const std::vector<Transition> getTransitions();
-	bool isAcceptState() const;
-	bool isBeginState() const;
+	const std::string getType() const;
 
-	void setStateName(std::string stateName);
+	void setStateName(const std::string stateName);
 	void setTransitions(const std::vector<Transition>& transitions);
-	void setAcceptState(bool acceptState);
-	void setBeginState(bool beginState);
+	void setType(const std::string theType);
 
 	std::string toString();
 
 private:
 	std::string stateName;
-	std::vector<Transition> transitions;
-	bool beginState;
-	bool acceptState;
+	std::string type;
 };
 
 #endif /* STATE_H_ */

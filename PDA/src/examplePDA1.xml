@@ -1,0 +1,88 @@
+<pda>
+	<!-- The following tags contain the general information of the PDA. -->
+	<meta-data>
+		<input-alphabet>e01</input-alphabet>
+		<stack-alphabet>e01Z</stack-alphabet>
+		<start-stack-symbol>Z</start-stack-symbol>
+	</meta-data>
+	
+	<states numberOfStates="3">
+		<state number="0" type="start">
+			<transition number="0">
+				<input>0</input> 								
+				<stack-symbol-to-pop>Z</stack-symbol-to-pop> 	
+				<stack-symbol-to-push>0Z</stack-symbol-to-push>		
+				<end-state>0</end-state>
+			</transition>
+			<transition number="1">
+				<input>1</input> 								
+				<stack-symbol-to-pop>Z</stack-symbol-to-pop> 	
+				<stack-symbol-to-push>1Z</stack-symbol-to-push>		
+				<end-state>0</end-state>
+			</transition>
+			<transition number="2">
+				<input>0</input> 								
+				<stack-symbol-to-pop>0</stack-symbol-to-pop> 	
+				<stack-symbol-to-push>00</stack-symbol-to-push>		
+				<end-state>0</end-state>
+			</transition>		
+			<transition number="3">
+				<input>0</input> 								
+				<stack-symbol-to-pop>1</stack-symbol-to-pop> 	
+				<stack-symbol-to-push>01</stack-symbol-to-push>		
+				<end-state>0</end-state>
+			</transition>
+			<transition number="4">
+				<input>1</input> 								
+				<stack-symbol-to-pop>0</stack-symbol-to-pop> 	
+				<stack-symbol-to-push>10</stack-symbol-to-push>		
+				<end-state>0</end-state>
+			</transition>
+			<transition number="5">
+				<input>1</input> 								
+				<stack-symbol-to-pop>1</stack-symbol-to-pop> 	
+				<stack-symbol-to-push>11</stack-symbol-to-push>		
+				<end-state>0</end-state>
+			</transition>
+			<transition number="6">
+				<input>e</input>
+				<stack-symbol-to-pop>Z</stack-symbol-to-pop>
+				<stack-symbol-to-push>Z</stack-symbol-to-push>  
+				<end-state>1</end-state>
+			</transition>
+			<transition number="7">
+				<input>e</input>
+				<stack-symbol-to-pop>0</stack-symbol-to-pop>
+				<stack-symbol-to-push>0</stack-symbol-to-push>  
+				<end-state>1</end-state>
+			</transition>
+			<transition number="8">
+				<input>e</input>
+				<stack-symbol-to-pop>1</stack-symbol-to-pop>
+				<stack-symbol-to-push>1</stack-symbol-to-push>  
+				<end-state>1</end-state>
+			</transition>
+		</state>
+		<state number="1" type="normal">
+			<transition number="0">
+				<input>0</input>
+				<stack-symbol-to-pop>0</stack-symbol-to-pop>
+				<stack-symbol-to-push>e</stack-symbol-to-push>  
+				<end-state>1</end-state>
+			</transition>
+			<transition number="1">
+				<input>1</input> 								
+				<stack-symbol-to-pop>1</stack-symbol-to-pop> 	
+				<stack-symbol-to-push>e</stack-symbol-to-push>		
+				<end-state>1</end-state>
+			</transition>
+			<transition number="2">
+				<input>e</input> 								
+				<stack-symbol-to-pop>Z</stack-symbol-to-pop> 	
+				<stack-symbol-to-push>Z</stack-symbol-to-push>		
+				<end-state>2</end-state>
+			</transition>	
+		</state>
+		<state number="2" type="accept"/>
+	</states>
+</pda>
