@@ -17,14 +17,19 @@ int main(int argc, char* argv[]){
 		char* fileName = argv[1];
 		cout << "Opening and parsing: " << fileName << endl;
 		CFG newCFG(fileName);
-		cout << newCFG << endl;
+		//cout << newCFG << endl;
 		CYK newCYK(newCFG);
 
 
 		for(int i = 2; i < argc; i++){
 			cout << "Testing string: "<< argv[i] << endl;
-			newCYK.testString(argv[i]);
-			newCYK.visualRepresentation();
+			if(newCYK.testString(argv[i])){
+				cout << "[OK] String " << argv[i] << " is in the language" << endl;
+			}
+			else{
+				cout << "[XX] String " << argv[i] << " is not in the language" << endl;
+			}
+			//newCYK.visualRepresentation();
 		}
 
 	}
