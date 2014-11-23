@@ -9,6 +9,7 @@
 #define CFG_H_
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <map>
 #include "tinyxml2.h"
@@ -31,6 +32,8 @@ public:
 	void setVariables(const std::vector<char>& variables);
 	friend std::ostream& operator<<(std::ostream& out, CFG& object);
 	std::vector<std::string> getBody(char head);
+
+	void toXML(const std::string fileName);
 
 
 
