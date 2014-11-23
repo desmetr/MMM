@@ -31,7 +31,7 @@ public:
 	const std::stack<std::string>& getPdaStack() const;
 	void setPdaStack(const std::stack<std::string>& pdaStack);
 
-	SuccessEnum parseXML(char* fileName);
+	SuccessEnum parseXML(const char* fileName);
 	
 	void print();
 	

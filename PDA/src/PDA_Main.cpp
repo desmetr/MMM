@@ -17,37 +17,37 @@
 
 using namespace std;
 
+void generateDotFile(PDA& pda, char* fileNameDot)	{
+	ofstream stream;
+	strcat(fileNameDot, ".dot");
+	stream.open(fileNameDot);
+	stream << pda;
+	stream.close();
+	
+	string command = "chmod 777 ";
+	command.append(fileNameDot);
+	system(command.c_str());
+	
+	command = "dot -Tpng ";
+	command.append(fileNameDot);
+	command.append(" -O");
+	system(command.c_str());
+}
+
 int main(int argc, char* argv[]) {
 	PDA pda;
-	char* fileName = argv[1];
-	strcat(fileName, ".xml");
+	string fileNameXML = Utilities::charPtrToString(argv[1]);
+	fileNameXML += ".xml";
 	if (argc == 2)	{
-//		char* fileName = argv[1];
-//		fileName += ".xml";
-		cout << "Opening and parsing " << fileName << endl;
-		pda.parseXML(fileName);
+		cout << "Opening and parsing " << fileNameXML << endl;
+		pda.parseXML(Utilities::stringToCharPtr(fileNameXML));
 	}
 	else	{
 		cerr << "Error, no file specified." << endl;
 	}
 	
 	pda.print();
-	
-	ofstream stream;
-	fileName = argv[1];
-	strcat(fileName, ".dot");
-	stream.open(fileName);
-	stream << pda;
-	stream.close();
-	
-	string command = "chmod 777 ";
-	command.append(fileName);
-	system(command.c_str());
-	
-	command = "dot -Tpng ";;
-	command.append(fileName);
-	command.append(" -O");
-	system(command.c_str());
+	generateDotFile(pda, argv[1]);
 	
 	return 0;
 }

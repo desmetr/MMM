@@ -21,6 +21,8 @@ public:
 	static int stringToInt(std::string theString);
 	static int constCharToInt(const char* theString);
 	static std::string charToString(char theChar);
+	static std::string charPtrToString(char* theCharPtr);
+	static const char* stringToCharPtr(std::string theString);
 };
 
 #endif /* UTILITIES_H_ */

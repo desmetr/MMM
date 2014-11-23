@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <string>
+#include <set>
 #include <iostream>
 #include "Transition.h"
 
@@ -20,6 +21,7 @@ public:
 	virtual ~State();
 	
 	std::vector<Transition> transitions;
+	std::set<std::string> endStates;
 
 	const std::string getStateName() const;
 	const std::string getType() const;

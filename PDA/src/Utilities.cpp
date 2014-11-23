@@ -59,3 +59,12 @@ std::string Utilities::charToString(char theChar)	{
 	
 	return returnString;
 }
+
+std::string Utilities::charPtrToString(char* theCharPtr)	{
+	std::string returnString(theCharPtr);
+	return returnString;	
+}
+
+const char* Utilities::stringToCharPtr(std::string theString)	{
+	return theString.c_str();
+}

@@ -19,7 +19,7 @@ const std::stack<std::string>& PDA::getPdaStack() const 		{	return PDAStack;		}
 
 void PDA::setPdaStack(const std::stack<std::string>& pdaStack) 	{	PDAStack = pdaStack;	}
 
-SuccessEnum PDA::parseXML(char* fileName) {
+SuccessEnum PDA::parseXML(const char* fileName) {
 	TiXmlDocument doc;
 	TiXmlElement* root;
 	try	{
@@ -78,14 +78,14 @@ SuccessEnum PDA::parseXML(char* fileName) {
 			
 			if (elemName == "states")	{
 				const char* numberOfStatesString = elem->Attribute("numberOfStates");
-				int numberOfStates = Utilities::constCharToInt(numberOfStatesString);
+				const int numberOfStates = Utilities::constCharToInt(numberOfStatesString);
 				
 				for (TiXmlElement* stateElem = elem->FirstChildElement(); stateElem != nullptr; stateElem = stateElem->NextSiblingElement())	{
 					string stateElemName = stateElem->Value();
 						
 					if (stateElemName == "state")	{
 						const char* numberOfStateString = stateElem->Attribute("number");
-						int numberOfState = Utilities::constCharToInt(numberOfStateString);
+						const int numberOfState = Utilities::constCharToInt(numberOfStateString);
 						const char* type = stateElem->Attribute("type");
 						
 						State newState(numberOfStateString, type);
@@ -116,6 +116,7 @@ SuccessEnum PDA::parseXML(char* fileName) {
 									if (transInfoElemName == "end-state")	{
 										string endStateString = transInfoElem->GetText();
 										newTransition.setEndState(endStateString);
+										newState.endStates.insert(endStateString);
 									}
 								}
 								newState.transitions.push_back(newTransition);
@@ -171,16 +172,27 @@ ostream& operator<< (ostream& out, PDA& pda)	{
 	out << "digraph PDA {" << endl;
 	out << "\trankdir=LR;" << endl;
 	
-	for (auto& state : pda.states)	{
+	for (const auto& state : pda.states)	{
 		if (state.getType() == "accept")	{
 			out << "\t" << state.getStateName() << " [shape=doublecircle];" << endl;
 		}
 		else	{
 			out << "\t" << state.getStateName() << " [shape=circle];" << endl;
 		}
-		for (const auto& transition : state.transitions)	{
-			out << "\t" << state.getStateName() << " -> " << transition.getEndState() << " [label=\"";
-			out << transition.getInputSymbol() << ", " << transition.getStackSymbolToPop() << "/" << transition.getStackSymbolToPush() << "\"]" << endl;
+		
+		string localLabel = "";		
+ 		for (const auto& endState : state.endStates)	{
+			out << "\t" << state.getStateName() << " -> " << endState << "[label=\"";
+			for (const auto& transition : state.transitions)	{
+				if (transition.getEndState().compare(endState) == 0)	{
+					localLabel += transition.getInputSymbol() + ", " + transition.getStackSymbolToPop() + "/" + transition.getStackSymbolToPush() + "\\n";
+				}
+			}
+			unsigned int found = localLabel.find_last_of("\\n");
+			string outString = localLabel.substr(0, found - 1) + "\"]";
+			out << outString << endl;
+			localLabel = "";
+			outString = "";
 		}
 	}
 	out << "}";
