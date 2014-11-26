@@ -32,6 +32,7 @@ public:
 	void setPdaStack(const std::stack<std::string>& pdaStack);
 
 	SuccessEnum parseXML(const char* fileName);
+	void convertToEmptyStack();
 	
 	void print();
 	
@@ -41,6 +42,7 @@ private:
 	std::set<char> stackAlphabet;
 	std::string startStackSymbol;
 	
+	std::string algorithm;
 };
 
 std::ostream& operator<< (std::ostream& out, PDA& pda);

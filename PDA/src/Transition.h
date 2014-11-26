@@ -15,6 +15,7 @@ class Transition {
 public:
 	Transition();
 	Transition(int beginState);
+	Transition(std::string input, std::string stackSymbolToPop, std::string stackSymbolToPush, std::string endState);
 	virtual ~Transition();
 	
 	const int getBeginState() const;
@@ -23,10 +24,10 @@ public:
 	const std::string& getStackSymbolToPush() const;
 	const std::string& getEndState() const;
 	
-	void setInputSymbol(std::string& inputSymbol);
-	void setStackSymbolToPop(std::string& stackSymbolToPop);
-	void setStackSymbolToPush(std::string& stackSymbolToPush);
-	void setEndState(std::string& endState);
+	void setInputSymbol(std::string inputSymbol);
+	void setStackSymbolToPop(std::string stackSymbolToPop);
+	void setStackSymbolToPush(std::string stackSymbolToPush);
+	void setEndState(std::string endState);
 
 	// I used a toString method instead of a print method, because the output of this method will be used in the State class.
 	std::string toString();

@@ -4,6 +4,7 @@
 		<input-alphabet>e)(x</input-alphabet>
 		<stack-alphabet>e$(xt</stack-alphabet>
 		<start-stack-symbol>$</start-stack-symbol>
+		<algorithm>none</algorithm>
 	</meta-data>
 	
 	<states numberOfStates="5">

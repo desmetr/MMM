@@ -34,9 +34,11 @@ string State::toString() {
 	outputString += type;
 	outputString += ")\t";
 	
-	for (auto& transition : this->transitions)	{
-		outputString += "";
-		outputString += transition.toString();
+	if (this->transitions.size() > 0){
+		for (auto& transition : this->transitions)	{
+			outputString += "";
+			outputString += transition.toString();
+		}
 	}
 	
 	return outputString;
