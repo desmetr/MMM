@@ -18,6 +18,7 @@
 #include "State.h"
 #include "Utilities.h"
 #include "Transition.h"
+#include "ValidateException.h"
 
 enum SuccessEnum {FAILURE, SUCCESS};
 
@@ -33,6 +34,7 @@ public:
 
 	SuccessEnum parseXML(const char* fileName);
 	void convertToEmptyStack();
+	bool validateString(std::string);
 	
 	void print();
 	

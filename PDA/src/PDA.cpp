@@ -19,9 +19,7 @@ const std::stack<std::string>& PDA::getPdaStack() const 		{	return PDAStack;		}
 
 void PDA::setPdaStack(const std::stack<std::string>& pdaStack) 	{	PDAStack = pdaStack;	}
 
-void PDA::convertToEmptyStack()	{
-//	print();
-	
+void PDA::convertToEmptyStack()	{	
 	// First we create two additional states. These will be the start state and the last state of the new PDA.
 	State newStartState("q", "start");	// The new start state will get the name p to show the difference between the original states and the new ones.
 	State newFinalState("p", "normal");	// The new final state will get the name q, for the same reasons as above. 
@@ -54,8 +52,46 @@ void PDA::convertToEmptyStack()	{
 	Transition lastStateTransition("e", "any", "e", newFinalState.getStateName());
 	states.back().transitions.push_back(lastStateTransition);
 	states.back().endStates.insert(newFinalState.getStateName());
-	
-//	print();
+}
+
+bool PDA::validateString(string inputString)	{
+	bool result = true;
+	try	{
+		for (const auto& character : inputString)	{
+			cout << "current character: " << character << endl;
+			for (auto& state : states)	{
+				for (auto& transition : state.transitions)	{
+					cout << transition.toString() << endl;
+					if (state.getType() == "start")	{
+						if (transition.getInputSymbol().compare(Utilities::charToString(character)) == 0)	{
+							cout << "\t" << transition.toString() << endl;
+							continue;
+						}
+					}
+					else if (state.getType() == "normal")	{
+						if (transition.getInputSymbol().compare(Utilities::charToString(character)) == 0)	{
+							cout << "\t" << transition.toString() << endl;
+							continue;
+						}
+					}
+					else if (state.getType() == "accept")	{
+						if (transition.getInputSymbol().compare(Utilities::charToString(character)) == 0)	{
+							cout << "\t" << transition.toString() << endl;
+							continue;
+						}
+					}
+					else	{
+						result = false;
+					}
+				}
+			}
+		}	
+	}
+	catch (ValidateException& e){
+		
+		result = false;
+	}
+	return result;
 }
 
 SuccessEnum PDA::parseXML(const char* fileName) {

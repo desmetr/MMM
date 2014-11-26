@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 	PDA pda;
 	string fileNameXML = Utilities::charPtrToString(argv[1]);
 	fileNameXML += ".xml";
-	if (argc == 2)	{
+	if (argc == 3)	{
 		cout << "Opening and parsing " << fileNameXML << endl;
 		pda.parseXML(Utilities::stringToCharPtr(fileNameXML));
 	}
@@ -46,6 +46,13 @@ int main(int argc, char* argv[]) {
 		cerr << "Error, no file specified." << endl;
 	}
 	
+	bool inPDA = pda.validateString(Utilities::charPtrToString(argv[2]));
+	if (inPDA)	{
+		cout << "[OK] string " << argv[2] << " is accepted!" << endl;
+	}
+	else	{
+		cout << "[XX] string " << argv[2] << " is not accepted!" << endl;
+	}
 	pda.print();
 	generateDotFile(pda, argv[1]);
 	
