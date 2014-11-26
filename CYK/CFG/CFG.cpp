@@ -291,4 +291,45 @@ std::ostream& operator<<(std::ostream& out, CFG& object) {
 
 }
 
+void CFG::toXML(const std::string fileName){
+	//create a new file , or overwrite another one.
+	std::ofstream xmlOut;
+	xmlOut.open(fileName.c_str());
+	//write the xml itsself.
+	xmlOut << "<CFG>" << std::endl;
+
+		//write all terminals to the file.
+		xmlOut << "\t<TERMINALS>";
+		for(char c : terminals){
+			xmlOut << c;
+		}
+		xmlOut << "</TERMINALS>" << std::endl;
+
+		//write the variables to the file.
+		xmlOut << "\t<VARIABLES>";
+		for(char v : variables){
+			xmlOut<<v;
+		}
+		xmlOut << "</VARIABLES>" << std::endl;
+
+		//write the start variable to the file.
+		xmlOut << "\t<STARTVAR>" << startVariable << "</STARTVAR>" << std::endl;
+
+		//write the productions to the file.
+		xmlOut << "\t<PRODUCTIONS>" << std::endl;
+			for( std::multimap<char, std::string>::iterator it = productions.begin(); it!= productions.end(); it ++ ){
+				xmlOut << "\t\t<HEAD var=\"" << it->first << "\">" << std::endl;
+					xmlOut << "\t\t\t<BODY>" << it->second << "</BODY>" << std::endl;
+				xmlOut << "\t\t</HEAD>" << std::endl;
+			}
+		xmlOut << "\t</PRODUCTIONS>" << std::endl;
+
+	xmlOut << "</CFG>" << std::endl;
+
+
+
+
+
+}
+
 

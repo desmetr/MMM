@@ -4,156 +4,138 @@ CYK::CYK(CFG& newGrammar) {
 	this->grammar = newGrammar;
 }
 
+set<char> CYK::getHeadVar(char X, char Y){
+
+	//vector to hold found generating symbols
+	set<char> holder;
+
+
+	for(multimap<char, string>::iterator it = tempMap.begin(); it != tempMap.end(); it ++){
+		if(it->second.size() == 2 && it->second[0] == X && it->second[1] == Y){
+			holder.insert( it->first );
+		}
+	}
+
+	return holder;
+
+}
+
+set<char> CYK::getHeadTerm(char X){
+	//vector to hold found generating symbols
+	set<char> holder;
+
+
+
+	//find heads of productions A -> a where a  e T
+
+	for(multimap<char, string>::iterator it = tempMap.begin(); it != tempMap.end(); it ++){
+		if(it->second.size() == 1 && it->second[0] == X){
+			holder.insert( it->first );
+		}
+	}
+
+
+
+	//return found stuff
+	return holder;
+}
+
 
 bool CYK::testString(string newTest) {
 
+	//N = size of string
+	unsigned int n = newTest.size();
 
-	//get the length of the string
-	unsigned int stringSize = newTest.size();
+	//Temporarily put the productions in the temp map.
+	tempMap = grammar.getProductions();
+//
+	//Generate the table.
+	generateTable(n);
 
-	//get the ammount of symbols (terminals + variables)
-	unsigned int symbolSize = grammar.getVariables().size();
-
-	//generate the table for the algorithm.
-	generateTable(stringSize, symbolSize);
-
-	//get the production map
-	multimap<char,string> productions = grammar.getProductions();
-
-	//get the variables
-	vector<char> variables = grammar.getVariables();
-
-	//SPECIAL CASE [01] :: Empty string
-
-	/* if we can go from the start symbol to the empty string, then the test is succesful
-	The CFG class should allow the empty string to be a production body so we just test on size of string here. */
-
-	if(newTest.size() == 0){
-
-		pair< multimap< char, string >::iterator, multimap< char, string >::iterator> nullRange;
-		nullRange = productions.equal_range( grammar.getStartVariable() );
-
-		for(multimap<char,string>::iterator it = nullRange.first; it != nullRange.second; ++it){
-			if(it->first == grammar.getStartVariable() && it->second == ""){
-				cout << "The empty string is in the language" << endl;
-				return true;
-			}
-		}
-
-
+	/*
+	 * Set the first row of the table
+	 * This means that for a string baaba
+	 * the cells on the first row are filled with
+	 * the variables that generate b, second cell the ones that generate a, third cell a again ....
+	 */
+	for(unsigned int i = 0; i < n; i++){
+		set<char> found = getHeadTerm(newTest[i]);
+		table[i][i].insert( found.begin(), found.end() );
 	}
 
-	//special case [02] :: first row
-	//todo find more elegant solution ;)
-	for(unsigned int stringPos = 0; stringPos <= stringSize; stringPos++){
-		for(multimap<char,string>::iterator it = productions.begin(); it != productions.end(); ++it){
-			for(unsigned int varInd =0; varInd < variables.size(); varInd ++){
-				if(it->first == variables[varInd] && it->second.size() == 1 && it->second[0] == newTest[stringPos]){
-					table[stringPos][0][varInd] = true;
-				}
-			}
-		}
-	}
+	/*
+	 * Main chunk of the algorithm , here we set the other rows.
+	 */
+	//for each substring length, starting from 1 because we did 0 above.
+	for(unsigned int i = 1; i < n; i++){
+		//for each substring start
+		for(unsigned int j = 0; j < n-i; j++){
+			//for each part of the substring (k in notes)
+			for(unsigned int l =0; l < i; l++){
+				//find variables which are generating for each part of the substring, if they exist.
+				set<char> leftSubsVar = table[j][j+l];
+				set<char> rightSubsVar = table[j+l+1][j+i];
 
-	for(unsigned int l = 1; l < stringSize; l ++){
-		cout << "ROW : " << l << "=======================================================" << endl;
-		for(unsigned int r = 0; r < stringSize - l; r++){
-
-			for(unsigned int t = 0; t < l; t++){
-
-				for(multimap<char,string>::iterator it = productions.begin(); it != productions.end(); ++it){
-
-					for(unsigned int varInd =0; varInd < variables.size(); varInd ++){
-
-						if(it->first == variables[varInd] && it->second.size() == 2){
-
-							unsigned int varIndexOne = findIndex(it->second[0]);
-							unsigned int varIndexTwo = findIndex(it->second[1]);
-
-							cout << "X[" << r << "," << l << "]:  ";
-							cout << variables[varInd] << " -> " << variables[varIndexOne] << variables[varIndexTwo] << " renders ";
-
-
-							cout << table[r][t][varIndexOne] << " x " <<  table[r+t+1][l-1][varIndexTwo] << endl;
-
-
-							cout << "Looking in: " << r << "," << t << "," << varIndexOne << "  &&  "<<r+ t+1 << "," << l - 1 << "," << varIndexTwo << endl;
-
-							if( table[r][t][varIndexOne] == true  && table[r+t+1][l - 1 ][varIndexTwo] == true){
-								cout<<"matchu matchu"<<endl;
-								table[r][l][varInd] = true;
-
-							}
-
-						}
-
+				//iterate over the contents of both the cells. creating any possible combination of variables that could generate the substring.
+				for(set<char>::iterator lit = leftSubsVar.begin(); lit != leftSubsVar.end(); lit++){
+					for(set<char>::iterator rit = rightSubsVar.begin(); rit != rightSubsVar.end(); rit++){
+						//We're looking for variables of the form X -> lit,rit
+						set<char> found = getHeadVar(*lit,*rit);
+						//Insert the variables that generate lit,rit into the cell, if any were found.
+						table[j][j+i].insert(found.begin(),found.end());
 					}
-
 				}
 
 
 			}
-
 		}
 
 	}
 
+	/*
+	 * A string is part of a language when the start symbol is in the upper left cell (table[0][n-1])
+	 * Do the check and return true if the string is part of the language , false if not.
+	 */
+	for(char v : table[0][n-1]){
+		if(v==grammar.getStartVariable()) return true;
+	}
 
+	return false;
 
 }
 
 
-void CYK::generateTable(unsigned int stringSize, unsigned int symbolSize) {
-	//first clear the table of any possible previous stuff.
+void CYK::generateTable(unsigned int stringSize) {
+	//First clear the table.
 	table.clear();
 
-	//generate a stringSize x stringSize x symbolSize table.
-	//This means that we create a stringSize x stringSize table, in which every cell has symbolSize bools.
-
-	for(unsigned int i = 0; i < stringSize; i++){
-
-		vector<vector<bool> > levelOne;
-
-		for(unsigned int j = 0; j < stringSize; j++){
-
-			vector<bool> levelTwo;
-
-			for(unsigned int k = 0; k < symbolSize; k++){
-
-				levelTwo.push_back(false);
-
-			}
-
-			levelOne.push_back(levelTwo);
-		}
-
-		table.push_back(levelOne);
-
+	//Initialize the table.
+	for(unsigned int i = 0; i < stringSize; ++i){
+		table.push_back(vector<set<char> >(stringSize));
 	}
+
+
+	//done!
 
 }
 
 void CYK::visualRepresentation(){
 
-	//TURN YOUR HEAD 90 TO THE RIGHT AND GET A VISUAL REPRESENTATION OF THE TABLE
-	//FOR DEBUG + WHEN I INEVITABILY FORGET WHAT THE TABLE LOOKS LIKE
-
 	for(unsigned int i = 0; i < table.size(); i++){
-		cout<< " X[" << i  << "]";
 		for(unsigned int j = 0; j < table[i].size(); j++){
-			cout<< " [" << j +1 << "] "  << " {";
-			for(unsigned int k = 0; k < table[i][j].size(); k++){
-				cout << table[i][j][k];
+			cout << "[" << i << "][" << j << "]:{";
+			for(set<char>::iterator it = table[i][j].begin(); it != table[i][j].end(); it++){
+				cout << *it;
 			}
-			cout << "} ";
+			cout << "}" << endl;
 		}
-		cout<<endl;
 	}
 
 }
 
 
 int CYK::findIndex(char var){
+	//function is not really needed anymore i think, might remove it later.
 	vector<char> variables = grammar.getVariables();
 	unsigned int index = 0;
 	for(char v : variables){
@@ -163,6 +145,5 @@ int CYK::findIndex(char var){
 
 		index++;
 	}
-	cout<<"oops at findIndex: index not found";
 	return(-1);
 }
