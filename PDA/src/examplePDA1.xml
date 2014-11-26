@@ -4,7 +4,6 @@
 		<input-alphabet>e01</input-alphabet>
 		<stack-alphabet>e01Z</stack-alphabet>
 		<start-stack-symbol>Z</start-stack-symbol>
-		<algorithm>none</algorithm>
 	</meta-data>
 	
 	<states numberOfStates="3">
@@ -86,4 +85,6 @@
 		</state>
 		<state number="2" type="accept"/>
 	</states>
+	
+	<algorithm>none</algorithm>
 </pda>

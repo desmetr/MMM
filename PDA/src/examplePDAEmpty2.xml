@@ -4,7 +4,6 @@
 		<input-alphabet>e)(x</input-alphabet>
 		<stack-alphabet>e$(xt</stack-alphabet>
 		<start-stack-symbol>$</start-stack-symbol>
-		<algorithm>none</algorithm>
 	</meta-data>
 	
 	<states numberOfStates="5">
@@ -66,4 +65,6 @@
 		</state>
 		<state number="4" type="accept"/>
 	</states>
+	
+	<algorithm>empty</algorithm>
 </pda>

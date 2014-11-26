@@ -20,50 +20,40 @@ const std::stack<std::string>& PDA::getPdaStack() const 		{	return PDAStack;		}
 void PDA::setPdaStack(const std::stack<std::string>& pdaStack) 	{	PDAStack = pdaStack;	}
 
 void PDA::convertToEmptyStack()	{
+//	print();
+	
 	// First we create two additional states. These will be the start state and the last state of the new PDA.
 	State newStartState("q", "start");	// The new start state will get the name p to show the difference between the original states and the new ones.
 	State newFinalState("p", "normal");	// The new final state will get the name q, for the same reasons as above. 
 										// And it will be a normal state, because in a PDA that accepts with an empty stack, there is no accept state. 
 	
-	inputAlphabet.insert(newStartState.getStateName()[0]);
-	inputAlphabet.insert(newFinalState.getStateName()[0]);
-	
-	Transition newStartTransition;
 	for (auto& state : states)	{
 		if (state.getType() == "start")	{
-			newStartTransition.setInputSymbol("e");
-			newStartTransition.setStackSymbolToPop("Y");
-			newStartTransition.setStackSymbolToPush(startStackSymbol + "Y");
-			newStartTransition.setEndState(state.getStateName());
+			Transition newStartTransition("e", "Y", startStackSymbol + "Y", state.getStateName());
 			
 			stackAlphabet.insert('Y');
 			startStackSymbol = "Y";
+			newStartState.transitions.push_back(newStartTransition);
+			newStartState.endStates.insert(state.getStateName());
+			
+			state.setType("normal");
 		}
-	}
-	// TODO: not so good, now ony the last values of newStartTransition will be push_backed.
-	// This is correct if there is only one old start state (probably always will).
-	newStartState.transitions.push_back(newStartTransition);
+	}	
 
-	// This loop assures us that there will be no more start states, except the one we will add next.
-	for (auto& state : states)	{
-		if (state.getType() == "start")	{
-			state.setType("normal");	
-		}
-	}
-	
 	states.insert(states.begin(), newStartState);	// Add the new start state to the beginning of the states vector.	
 	states.push_back(newFinalState);				// Push back the new final state to the end of the states vector.
 	
-	Transition newFinalTransition;
 	for (auto& state : states)	{
 		if (state.getType() == "accept")	{
-			newFinalTransition.setInputSymbol("e");
-			newFinalTransition.setStackSymbolToPop("any");	// TODO any in stack alphabet?
-			newFinalTransition.setStackSymbolToPush("e");
-			newFinalTransition.setEndState(newFinalState.getStateName());
+			Transition newFinalTransition("e", "any", "e", newFinalState.getStateName());	// TODO any in stack alphabet?
+			state.transitions.push_back(newFinalTransition);
+			state.endStates.insert(newFinalState.getStateName());
 		}	
-		state.transitions.push_back(newFinalTransition);
 	}
+	
+	Transition lastStateTransition("e", "any", "e", newFinalState.getStateName());
+	states.back().transitions.push_back(lastStateTransition);
+	states.back().endStates.insert(newFinalState.getStateName());
 	
 //	print();
 }

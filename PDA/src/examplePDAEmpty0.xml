@@ -4,6 +4,7 @@
 		<input-alphabet>abc</input-alphabet>
 		<stack-alphabet>XZ</stack-alphabet>
 		<start-stack-symbol>X</start-stack-symbol>
+		<algorithm>empty</algorithm>
 	</meta-data>
 	
 	<states numberOfStates="4">
@@ -46,8 +47,5 @@
 		<state number="3" type="accept">
 		</state>
 	</states>
-	
-	<algorithm>empty</algorithm>
-	
 </pda>
 

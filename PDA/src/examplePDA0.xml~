@@ -4,9 +4,10 @@
 		<input-alphabet>abc</input-alphabet>
 		<stack-alphabet>XZ</stack-alphabet>
 		<start-stack-symbol>X</start-stack-symbol>
+		<algorithm>none</algorithm>
 	</meta-data>
 	
-	<states numberOfStates="3">
+	<states numberOfStates="4">
 		<state number="0" type="start">
 			<transition number="0">
 				<input>a</input> 								
