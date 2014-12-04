@@ -14,32 +14,6 @@ void CFG::setProductions(const std::multimap<char, std::string>& productions) {
 	this->productions = productions;
 }
 
-std::vector<std::string> CFG::getProductions(char variable){
-	std::vector<std::string> vec;
-	std::pair< std::multimap< char, std::string>::iterator, std::multimap< char, std::string>::iterator > gebied;
-	gebied = productions.equal_range( variable );
-
-	for ( std::multimap<char, std::string>::iterator it=gebied.first; it != gebied.second; ++it){
-		if (it->first == variable){
-			vec.push_back(it->second);
-		}
-	}
-	return vec;
-}
-
-bool CFG::isInMultimap( std::pair<char, std::string> p){//nieuw
-	std::pair< std::multimap< char, std::string>::iterator, std::multimap< char, std::string>::iterator > gebied;
-	gebied = productions.equal_range( p.first );
-
-	for ( std::multimap<char, std::string>::iterator it=gebied.first; it != gebied.second; ++it){
-		if (it->second == p.second){
-			return true;
-		}
-	}
-	return false;
-}
-
-
 char CFG::getStartVariable() const {
 	return startVariable;
 }
