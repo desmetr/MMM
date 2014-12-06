@@ -23,6 +23,8 @@ public:
 
 	const std::multimap<char, std::string>& getProductions() const;
 	void setProductions(const std::multimap<char, std::string>& productions);
+	std::vector<std::string> getProductions(char variable);//nieuw
+	bool isInMultimap( std::pair<char, std::string> p);//nieuw
 	char getStartVariable() const;
 	void setStartVariable(char startVariable);
 	const std::vector<char>& getTerminals() const;

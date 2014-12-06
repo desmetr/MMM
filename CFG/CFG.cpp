@@ -135,7 +135,7 @@ CFG::CFG(std::string fileName){
 
 	if(ssNode != NULL){
 		std::string ssString = ssNode->GetText();
-			tempStartVar = ssString[0];
+		tempStartVar = ssString[0];
 	}
 
 	else{
@@ -156,6 +156,32 @@ CFG::CFG(std::string fileName){
 	else{
 
 		std::cout << "No productions section found in XML, aborting" << std::endl;
+		return;
+
+	}
+
+	//load CNF boolean
+	/////////////////////////////
+
+	tinyxml2::XMLElement* cnfNode = root->FirstChildElement( "CNF" );
+	if(cnfNode != NULL){
+
+		std::string cnfString = cnfNode->GetText();
+		if ( cnfString == "true" ){
+			toCNF = true;
+		}
+		else if ( cnfString == "false" ){
+			toCNF = false;
+		}
+		else {
+			std::cout << "Invalid CNF section, aborting" << std::endl;
+			return;
+		}
+
+	}
+	else{
+
+		std::cout << "No CNF section found in XML, aborting" << std::endl;
 		return;
 
 	}
@@ -224,6 +250,10 @@ std::vector<std::string> CFG::getBody(const char head) {
 
 
 
+}
+
+bool CFG::getToCNF(){
+	return toCNF;
 }
 
 std::vector<std::pair<char, std::string> > CFG::parseRules(tinyxml2::XMLElement* prNode) {

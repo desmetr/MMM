@@ -14,6 +14,8 @@
 #include "tinyxml2.h"
 #include <algorithm>
 
+class CNF;
+
 class CFG{
 public:
 
@@ -34,7 +36,8 @@ public:
 	friend std::ostream& operator<<(std::ostream& out, CFG& object);
 	std::vector<std::string> getBody(char head);
 
-
+	bool getToCNF();
+	friend CNF;
 
 private:
 
@@ -44,6 +47,8 @@ private:
 	std::vector<char> variables;
 	char startVariable;
 	std::vector< std::pair<char,std::string> > parseRules(tinyxml2::XMLElement* prNode);
+
+	bool toCNF;
 
 };
 
