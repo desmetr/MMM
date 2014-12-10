@@ -11,13 +11,6 @@ using std::find;
 /////////////////////////////////
 // constructors & destructors //
 ///////////////////////////////
-CNF::CNF() : allChar ({'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-	'a','b','c','d','e','f','g','h','i','h','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-	'0','1','2','3','4','5','6','7','8','9'}){
-	// TODO Auto-generated constructor stub
-
-}
-
 CNF::CNF(CFG cfg): oldCFG(cfg), allChar ({'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
 	'a','b','c','d','e','f','g','h','i','h','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
 	'0','1','2','3','4','5','6','7','8','9'}){
@@ -360,12 +353,9 @@ void CNF::createReachableSymbols(const charVec& genVec, charVec& reachableVar, c
 			stringVec prod = newCFG.getProductions(newVar[iii]);
 			for (auto string : prod){
 				for (auto ch : string){
+					std::cout << ch <<std::endl;
 					if ( charInVec(oldCFG.terminals, ch) ){
 						//terminal
-						if (ch == 'Y'){
-							for (char ch2 : oldCFG.terminals){
-							}
-						}
 						if ( !charInVec(reachableTerm, ch) ){
 							//if we haven't encountered yet
 							reachableTerm.push_back(ch);
@@ -385,6 +375,8 @@ void CNF::createReachableSymbols(const charVec& genVec, charVec& reachableVar, c
 				}
 
 			}
+		}
+		if (newVar.size()>0){
 			newVar.erase(newVar.begin(), newVar.begin()+size);//remove all the reachable variable whose production we have checked
 		}
 	}

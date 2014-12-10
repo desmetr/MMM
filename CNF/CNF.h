@@ -15,7 +15,6 @@
 
 class CNF {
 public:
-	CNF();
 	CNF(CFG cfg);
 	virtual ~CNF();
 
