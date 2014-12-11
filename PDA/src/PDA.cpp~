@@ -54,7 +54,7 @@ void PDA::convertToEmptyStack()	{
 	states.back().endStates.insert(newFinalState.getStateName());
 }
 
-/*bool PDA::validateString(string inputString)	{
+bool PDA::validateString(string inputString)	{
 	bool result = true;
 	try	{
 		for (const auto& character : inputString)	{
@@ -93,7 +93,7 @@ void PDA::convertToEmptyStack()	{
 	}
 	return result;
 }
-*/
+
 SuccessEnum PDA::parseXML(const char* fileName) {
 	TiXmlDocument doc;
 	TiXmlElement* root;
@@ -201,7 +201,6 @@ SuccessEnum PDA::parseXML(const char* fileName) {
 					}
 				}
 			}
-			cout << "eeee" << endl;
 			if (elemName == "algorithm")	{
 				string algorithm = elem->GetText();
 				if (algorithm == "empty")	{
