@@ -106,7 +106,7 @@ SuccessEnum PDA::parseXML(const char* fileName) {
 
 		root = doc.FirstChildElement();
 		if (root == NULL)	{
-			cerr << "Faile to load file: No root element." << endl;
+			cerr << "Failed to load file: No root element." << endl;
 			doc.Clear();
 			return FAILURE;
 		}
