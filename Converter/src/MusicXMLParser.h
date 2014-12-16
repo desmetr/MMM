@@ -16,6 +16,14 @@
 #include "PartList.h"
 #include "ScoreInstrument.h"
 #include "MidiInstrument.h"
+#include "Part.h"
+
+/*
+ * This class parses a MusicXML file and stores the info accordingly in a class structure.
+ * This class structure is needed for the conversion from MusicXML to MEI.
+ *
+ * TODO file with rests only show one measure
+ */
 
 enum SuccessEnum {FAILURE, SUCCESS};
 
@@ -26,11 +34,11 @@ public:
 
 	SuccessEnum parse(std::string fileName);
 
+	void print();
+
 private:
 	PartList partList;
-	ScorePart scorePart;
-	ScoreInstrument scoreInstrument;
-	MidiInstrument midiInstrument;
+	Part part;
 };
 
 #endif /* MUSICXMLPARSER_H_ */

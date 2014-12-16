@@ -29,10 +29,10 @@ void MidiInstrument::setPan(const string& pan) 					{	this->pan = pan;					}
 void MidiInstrument::setVolume(const string& volume) 			{	this->volume = volume;				}
 
 void MidiInstrument::print() {
-	cout << "Attributes of MidiInstrument:" << endl;
+	cout << "MidiInstrument:" << endl;
 	cout << "\tID: " << id << endl;
 	cout << "\tmidiChannel: " << midiChannel << endl;
 	cout << "\tmidiProgram: " << midiProgram << endl;
-	cout << "\tpan: " << pan << endl;
 	cout << "\tvolume: " << volume << endl;
+	cout << "\tpan: " << pan << endl;
 }

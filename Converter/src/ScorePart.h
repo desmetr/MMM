@@ -10,11 +10,16 @@
 
 #include <string>
 #include <iostream>
+#include "ScoreInstrument.h"
+#include "MidiInstrument.h"
 
 class ScorePart {
 public:
 	ScorePart();
 	virtual ~ScorePart();
+
+	ScoreInstrument scoreInstrument;
+	MidiInstrument midiInstrument;
 
 	const std::string& getId() const;
 	const std::string& getPartName() const;

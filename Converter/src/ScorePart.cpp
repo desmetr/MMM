@@ -24,7 +24,9 @@ void ScorePart::setId(const string& id) 			{	this->id = id;				}
 void ScorePart::setPartName(const string& partName) {	this->partName = partName;	}
 
 void ScorePart::print() {
-	cout << "Attributes of ScorePart:" << endl;
+	cout << "ScorePart:" << endl;
 	cout << "\tID: " << id << endl;
 	cout << "\tpartName: " << partName << endl;
+	scoreInstrument.print();
+	midiInstrument.print();
 }

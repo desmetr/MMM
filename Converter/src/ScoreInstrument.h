@@ -29,7 +29,7 @@ private:
 	std::string id;
 	std::string instrumentName;
 
-	const std::string tagName;
+	const std::string tagName = "score-instrument";
 };
 
 

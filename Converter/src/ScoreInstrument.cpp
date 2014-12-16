@@ -23,7 +23,7 @@ void ScoreInstrument::setId(const string& id) 								{	this->id = id;							}
 void ScoreInstrument::setInstrumentName(const string& instrumentName) 		{	this->instrumentName = instrumentName;	}
 
 void ScoreInstrument::print() {
-	cout << "Attributes of ScoreInstrument: " << endl;
+	cout << "ScoreInstrument: " << endl;
 	cout << "\tID: " << id << endl;
 	cout << "\tinstrumentName: " << instrumentName << endl;
 }

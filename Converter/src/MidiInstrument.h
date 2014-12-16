@@ -38,7 +38,7 @@ private:
 	std::string volume;
 	std::string pan;
 
-	const std::string tagName;
+	const std::string tagName = "midi-instrument";
 };
 
 #endif /* MIDIINSTRUMENT_H_ */
