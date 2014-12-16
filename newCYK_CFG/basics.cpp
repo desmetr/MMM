@@ -21,5 +21,5 @@ terminal::terminal(std::string _content){
 
 variable::variable(std::string _content){
 	this->content = _content;
-	this->type = "terminal";
+	this->type = "variable";
 }
