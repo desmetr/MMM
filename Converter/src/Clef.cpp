@@ -23,7 +23,7 @@ void Clef::setLine(const string& line) 	{	this->line = line;	}
 void Clef::setSign(const string& sign) 	{	this->sign = sign;	}
 
 void Clef::print() {
-	cout << "Clef:" << endl;
-	cout << "\tsign: " << sign << endl;
-	cout << "\tline: " << line << endl;
+	cout << "\t\t\tClef:" << endl;
+	cout << "\t\t\t\tsign: " << sign << endl;
+	cout << "\t\t\t\tline: " << line << endl;
 }

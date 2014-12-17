@@ -10,6 +10,7 @@
 
 #include <string>
 #include <iostream>
+#include "PartName.h"
 #include "ScoreInstrument.h"
 #include "MidiInstrument.h"
 
@@ -18,21 +19,19 @@ public:
 	ScorePart();
 	virtual ~ScorePart();
 
+	PartName partName;
 	ScoreInstrument scoreInstrument;
 	MidiInstrument midiInstrument;
 
 	const std::string& getId() const;
-	const std::string& getPartName() const;
 	const std::string& getTagName() const;
 
 	void setId(const std::string& id);
-	void setPartName(const std::string& partName);
 
 	void print();
 
 private:
 	std::string id;
-	std::string partName;
 
 	const std::string tagName = "score-part";
 };

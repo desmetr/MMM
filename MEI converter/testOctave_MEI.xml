@@ -1,86 +1,82 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <mei xmlns="http://www.music-encoding.org/ns/mei" xmlns:xlink="http://www.w3.org/1999/xlink" meiversion="2013">
-   <meiHead>
-      <fileDesc>
-         <titleStmt>
+  <meiHead>
+    <fileDesc>
+      <titleStmt>
+        <title/>
+      </titleStmt>
+      <pubStmt/>
+      <sourceDesc>
+        <source>
+          <titleStmt>
             <title/>
-         </titleStmt>
-         <pubStmt/>
-         <sourceDesc>
-            <source>
-               <titleStmt>
-                  <title/>
-               </titleStmt>
-               <pubStmt/>
-            </source>
-         </sourceDesc>
-      </fileDesc>
-      <encodingDesc>
-         <editorialDecl>
-            <normalization>
-               <p>Calculation of @tstamp and @tstamp2 values on control events, such as dir, dynam,
-              hairpin, etc., includes MusicXML offset values.</p>
-               <p>The parameters for musicxml2mei.xsl were set as follows: <list>
-                     <li>layout: "strip", </li>
-                     <li>formeWork: "strip", </li>
-                     <li>keepAttributes: "false", </li>
-                     <li>generateMIDI: "false", </li>
-                     <li>articStyle: "elem", </li>
-                     <li>accidStyle: "attr", </li>
-                     <li>tieStyle: "attr", </li>
-                     <li>labelStyle: "attr"</li>
-                  </list>
-               </p>
-            </normalization>
-         </editorialDecl>
-      </encodingDesc>
-      <revisionDesc>
-         <change n="1">
-            <respStmt/>
-            <changeDesc>
-               <p>Transcoded from a MusicXML version 1.0 file using an XSLT stylesheet (musicxml2mei v. 3.0).</p>
-            </changeDesc>
-            <date>2014-12-16</date>
-         </change>
-      </revisionDesc>
-   </meiHead>
-   <music>
-      <body>
-         <mdiv>
-            <score>
-               <scoreDef meter.count="4" meter.unit="4" key.sig="0" key.mode="major">
-                  <staffGrp>
-                     <staffDef n="1"
-                               xml:id="P1"
-                               label="Piano"
-                               lines="5"
-                               clef.line="2"
-                               clef.shape="G"/>
-                  </staffGrp>
-               </scoreDef>
-               <section>
-                  <measure n="1" xml:id="d1e19">
-                     <staff n="1">
-                        <layer n="1">
-                           <note xml:id="d1e39" pname="c" oct="4" dur="4" stem.dir="up"/>
-                           <note xml:id="d1e53" pname="e" oct="4" dur="4" stem.dir="up"/>
-                           <note xml:id="d1e67" pname="g" oct="4" dur="4" stem.dir="up"/>
-                           <note xml:id="d1e81" pname="c" oct="5" dur="4" stem.dir="down"/>
-                        </layer>
-                     </staff>
-                  </measure>
-                  <measure n="2" xml:id="d1e95" right="end">
-                     <staff n="1">
-                        <layer n="1">
-                           <note xml:id="d1e97" pname="g" oct="4" dur="4" stem.dir="up"/>
-                           <note xml:id="d1e111" pname="e" oct="4" dur="4" stem.dir="up"/>
-                           <note xml:id="d1e125" pname="c" oct="4" dur="2" stem.dir="up"/>
-                        </layer>
-                     </staff>
-                  </measure>
-               </section>
-            </score>
-         </mdiv>
-      </body>
-   </music>
+          </titleStmt>
+          <pubStmt/>
+        </source>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <editorialDecl>
+        <normalization>
+          <p>Calculation of @tstamp and @tstamp2 values on control events, such as dir, dynam, hairpin, etc., includes MusicXML offset values.</p>
+          <p>The parameters for musicxml2mei.xsl were set as follows:
+            <list>
+              <li>layout: "strip", </li>
+              <li>formeWork: "strip", </li>
+              <li>keepAttributes: "false", </li>
+              <li>generateMIDI: "false", </li>
+              <li>articStyle: "elem", </li>
+              <li>accidStyle: "attr", </li>
+              <li>tieStyle: "attr", </li>
+              <li>labelStyle: "attr"</li>
+            </list>
+          </p>
+        </normalization>
+      </editorialDecl>
+    </encodingDesc>
+    <revisionDesc>
+      <change n="1">
+        <respStmt/>
+        <changeDesc>
+          <p>Transcoded from a MusicXML version 1.0 file using an XSLT stylesheet (musicxml2mei v. 3.0).</p>
+        </changeDesc>
+        <date>2014-12-16</date>
+      </change>
+    </revisionDesc>
+  </meiHead>
+  <music>
+
+    <body>
+      <mdiv>
+        <score>
+          <scoreDef meter.count="4" meter.unit="4" key.sig="0" key.mode="major">
+            <staffGrp>
+              <staffDef n="1" xml:id="P1" label="Piano" lines="5" clef.line="2" clef.shape="G" />
+            </staffGrp>
+          </scoreDef>
+          <section>
+            <measure n="1" xml:id="d1e19">
+              <staff n="1">
+                <layer n="1">
+                  <note xml:id="d1e39" pname="c" oct="4" dur="4" stem.dir="up" />
+                  <note xml:id="d1e53" pname="e" oct="4" dur="4" stem.dir="up" />
+                  <note xml:id="d1e67" pname="g" oct="4" dur="4" stem.dir="up" />
+                  <note xml:id="d1e81" pname="c" oct="5" dur="4" stem.dir="down" />
+                </layer>
+              </staff>
+            </measure>
+            <measure n="2" xml:id="d1e95" right="end">
+              <staff n="1">
+                <layer n="1">
+                  <note xml:id="d1e97" pname="g" oct="4" dur="4" stem.dir="up" />
+                  <note xml:id="d1e111" pname="e" oct="4" dur="4" stem.dir="up" />
+                  <note xml:id="d1e125" pname="c" oct="4" dur="2" stem.dir="up" />
+                </layer>
+              </staff>
+            </measure>
+          </section>
+        </score>
+      </mdiv>
+    </body>
+  </music>
 </mei>

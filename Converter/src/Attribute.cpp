@@ -15,15 +15,14 @@ Attribute::Attribute() {
 Attribute::~Attribute() {
 }
 
-const string& Attribute::getDivisions() const	{	return divisions;	}
 const string& Attribute::getTagName() const		{	return tagName;		}
 
-void Attribute::setDivisions(const string& divisions) {	this->divisions = divisions;	}
-
 void Attribute::print() {
-	cout << "Attribute:" << endl;
-	cout << "\tdivisions: " << divisions << endl;
-	key.print();
-	time.print();
-	clef.print();
+	if (division.getDivisions() != "")	{
+		cout << "\t\tAttribute:" << endl;
+		division.print();
+		key.print();
+		time.print();
+		clef.print();
+	}
 }

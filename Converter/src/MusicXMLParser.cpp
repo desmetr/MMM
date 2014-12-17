@@ -24,16 +24,11 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 	try	{
 		doc.LoadFile(fileName.c_str());
 		if (doc.ErrorID() != 0)		{
-			cout << "The specified file could not be found, aborting..." << endl;
-			return FAILURE;
+			throw runtime_error("File could not be opened.\n");
 		}
 
 		root = doc.FirstChildElement();
-		if (root == NULL)	{
-			cerr << "Failed to load file: No root element." << endl;
-			doc.Clear();
-			return FAILURE;
-		}
+		checkElement(root);
 	}
 	catch (exception& e)	{
 		cout << e.what() << endl;
@@ -44,34 +39,35 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 		string rootValue = root->Value();
 		if (rootValue == "score-partwise")	{
 			for (XMLElement* elem = root->FirstChildElement(); elem != nullptr; elem = elem->NextSiblingElement())	{
+				checkElement(elem);
+
 				string elemName = elem->Value();
 
 				// Parse the first block, parent = part-list.
 				if (elemName == "part-list")	{
 					for (XMLElement* partListElem = elem->FirstChildElement(); partListElem != nullptr; partListElem = partListElem->NextSiblingElement())	{
+						checkElement(partListElem);
+
 						string partListElemName = partListElem->Value();
 
-						if (partListElemName == "part-group")	{
-							const char* partGroupType = partListElem->Attribute("type");
-							const char* partGroupNumber = partListElem->Attribute("number");
-							partList.setPartGroupNumber(partGroupNumber);
-							partList.setPartGroupType(partGroupType);
-						}
 						if (partListElemName == "score-part")	{
 							const char* id = partListElem->Attribute("id");
 							partList.scorePart.setId(id);
 
 							for (XMLElement* scorePartElem = partListElem->FirstChildElement(); scorePartElem != nullptr; scorePartElem = scorePartElem->NextSiblingElement())	{
+								checkElement(scorePartElem);
 								string scorePartElemName = scorePartElem->Value();
 
 								if (scorePartElemName == "part-name")	{
-									partList.scorePart.setPartName(scorePartElem->GetText());
+									partList.scorePart.partName.setName(scorePartElem->GetText());
 								}
 								if (scorePartElemName == "score-instrument")	{
 									const char* id = scorePartElem->Attribute("id");
 									partList.scorePart.scoreInstrument.setId(id);
 
 									for (XMLElement* instrumentNameElem = scorePartElem->FirstChildElement(); instrumentNameElem != nullptr; instrumentNameElem = instrumentNameElem->NextSiblingElement())	{
+										checkElement(instrumentNameElem);
+
 										string instrumentNameElemName = instrumentNameElem->Value();
 
 										if (instrumentNameElemName == "instrument-name")	{
@@ -84,6 +80,8 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 									partList.scorePart.midiInstrument.setId(id);
 
 									for (XMLElement* midiInstrumentElem = scorePartElem->FirstChildElement(); midiInstrumentElem != nullptr; midiInstrumentElem = midiInstrumentElem->NextSiblingElement())		{
+										checkElement(midiInstrumentElem);
+
 										string midiInstrumentElemName = midiInstrumentElem->Value();
 
 										if (midiInstrumentElemName == "midi-channel")	{
@@ -111,6 +109,8 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 					part.setId(partID);
 
 					for (XMLElement* partElem = elem->FirstChildElement(); partElem != nullptr; partElem = partElem->NextSiblingElement())	{
+						checkElement(partElem);
+
 						string partElemName = partElem->Value();
 
 						Measure tempMeasure;
@@ -119,17 +119,25 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 							tempMeasure.setNumber(measureNumber);
 
 							for (XMLElement* measureElem = partElem->FirstChildElement(); measureElem != nullptr; measureElem = measureElem->NextSiblingElement())	{
+								checkElement(measureElem);
+
 								string measureElemName = measureElem->Value();
 
 								if (measureElemName == "attributes")	{
 									for (XMLElement* attributeElem = measureElem->FirstChildElement(); attributeElem != nullptr; attributeElem = attributeElem->NextSiblingElement())	{
+										checkElement(attributeElem);
+
 										string attributeElemName = attributeElem->Value();
+
 										if (attributeElemName == "divisions")	{
-											tempMeasure.attribute.setDivisions(attributeElem->GetText());
+											tempMeasure.attribute.division.setDivisions(attributeElem->GetText());
 										}
 										if (attributeElemName == "key")	{
 											for (XMLElement* keyElem = attributeElem->FirstChildElement(); keyElem != nullptr; keyElem = keyElem->NextSiblingElement())	{
+												checkElement(keyElem);
+
 												string keyElemName = keyElem->Value();
+
 												if (keyElemName == "fifths")	{
 													tempMeasure.attribute.key.setFifths(keyElem->GetText());
 												}
@@ -140,7 +148,10 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 										}
 										if (attributeElemName == "time")	{
 											for (XMLElement* timeElem = attributeElem->FirstChildElement(); timeElem != nullptr; timeElem = timeElem->NextSiblingElement())	{
+												checkElement(timeElem);
+
 												string timeElemName = timeElem->Value();
+
 												if (timeElemName == "beats")	{
 													tempMeasure.attribute.time.setBeats(timeElem->GetText());
 												}
@@ -151,7 +162,10 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 										}
 										if (attributeElemName == "clef")	{
 											for (XMLElement* clefElem = attributeElem->FirstChildElement(); clefElem != nullptr; clefElem = clefElem->NextSiblingElement())	{
+												checkElement(clefElem);
+
 												string clefElemName = clefElem->Value();
+
 												if (clefElemName == "sign")	{
 													tempMeasure.attribute.clef.setSign(clefElem->GetText());
 												}
@@ -165,39 +179,47 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 								if (measureElemName == "note")	{
 									Note tempNote;
 
-									const char* noteDefaultX = measureElem->Attribute("default-x");
-									tempNote.setDefaultX(noteDefaultX);
-									const char* noteDefaultY = measureElem->Attribute("default-y");
-									tempNote.setDefaultY(noteDefaultY);
-
 									for (XMLElement* noteElem = measureElem->FirstChildElement(); noteElem != nullptr; noteElem = noteElem->NextSiblingElement())	{
+										checkElement(noteElem);
+
 										string noteElemName = noteElem->Value();
-										if (noteElemName == "duration")	{
-											tempNote.setDuration(noteElem->GetText());
-										}
-										if (noteElemName == "voice")	{
-											tempNote.setVoice(noteElem->GetText());
-										}
-										if (noteElemName == "type")	{
-											tempNote.setType(noteElem->GetText());
-										}
-										if (noteElemName == "stem")	{
-											tempNote.setStem(noteElem->GetText());
-										}
-										if (noteElemName == "pitch")	{
-											for (XMLElement* pitchElem = noteElem->FirstChildElement(); pitchElem != nullptr; pitchElem = pitchElem->NextSiblingElement())	{
-												string pitchElemName = pitchElem->Value();
-												if (pitchElemName == "step")	{
-													tempNote.pitch.setStep(pitchElem->GetText());
-												}
-												if (pitchElemName == "octave")	{
-													tempNote.pitch.setOctave(pitchElem->GetText());
-												}
-											}
-										}
+
 										if (noteElemName == "rest")	{
 											tempNote.setRest(true);
 										}
+										if (noteElemName == "duration")	{
+											tempNote.duration.setDuration(noteElem->GetText());
+										}
+										if (noteElemName == "voice")	{
+											tempNote.voice.setVoice(noteElem->GetText());
+										}
+										if (noteElemName == "type")	{
+											tempNote.type.setType(noteElem->GetText());
+										}
+										if (noteElemName == "stem")	{
+											tempNote.stem.setStem(noteElem->GetText());
+										}
+										if (noteElemName == "pitch")	{
+											for (XMLElement* pitchElem = noteElem->FirstChildElement(); pitchElem != nullptr; pitchElem = pitchElem->NextSiblingElement())	{
+												checkElement(pitchElem);
+
+												string pitchElemName = pitchElem->Value();
+
+												if (pitchElemName == "step")	{
+													tempNote.pitch.step.setStep(pitchElem->GetText());
+												}
+												if (pitchElemName == "octave")	{
+													tempNote.pitch.octave.setOctave(pitchElem->GetText());
+												}
+											}
+										}
+									}
+
+									if (!tempNote.isRest())	{
+										const char* noteDefaultX = measureElem->Attribute("default-x");
+										tempNote.setDefaultX(noteDefaultX);
+										const char* noteDefaultY = measureElem->Attribute("default-y");
+										tempNote.setDefaultY(noteDefaultY);
 									}
 
 									tempMeasure.notes.push_back(tempNote);
@@ -207,9 +229,12 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 									tempMeasure.barLine.setLocation(location);
 
 									for (XMLElement* barLineElem = measureElem->FirstChildElement(); barLineElem != nullptr; barLineElem = barLineElem->NextSiblingElement())	{
+										checkElement(barLineElem);
+
 										string barLineElemName = barLineElem->Value();
+
 										if (barLineElemName == "bar-style")	{
-											tempMeasure.barLine.setBarStyle(barLineElem->GetText());
+											tempMeasure.barLine.barStyle.setBarStyle(barLineElem->GetText());
 										}
 									}
 								}
@@ -229,10 +254,13 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 }
 
 void MusicXMLParser::print() {
-	cout << "Printing partList" << endl;
-	cout << "-----------------" << endl;
 	partList.print();
-	cout << endl << "Printing part" << endl;
-	cout << "-------------" << endl;
 	part.print();
+}
+
+SuccessEnum MusicXMLParser::checkElement(XMLElement* element) {
+	if (element == NULL) 	{
+		throw runtime_error("Parser could not find a necessary XML element, check you files for errors.");
+	}
+	return SUCCESS;
 }

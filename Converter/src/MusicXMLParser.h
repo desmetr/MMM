@@ -39,6 +39,9 @@ public:
 private:
 	PartList partList;
 	Part part;
+
+	//	Checks if an XMLElement* is NULL, throws an exception if it is , because it indicates a parser or XML error.
+	SuccessEnum checkElement(tinyxml2::XMLElement* element);
 };
 
 #endif /* MUSICXMLPARSER_H_ */

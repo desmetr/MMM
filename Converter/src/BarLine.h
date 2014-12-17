@@ -10,24 +10,24 @@
 
 #include <string>
 #include <iostream>
+#include "BarStyle.h"
 
 class BarLine {
 public:
 	BarLine();
 	virtual ~BarLine();
 
-	const std::string& getBarStyle() const;
+	BarStyle barStyle;
+
 	const std::string& getLocation() const;
 	const std::string& getTagName() const;
 
-	void setBarStyle(const std::string& barStyle);
 	void setLocation(const std::string& location);
 
 	void print();
 
 private:
 	std::string location;
-	std::string barStyle;
 
 	const std::string tagName = "barline";
 };

@@ -21,8 +21,8 @@ const string& Measure::getTagName() const 	{	return tagName;	}
 void Measure::setNumber(const string& number) 			{	this->number = number;			}
 
 void Measure::print() {
-	cout << "Measure:" << endl;
-	cout << "\tnumber: " << number << endl;
+	cout << "\tMeasure:" << endl;
+	cout << "\t\tnumber: " << number << endl;
 	attribute.print();
 	cout << endl;
 	for (auto& note : notes)	{

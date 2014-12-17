@@ -17,16 +17,14 @@ ScorePart::~ScorePart() {
 }
 
 const string& ScorePart::getId() const 			{	return id;			}
-const string& ScorePart::getPartName() const 	{	return partName;	}
 const string& ScorePart::getTagName() const 	{	return tagName;		}
 
 void ScorePart::setId(const string& id) 			{	this->id = id;				}
-void ScorePart::setPartName(const string& partName) {	this->partName = partName;	}
 
 void ScorePart::print() {
-	cout << "ScorePart:" << endl;
-	cout << "\tID: " << id << endl;
-	cout << "\tpartName: " << partName << endl;
+	cout << "\tScorePart:" << endl;
+	cout << "\t\tID: " << id << endl;
+	partName.print();
 	scoreInstrument.print();
 	midiInstrument.print();
 }
