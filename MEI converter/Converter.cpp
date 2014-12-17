@@ -25,8 +25,13 @@ int main(int argc, char* argv[]) {
 //
 //	parser.print();
 	MEIParser a;
-	a.parse("testOctave_MEI.xml");
-	a.debugOut();
+	try{
+		a.parse("testOctave_MEI.xml");
+		a.debugOut();
+	}
+	catch(exception& e){
+		cout << e.what() << endl;
+	}
 
 	return 0;
 }
