@@ -1,5 +1,6 @@
 [GEIMPLEMENTEERD]
-Kan momenteel al de scoreDef parsen , wat ongeveer overeen komt met een score part
+Parsing
+Mapping op musicXML objecten tot noten (voor morgen :p)
 
 [WERKING]
 tijdens het parsen wordt alle data in een intermediaire structuur gestoken (MEIDataContainers.h)
@@ -7,9 +8,6 @@ Wanneer de parsing voltooid is, wordt de data door de mapping functie op MusicXM
 Eens dit gebeurd is kan er een musicXML bestand gegenereerd worden.
 
 [NOG TE DOEN]
-TODO; Parse <section> (komt overeen met de data van <note> in MusicXML
-TODO: mapping function
+TODO: mapping function afmaken.
 TODO; output to XML from MusicXML
-
-Idee: alle geimporteerde files, MusicXML / MEI / (midi) worden gemapt in dezelfde MusicXML objecten (door rafael gemaakt) Laat alle converter functies gewoon met dit soort objecten werken voor output naar XML.
 
