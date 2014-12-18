@@ -16,7 +16,6 @@
 * the object data can then be used to generate a MusicXML file.
  */
 
-enum succesEnum{FAILURE,SUCCES};
 
 using std::string;
 using std::cout;
@@ -29,10 +28,10 @@ public:
 	MEIParser();
 	virtual ~MEIParser();
 
-	succesEnum parse(string fileName);
+	void parse(string fileName);
 
 	//maps the intermediate data structures onto proper musicXML based dataStructures (used by MusicXML parser.)
-	succesEnum mapData();
+	void mapData();
 
 	void debugOut();
 

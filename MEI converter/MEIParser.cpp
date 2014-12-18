@@ -20,7 +20,7 @@ void MEIParser::checkElement(tinyxml2::XMLElement* el){
 	if(el == NULL) throw std::runtime_error("Parser could not find a necessary XML element, check you files for errors.");
 }
 
-succesEnum MEIParser::parse(string fileName){
+void MEIParser::parse(string fileName){
 	tinyxml2::XMLDocument meiFile;
 
 	//load the MEI xml file.
@@ -59,8 +59,6 @@ succesEnum MEIParser::parse(string fileName){
 	}
 	else throw std::runtime_error("No section element in xml, aborting.");
 
-	//we're done!
-	return SUCCES;
 
 
 }
@@ -182,7 +180,7 @@ void MEIParser::parseSection(tinyxml2::XMLElement* section){
 
 }
 
-succesEnum MEIParser::mapData(){
+void MEIParser::mapData(){
 	//IGNORE ALL to_string ERRORS IN ECLIPSE.
 
 	//map all data onto the musicXML objects.
@@ -244,8 +242,6 @@ succesEnum MEIParser::mapData(){
 		x = 12.0;
 	}
 
-
-	return SUCCES;
 }
 
 int MEIParser::generateNoteY(char name, int octave){
