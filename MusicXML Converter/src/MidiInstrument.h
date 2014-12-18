@@ -10,33 +10,30 @@
 
 #include <string>
 #include <iostream>
+#include "MidiChannel.h"
+#include "MidiProgram.h"
+#include "Volume.h"
+#include "Pan.h"
 
 class MidiInstrument {
 public:
 	MidiInstrument();
 	virtual ~MidiInstrument();
 
+	MidiChannel midiChannel;
+	MidiProgram midiProgram;
+	Volume volume;
+	Pan pan;
+
 	const std::string& getId() const;
-	const std::string& getMidiChannel() const;
-	const std::string& getMidiProgram() const;
-	const std::string& getPan() const;
 	const std::string& getTagName() const;
-	const std::string& getVolume() const;
 
 	void setId(const std::string& id);
-	void setMidiChannel(const std::string& midiChannel);
-	void setMidiProgram(const std::string& midiProgram);
-	void setPan(const std::string& pan);
-	void setVolume(const std::string& volume);
 
 	void print();
 
 private:
 	std::string id;
-	std::string midiChannel;
-	std::string midiProgram;
-	std::string volume;
-	std::string pan;
 
 	const std::string tagName = "midi-instrument";
 };

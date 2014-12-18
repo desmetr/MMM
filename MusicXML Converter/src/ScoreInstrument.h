@@ -10,24 +10,24 @@
 
 #include <string>
 #include <iostream>
+#include "InstrumentName.h"
 
 class ScoreInstrument {
 public:
 	ScoreInstrument();
 	virtual ~ScoreInstrument();
 
+	InstrumentName instrumentName;
+
 	const std::string& getId() const;
-	const std::string& getInstrumentName() const;
 	const std::string& getTagName() const;
 
 	void setId(const std::string& id);
-	void setInstrumentName(const std::string& instrumentName);
 
 	void print();
 
 private:
 	std::string id;
-	std::string instrumentName;
 
 	const std::string tagName = "score-instrument";
 };

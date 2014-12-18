@@ -10,14 +10,19 @@ CPP_SRCS += \
 ../src/Clef.cpp \
 ../src/Division.cpp \
 ../src/Duration.cpp \
+../src/InstrumentName.cpp \
 ../src/Key.cpp \
 ../src/Measure.cpp \
+../src/MidiChannel.cpp \
 ../src/MidiInstrument.cpp \
+../src/MidiProgram.cpp \
 ../src/MusicXML\ Converter.cpp \
+../src/MusicXMLGenerator.cpp \
 ../src/MusicXMLMaps.cpp \
 ../src/MusicXMLParser.cpp \
 ../src/Note.cpp \
 ../src/Octave.cpp \
+../src/Pan.cpp \
 ../src/Part.cpp \
 ../src/PartList.cpp \
 ../src/PartName.cpp \
@@ -28,7 +33,9 @@ CPP_SRCS += \
 ../src/Step.cpp \
 ../src/Time.cpp \
 ../src/Type.cpp \
+../src/Utilities.cpp \
 ../src/Voice.cpp \
+../src/Volume.cpp \
 ../src/tinyxml2.cpp 
 
 OBJS += \
@@ -38,14 +45,19 @@ OBJS += \
 ./src/Clef.o \
 ./src/Division.o \
 ./src/Duration.o \
+./src/InstrumentName.o \
 ./src/Key.o \
 ./src/Measure.o \
+./src/MidiChannel.o \
 ./src/MidiInstrument.o \
+./src/MidiProgram.o \
 ./src/MusicXML\ Converter.o \
+./src/MusicXMLGenerator.o \
 ./src/MusicXMLMaps.o \
 ./src/MusicXMLParser.o \
 ./src/Note.o \
 ./src/Octave.o \
+./src/Pan.o \
 ./src/Part.o \
 ./src/PartList.o \
 ./src/PartName.o \
@@ -56,7 +68,9 @@ OBJS += \
 ./src/Step.o \
 ./src/Time.o \
 ./src/Type.o \
+./src/Utilities.o \
 ./src/Voice.o \
+./src/Volume.o \
 ./src/tinyxml2.o 
 
 CPP_DEPS += \
@@ -66,14 +80,19 @@ CPP_DEPS += \
 ./src/Clef.d \
 ./src/Division.d \
 ./src/Duration.d \
+./src/InstrumentName.d \
 ./src/Key.d \
 ./src/Measure.d \
+./src/MidiChannel.d \
 ./src/MidiInstrument.d \
+./src/MidiProgram.d \
 ./src/MusicXML\ Converter.d \
+./src/MusicXMLGenerator.d \
 ./src/MusicXMLMaps.d \
 ./src/MusicXMLParser.d \
 ./src/Note.d \
 ./src/Octave.d \
+./src/Pan.d \
 ./src/Part.d \
 ./src/PartList.d \
 ./src/PartName.d \
@@ -84,7 +103,9 @@ CPP_DEPS += \
 ./src/Step.d \
 ./src/Time.d \
 ./src/Type.d \
+./src/Utilities.d \
 ./src/Voice.d \
+./src/Volume.d \
 ./src/tinyxml2.d 
 
 

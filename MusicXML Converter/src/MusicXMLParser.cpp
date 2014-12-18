@@ -71,7 +71,7 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 										string instrumentNameElemName = instrumentNameElem->Value();
 
 										if (instrumentNameElemName == "instrument-name")	{
-											partList.scorePart.scoreInstrument.setInstrumentName(instrumentNameElem->GetText());
+											partList.scorePart.scoreInstrument.instrumentName.setInstrumentName(instrumentNameElem->GetText());
 										}
 									}
 								}
@@ -85,16 +85,16 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 										string midiInstrumentElemName = midiInstrumentElem->Value();
 
 										if (midiInstrumentElemName == "midi-channel")	{
-											partList.scorePart.midiInstrument.setMidiChannel(midiInstrumentElem->GetText());
+											partList.scorePart.midiInstrument.midiChannel.setMidiChannel(midiInstrumentElem->GetText());
 										}
 										if (midiInstrumentElemName == "midi-program")	{
-											partList.scorePart.midiInstrument.setMidiProgram(midiInstrumentElem->GetText());
+											partList.scorePart.midiInstrument.midiProgram.setMidiProgram(midiInstrumentElem->GetText());
 										}
 										if (midiInstrumentElemName == "volume")	{
-											partList.scorePart.midiInstrument.setVolume(midiInstrumentElem->GetText());
+											partList.scorePart.midiInstrument.volume.setVolume(midiInstrumentElem->GetText());
 										}
 										if (midiInstrumentElemName == "pan")	{
-											partList.scorePart.midiInstrument.setPan(midiInstrumentElem->GetText());
+											partList.scorePart.midiInstrument.pan.setPan(midiInstrumentElem->GetText());
 										}
 									}
 								}
