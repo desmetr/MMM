@@ -7,28 +7,23 @@
 //============================================================================
 
 #include <iostream>
-//#include "MusicXMLParser.h"
+#include "MusicXMLParser.h"
 //#include "MusicXMLMaps.h"
 #include "MEIParser.h"
+#include "MEIGenerator.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
-//	MusicXMLParser parser;
-//	if (argc == 2)	{
-//		cout << "Opening and parsing " << argv[1] << endl;
-//		parser.parse(argv[1]);
-//	}
-//	else	{
-//		cerr << "Error, no file specified." << endl;
-//	}
-//
-//	parser.print();
 	MEIParser a;
+
+	MusicXMLParser p;
 	try{
-		a.parse("testOctave_MEI.xml");
-		a.mapData();
-		a.debugOut();
+		p.parse("testOctave.xml");
+		MEIGenerator g(p.getPartList(), p.getPart());
+		g.debugOut();
+
+
 	}
 	catch(exception& e){
 		cout << e.what() << endl;
