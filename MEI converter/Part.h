@@ -30,7 +30,8 @@ public:
 private:
 	std::string id;
 
-	const std::string tagName = "part";
+	std::string tagName = "part";
+//	const std::string tagName = "part";
 };
 
 #endif /* PART_H_ */

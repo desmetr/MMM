@@ -35,7 +35,8 @@ private:
 	std::string number;
 //	int number;
 
-	const std::string tagName = "measure";
+	std::string tagName = "measure";
+//	const std::string tagName = "measure";
 };
 
 #endif /* MEASURE_H_ */

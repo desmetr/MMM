@@ -32,6 +32,9 @@ public:
 	MusicXMLParser();
 	virtual ~MusicXMLParser();
 
+	const Part& getPart() const;
+	const PartList& getPartList() const;
+
 	SuccessEnum parse(std::string fileName);
 
 	void print();
@@ -39,6 +42,9 @@ public:
 private:
 	PartList partList;
 	Part part;
+
+	//	Checks if an XMLElement* is NULL, throws an exception if it is , because it indicates a parser or XML error.
+	SuccessEnum checkElement(tinyxml2::XMLElement* element);
 };
 
 #endif /* MUSICXMLPARSER_H_ */

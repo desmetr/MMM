@@ -23,7 +23,7 @@ void Key::setFifths(const string& fifths)	{	this->fifths = fifths;	}
 void Key::setMode(const string& mode)		{	this->mode = mode;		}
 
 void Key::print() {
-	cout << "Key:" << endl;
-	cout << "\tfifths: " << fifths << endl;
-	cout << "\tmode: " << mode << endl;
+	cout << "\t\t\tKey:" << endl;
+	cout << "\t\t\t\tfifths: " << fifths << endl;
+	cout << "\t\t\t\tmode: " << mode << endl;
 }

@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
 	MEIParser a;
 	try{
 		a.parse("testOctave_MEI.xml");
+		a.mapData();
 		a.debugOut();
 	}
 	catch(exception& e){

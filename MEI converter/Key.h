@@ -30,7 +30,8 @@ private:
 	std::string mode;
 //	int mode;
 
-	const std::string tagName = "key";
+	std::string tagName = "key";
+//	const std::string tagName = "key";
 };
 
 #endif /* KEY_H_ */

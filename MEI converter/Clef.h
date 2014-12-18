@@ -30,7 +30,8 @@ private:
 	std::string line;
 //	int line;
 
-	const std::string tagName = "clef";
+	std::string tagName = "clef";
+//	const std::string tagName = "clef";
 };
 
 #endif /* CLEF_H_ */

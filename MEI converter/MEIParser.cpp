@@ -8,6 +8,11 @@ MEIParser::MEIParser(){
 	noteMap['G'] = -30.0;
 	noteMap['A'] = -25.0;
 	noteMap['B'] = -20.0;
+
+	typeMap[2] = "half";
+	typeMap[4] = "quarter";
+	typeMap[8] = "eight";
+	typeMap[16] = "sixteenth";
 };
 MEIParser::~MEIParser(){};
 
@@ -181,18 +186,20 @@ succesEnum MEIParser::mapData(){
 	//IGNORE ALL to_string ERRORS IN ECLIPSE.
 
 	//map all data onto the musicXML objects.
-	partList.setPartGroupType("start");
-	partList.setPartGroupNumber("1"); //WARNING THIS IS STATIC RIGHT NOW. MORE PARTS = AUTO RISE PART NUMBER
+//	partList.setPartGroupType("start");
+//	partList.setPartGroupNumber("1"); //WARNING THIS IS STATIC RIGHT NOW. MORE PARTS = AUTO RISE PART NUMBER
 	//set all scorePart data.
 	partList.scorePart.setId(scoreDefContainer.PART_ID_VAR);
-	partList.scorePart.setPartName(scoreDefContainer.PART_NAME_VAR);
+	partList.scorePart.partName.setName(scoreDefContainer.PART_NAME_VAR);
 	partList.scorePart.scoreInstrument.setId("P1-13");
-	partList.scorePart.scoreInstrument.setInstrumentName(scoreDefContainer.PART_NAME_VAR);
+	partList.scorePart.scoreInstrument.instrumentName.setInstrumentName(scoreDefContainer.PART_NAME_VAR);
+
 	//midi data
-	partList.scorePart.midiInstrument.setMidiChannel("1"); //currently fixed.
-	partList.scorePart.midiInstrument.setMidiProgram("1"); //currently fixed.
-	partList.scorePart.midiInstrument.setVolume("78"); //currently fixed.
-	partList.scorePart.midiInstrument.setPan("0");//WHO NEEDS STEREO ANYWAY
+	partList.scorePart.midiInstrument.midiChannel.setMidiChannel("1"); //fixed value.
+	partList.scorePart.midiInstrument.midiProgram.setMidiProgram("1"); //fixed value
+	partList.scorePart.midiInstrument.volume.setVolume("78"); //fixed value.
+	partList.scorePart.midiInstrument.pan.setPan("0"); //Who needs stereo pshhh
+
 	//part data
 	part.setId(scoreDefContainer.PART_ID_VAR);
 	for(measureData& m : measures){
@@ -202,7 +209,8 @@ succesEnum MEIParser::mapData(){
 		//fill it up with parsed data from MEI
 		maat.setNumber( to_string(m.MEASURE_NUMBER_VAR) );
 
-		maat.attribute.setDivisions("1"); //const;
+		maat.attribute.division.setDivisions("1");
+		//maat.attribute.setDivisions("1"); //const;
 
 		maat.attribute.clef.setLine( to_string(scoreDefContainer.CLEF_LINE_VAR));
 		maat.attribute.clef.setSign( scoreDefContainer.CLEF_TYPE_VAR);
@@ -214,18 +222,24 @@ succesEnum MEIParser::mapData(){
 		maat.attribute.time.setBeats( to_string(scoreDefContainer.MAAT_BOVEN_VAR));
 
 		maat.barLine.setLocation("right"); //const
-		maat.barLine.setBarStyle("light-heavy");
+		maat.barLine.barStyle.setBarStyle("light-heavy");
 
 		for(noteData& n : m.NOTES ){
 			//create musicXML note.
 			Note noot;
 
-			//CONTINUE HERE
-
+			noot.setDefaultX(to_string(generateNoteX()));
+			noot.setDefaultY( to_string(generateNoteY(n.NOTE_NAME_VAR[0],n.NOTE_OCTAVE_VAR)));
+			noot.setRest(false);
+			noot.duration.setDuration("1");
+			noot.type.setType(generateNoteType(n.NOTE_DURATION_VAR));
+			noot.stem.setStem(n.STEM_DIR_VAR);
+			noot.pitch.step.setStep(n.NOTE_NAME_VAR);
+			noot.pitch.octave.setOctave(to_string(n.NOTE_OCTAVE_VAR));
+			noot.voice.setVoice("1"); //CONST
+			maat.notes.push_back(noot);
 		}
-
-
-
+		part.measures.push_back(maat);
 		//reset start note position
 		x = 12.0;
 	}
@@ -235,19 +249,26 @@ succesEnum MEIParser::mapData(){
 }
 
 int MEIParser::generateNoteY(char name, int octave){
-	double offset = -140 + octave * 35;
-	return offset + noteMap.find(name);
+	double offset = -140 + (octave * 35);
+	return offset + noteMap.find(name)->second;
 }
 
 double MEIParser::generateNoteX(){
 	if(firstMeasure){
 		x = 79.15;
+		firstMeasure = false;
+		return x;
 	}
 	else{
-		return x + 113.19;
+		double returnVal = x;
+		x += 113.19;
+		return returnVal;
 	}
 }
 
+string MEIParser::generateNoteType(int number){
+	return typeMap.find(number)->second;
+}
 
 void MEIParser::debugOut(){
 	cout << "<[GENERAL INFO]>" << endl << endl;
@@ -267,5 +288,8 @@ void MEIParser::debugOut(){
 		}
 	}
 
+	cout << "================MUSICXML========================" << endl;
+	partList.print();
+	part.print();
 
 }

@@ -19,21 +19,13 @@ public:
 
 	ScorePart scorePart;
 
-	const std::string& getPartGroupNumber() const;
-	const std::string& getPartGroupType() const;
 	const std::string& getTagName() const;
-
-	void setPartGroupNumber(const std::string& partGroupNumber);
-	void setPartGroupType(const std::string& partGroupType);
 
 	void print();
 
 private:
-	std::string partGroupType;
-	std::string partGroupNumber;
-//	int number;
-
-	const std::string tagName = "part-list";
+	std::string tagName = "part-list";
+//	const std::string tagName = "part-list";
 };
 
 #endif /* PARTLIST_H_ */

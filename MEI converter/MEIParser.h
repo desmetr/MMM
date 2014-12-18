@@ -22,6 +22,7 @@ using std::string;
 using std::cout;
 using std::endl;
 using std::stoi;
+using std::to_string;
 
 class MEIParser{
 public:
@@ -55,11 +56,13 @@ private:
 
 	int generateNoteY(char name, int octave);
 	double generateNoteX();
+	string generateNoteType(int number);
 
 	//used for note location generation. Yes this is weird.
 	bool firstMeasure = true;
 	double x = 0.0;
 	std::map<char,double> noteMap;
+	std::map<int,string> typeMap;
 
 
 

@@ -1,13 +1,3 @@
-[GEIMPLEMENTEERD]
-Parsing
-Mapping op musicXML objecten tot noten (voor morgen :p)
-
-[WERKING]
-tijdens het parsen wordt alle data in een intermediaire structuur gestoken (MEIDataContainers.h)
-Wanneer de parsing voltooid is, wordt de data door de mapping functie op MusicXML objecten gemapt.
-Eens dit gebeurd is kan er een musicXML bestand gegenereerd worden.
-
-[NOG TE DOEN]
-TODO: mapping function afmaken.
-TODO; output to XML from MusicXML
-
+[DONE]: Parsing, mapping
+[TODO]: reverse mapping, generate MEI xml
+[TODO]: rests are not implemented yet.

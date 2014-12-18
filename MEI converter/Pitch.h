@@ -10,26 +10,24 @@
 
 #include <string>
 #include <iostream>
+#include "Step.h"
+#include "Octave.h"
 
 class Pitch {
 public:
 	Pitch();
 	virtual ~Pitch();
 
-	const std::string& getOctave() const;
-	const std::string& getStep() const;
-	const std::string& getTagName() const;
+	Step step;
+	Octave octave;
 
-	void setOctave(const std::string& octave);
-	void setStep(const std::string& step);
+	const std::string& getTagName() const;
 
 	void print();
 
 private:
-	std::string step;
-	std::string octave;
-
-	const std::string tagName = "pitch";
+	std::string tagName = "pitch";
+//	const std::string tagName = "pitch";
 };
 
 #endif /* PITCH_H_ */

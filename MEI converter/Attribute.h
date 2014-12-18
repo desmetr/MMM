@@ -10,6 +10,7 @@
 
 #include <string>
 #include <iostream>
+#include "Division.h"
 #include "Key.h"
 #include "Time.h"
 #include "Clef.h"
@@ -19,6 +20,7 @@ public:
 	Attribute();
 	virtual ~Attribute();
 
+	Division division;
 	Key key;
 	Time time;
 	Clef clef;
@@ -31,10 +33,8 @@ public:
 	void print();
 
 private:
-	std::string divisions;
-//	int divisions;
-
-	const std::string tagName = "attributes";
+	std::string tagName = "attributes";
+//	const std::string tagName = "attributes";
 };
 
 #endif /* ATTRIBUTE_H_ */

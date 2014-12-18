@@ -15,15 +15,15 @@ BarLine::BarLine() {
 BarLine::~BarLine() {
 }
 
-const string& BarLine::getBarStyle() const 	{	return barStyle;	}
 const string& BarLine::getLocation() const 	{	return location;	}
 const string& BarLine::getTagName() const	{	return tagName;		}
 
-void BarLine::setBarStyle(const string& barStyle) 	{	this->barStyle = barStyle;	}
 void BarLine::setLocation(const string& location) 	{	this->location = location;	}
 
 void BarLine::print() {
-	cout << "BarLine:" << endl;
-	cout << "\tlocation: " << location << endl;
-	cout << "\tbarStyle: " << barStyle << endl;
+	if (location != "")	{
+		cout << "\t\tBarLine:" << endl;
+		cout << "\t\t\tlocation: " << location << endl;
+		barStyle.print();
+	}
 }

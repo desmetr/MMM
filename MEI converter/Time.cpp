@@ -23,7 +23,7 @@ void Time::setBeats(const string& beats) 		{	this->beats = beats;		}
 void Time::setBeatType(const string& beatType) 	{	this->beatType = beatType;	}
 
 void Time::print() {
-	cout << "Time:" << endl;
-	cout << "\tbeats: " << beats << endl;
-	cout << "\tbeatType: " << beatType << endl;
+	cout << "\t\t\tTime:" << endl;
+	cout << "\t\t\t\tbeats: " << beats << endl;
+	cout << "\t\t\t\tbeatType: " << beatType << endl;
 }
