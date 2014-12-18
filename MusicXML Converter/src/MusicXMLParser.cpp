@@ -141,10 +141,10 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 												string keyElemName = keyElem->Value();
 
 												if (keyElemName == "fifths")	{
-													tempMeasure.attribute.key.setFifths(keyElem->GetText());
+													tempMeasure.attribute.key.fifths.setFifths(keyElem->GetText());
 												}
 												if (keyElemName == "mode")	{
-													tempMeasure.attribute.key.setMode(keyElem->GetText());
+													tempMeasure.attribute.key.mode.setMode(keyElem->GetText());
 												}
 											}
 										}
@@ -155,10 +155,10 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 												string timeElemName = timeElem->Value();
 
 												if (timeElemName == "beats")	{
-													tempMeasure.attribute.time.setBeats(timeElem->GetText());
+													tempMeasure.attribute.time.beats.setBeats(timeElem->GetText());
 												}
 												if (timeElemName == "beat-type")	{
-													tempMeasure.attribute.time.setBeatType(timeElem->GetText());
+													tempMeasure.attribute.time.beatType.setBeatType(timeElem->GetText());
 												}
 											}
 										}
@@ -169,10 +169,10 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 												string clefElemName = clefElem->Value();
 
 												if (clefElemName == "sign")	{
-													tempMeasure.attribute.clef.setSign(clefElem->GetText());
+													tempMeasure.attribute.clef.sign.setSign(clefElem->GetText());
 												}
 												if (clefElemName == "line")	{
-													tempMeasure.attribute.clef.setLine(clefElem->GetText());
+													tempMeasure.attribute.clef.line.setLine(clefElem->GetText());
 												}
 											}
 										}

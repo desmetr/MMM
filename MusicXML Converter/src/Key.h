@@ -10,26 +10,22 @@
 
 #include <string>
 #include <iostream>
+#include "Fifths.h"
+#include "Mode.h"
 
 class Key {
 public:
 	Key();
 	virtual ~Key();
-	const std::string& getFifths() const;
-	const std::string& getMode() const;
-	const std::string& getTagName() const;
 
-	void setFifths(const std::string& fifths);
-	void setMode(const std::string& mode);
+	Fifths fifths;
+	Mode mode;
+
+	const std::string& getTagName() const;
 
 	void print();
 
 private:
-	std::string fifths;
-//	int fifths;
-	std::string mode;
-//	int mode;
-
 	std::string tagName = "key";
 //	const std::string tagName = "key";
 };

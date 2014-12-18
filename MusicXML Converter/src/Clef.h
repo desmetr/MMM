@@ -10,28 +10,23 @@
 
 #include <string>
 #include <iostream>
+#include "Sign.h"
+#include "Line.h"
 
 class Clef {
 public:
 	Clef();
 	virtual ~Clef();
 
-	const std::string& getLine() const;
-	const std::string& getSign() const;
-	const std::string& getTagName() const;
+	Sign sign;
+	Line line;
 
-	void setLine(const std::string& line);
-	void setSign(const std::string& sign);
+	const std::string& getTagName() const;
 
 	void print();
 
 private:
-	std::string sign;
-	std::string line;
-//	int line;
-
 	std::string tagName = "clef";
-//	const std::string tagName = "clef";
 };
 
 #endif /* CLEF_H_ */

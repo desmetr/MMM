@@ -15,7 +15,6 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	MusicXMLParser musicXMLParser;
-	MusicXMLGenerator musicXMLGenerator(musicXMLParser.getPartList(), musicXMLParser.getPart());
 
 	if (argc == 2)	{
 		cout << "Opening and parsing " << argv[1] << endl;
@@ -28,6 +27,7 @@ int main(int argc, char* argv[]) {
 //	musicXMLParser.print();
 
 	cout << "Generating a MusicXML file..." << endl;
+	MusicXMLGenerator musicXMLGenerator(musicXMLParser.getPartList(), musicXMLParser.getPart());
 	musicXMLGenerator.generateMusicXML();
 
 	return 0;

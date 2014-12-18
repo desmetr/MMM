@@ -15,15 +15,10 @@ Time::Time() {
 Time::~Time() {
 }
 
-const string& Time::getBeats() const 		{	return beats;		}
-const string& Time::getBeatType() const 	{	return beatType;	}
 const string& Time::getTagName() const 		{	return tagName;		}
-
-void Time::setBeats(const string& beats) 		{	this->beats = beats;		}
-void Time::setBeatType(const string& beatType) 	{	this->beatType = beatType;	}
 
 void Time::print() {
 	cout << "\t\t\tTime:" << endl;
-	cout << "\t\t\t\tbeats: " << beats << endl;
-	cout << "\t\t\t\tbeatType: " << beatType << endl;
+	beats.print();
+	beatType.print();
 }
