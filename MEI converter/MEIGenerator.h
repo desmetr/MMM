@@ -14,6 +14,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include "tinyxml2.h"
 
 using std::cout;
 using std::endl;
@@ -26,7 +27,7 @@ public:
 	MEIGenerator();
 	MEIGenerator(const PartList& partList,const Part& part);
 
-	bool generateXML();
+	void generateXML(string fileName);
 
 	void setMaps();
 

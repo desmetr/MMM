@@ -289,3 +289,11 @@ void MEIParser::debugOut(){
 	part.print();
 
 }
+
+PartList MEIParser::getPartList() const{
+	return this->partList;
+}
+
+Part MEIParser::getPart() const{
+	return this->part;
+}

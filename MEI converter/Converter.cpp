@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 	try{
 		p.parse("testOctave.xml");
 		MEIGenerator g(p.getPartList(), p.getPart());
-		g.debugOut();
+		g.generateXML("MEITEST.xml");
 
 
 	}

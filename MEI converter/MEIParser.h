@@ -29,11 +29,12 @@ public:
 	virtual ~MEIParser();
 
 	void parse(string fileName);
-
 	//maps the intermediate data structures onto proper musicXML based dataStructures (used by MusicXML parser.)
 	void mapData();
-
 	void debugOut();
+
+	PartList getPartList() const;
+	Part getPart() const;
 
 private:
 	//al mijn data gaat in jouw klasses gemapt worden uiteindelijk , maar dat is voor als de parser af is.
