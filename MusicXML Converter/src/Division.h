@@ -25,7 +25,8 @@ private:
 	std::string divisions;
 //	int divisions;
 
-	const std::string tagName = "divisions";
+	std::string tagName = "divisions";
+//	const std::string tagName = "divisions";
 };
 
 #endif /* DIVISION_H_ */

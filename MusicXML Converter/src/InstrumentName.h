@@ -26,7 +26,8 @@ public:
 private:
 	std::string instrumentName;
 
-	const std::string tagName = "instrument-name";
+	std::string tagName = "instrument-name";
+//	const std::string tagName = "instrument-name";
 };
 
 #endif /* INSTRUMENTNAME_H_ */

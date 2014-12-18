@@ -1,4 +1,4 @@
-src/MusicXML\ Converter.d: ../src/MusicXML\ Converter.cpp \
+src/MusicXMLConverter.d: ../src/MusicXMLConverter.cpp \
  ../src/MusicXMLParser.h ../src/tinyxml2.h ../src/ScorePart.h \
  ../src/PartName.h ../src/ScoreInstrument.h ../src/InstrumentName.h \
  ../src/MidiInstrument.h ../src/MidiChannel.h ../src/MidiProgram.h \
@@ -6,7 +6,8 @@ src/MusicXML\ Converter.d: ../src/MusicXML\ Converter.cpp \
  ../src/Measure.h ../src/Attribute.h ../src/Division.h ../src/Key.h \
  ../src/Time.h ../src/Clef.h ../src/Note.h ../src/Pitch.h ../src/Step.h \
  ../src/Octave.h ../src/Duration.h ../src/Voice.h ../src/Type.h \
- ../src/Stem.h ../src/BarLine.h ../src/BarStyle.h
+ ../src/Stem.h ../src/BarLine.h ../src/BarStyle.h \
+ ../src/MusicXMLGenerator.h ../src/Utilities.h
 
 ../src/MusicXMLParser.h:
 
@@ -65,3 +66,7 @@ src/MusicXML\ Converter.d: ../src/MusicXML\ Converter.cpp \
 ../src/BarLine.h:
 
 ../src/BarStyle.h:
+
+../src/MusicXMLGenerator.h:
+
+../src/Utilities.h:

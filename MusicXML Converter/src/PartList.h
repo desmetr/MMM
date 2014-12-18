@@ -24,7 +24,8 @@ public:
 	void print();
 
 private:
-	const std::string tagName = "part-list";
+	std::string tagName = "part-list";
+//	const std::string tagName = "part-list";
 };
 
 #endif /* PARTLIST_H_ */

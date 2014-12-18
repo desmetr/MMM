@@ -26,7 +26,8 @@ public:
 private:
 	std::string voice;
 
-	const std::string tagName = "voice";
+	std::string tagName = "voice";
+//	const std::string tagName = "voice";
 };
 
 #endif /* VOICE_H_ */

@@ -22,5 +22,5 @@ void Pan::setPan(const string& pan) 	{	this->pan = pan;	}
 
 void Pan::print() {
 	cout << "\t\t\tPan: " << endl;
-	cout << "\t\t\t\pan: " << pan << endl;
+	cout << "\t\t\t\tpan: " << pan << endl;
 }

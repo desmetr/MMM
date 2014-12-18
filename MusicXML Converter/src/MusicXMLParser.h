@@ -32,6 +32,9 @@ public:
 	MusicXMLParser();
 	virtual ~MusicXMLParser();
 
+	const Part& getPart() const;
+	const PartList& getPartList() const;
+
 	SuccessEnum parse(std::string fileName);
 
 	void print();

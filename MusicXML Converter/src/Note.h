@@ -46,7 +46,8 @@ private:
 //	float defaultX;
 //	float defaultY;
 
-	const std::string tagName = "note";
+	std::string tagName = "note";
+//	const std::string tagName = "note";
 };
 
 #endif /* NOTE_H_ */

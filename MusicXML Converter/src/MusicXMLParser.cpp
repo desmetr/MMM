@@ -11,11 +11,13 @@ using namespace std;
 using namespace tinyxml2;
 
 MusicXMLParser::MusicXMLParser() {
-
 }
 
 MusicXMLParser::~MusicXMLParser() {
 }
+
+const Part& MusicXMLParser::getPart() const 			{	return part;		}
+const PartList& MusicXMLParser::getPartList() const 	{	return partList;	}
 
 SuccessEnum MusicXMLParser::parse(string fileName) {
 	XMLDocument doc;

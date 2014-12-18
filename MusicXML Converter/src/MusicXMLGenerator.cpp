@@ -41,9 +41,10 @@ void MusicXMLGenerator::generateMusicXML() {
 	xmlDoc.SaveFile("MusicXMLFile.xml");
 }
 
-void MusicXMLGenerator::generateChildrenOfPartList(XMLElement& xmlElement) {
+void MusicXMLGenerator::generateChildrenOfPartList(XMLElement xmlElement) {
 	// Use all members of partList and generate the correct xml tags and text.
 	XMLElement* scorePartElement = xmlDoc.NewElement(Utilities::stringToCharPtr(partList.scorePart.getTagName()));
+	cout << Utilities::stringToCharPtr(partList.scorePart.getId()) << endl;
 	scorePartElement->SetAttribute("id", Utilities::stringToCharPtr(partList.scorePart.getId()));
 	xmlElement.InsertFirstChild(scorePartElement);
 

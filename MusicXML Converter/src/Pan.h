@@ -25,7 +25,8 @@ public:
 private:
 	std::string pan;
 
-	const std::string tagName = "pan";
+	std::string tagName = "pan";
+//	const std::string tagName = "pan";
 };
 
 #endif /* PAN_H_ */

@@ -33,7 +33,8 @@ public:
 private:
 	std::string id;
 
-	const std::string tagName = "score-part";
+	std::string tagName = "score-part";
+//	const std::string tagName = "score-part";
 };
 
 #endif /* SCOREPART_H_ */

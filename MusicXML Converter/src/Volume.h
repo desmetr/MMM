@@ -26,7 +26,8 @@ public:
 private:
 	std::string volume;
 
-	const std::string tagName = "volume";
+	std::string tagName = "volume";
+//	const std::string tagName = "volume";
 };
 
 #endif /* VOLUME_H_ */

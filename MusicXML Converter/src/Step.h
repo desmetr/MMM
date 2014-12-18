@@ -26,7 +26,8 @@ public:
 private:
 	std::string step;
 
-	const std::string tagName = "step";
+	std::string tagName = "step";
+//	const std::string tagName = "step";
 };
 
 #endif /* STEP_H_ */

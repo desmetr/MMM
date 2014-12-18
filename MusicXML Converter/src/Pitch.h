@@ -26,7 +26,8 @@ public:
 	void print();
 
 private:
-	const std::string tagName = "pitch";
+	std::string tagName = "pitch";
+//	const std::string tagName = "pitch";
 };
 
 #endif /* PITCH_H_ */

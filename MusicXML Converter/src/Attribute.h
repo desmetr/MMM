@@ -33,7 +33,8 @@ public:
 	void print();
 
 private:
-	const std::string tagName = "attributes";
+	std::string tagName = "attributes";
+//	const std::string tagName = "attributes";
 };
 
 #endif /* ATTRIBUTE_H_ */

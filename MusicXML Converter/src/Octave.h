@@ -26,7 +26,8 @@ public:
 private:
 	std::string octave;
 
-	const std::string tagName = "octave";
+	std::string tagName = "octave";
+//	const std::string tagName = "octave";
 };
 
 #endif /* OCTAVE_H_ */

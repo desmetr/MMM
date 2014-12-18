@@ -26,7 +26,8 @@ public:
 private:
 	std::string name;
 
-	const std::string tagName = "part-name";
+	std::string tagName = "part-name";
+//	const std::string tagName = "part-name";
 };
 
 #endif /* PARTNAME_H_ */

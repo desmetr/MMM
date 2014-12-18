@@ -31,7 +31,7 @@ private:
 
 	tinyxml2::XMLDocument xmlDoc;
 
-	void generateChildrenOfPartList(tinyxml2::XMLElement& xmlElement);
+	void generateChildrenOfPartList(tinyxml2::XMLElement xmlElement);
 	void generateChildrenOfPart(tinyxml2::XMLElement& xmlElement);
 };
 

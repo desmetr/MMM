@@ -31,7 +31,8 @@ private:
 	std::string beatType;
 //	int betaType;
 
-	const std::string tagName = "time";
+	std::string tagName = "time";
+//	const std::string tagName = "time";
 };
 
 #endif /* TIME_H_ */

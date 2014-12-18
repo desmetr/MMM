@@ -35,7 +35,8 @@ public:
 private:
 	std::string id;
 
-	const std::string tagName = "midi-instrument";
+	std::string tagName = "midi-instrument";
+//	const std::string tagName = "midi-instrument";
 };
 
 #endif /* MIDIINSTRUMENT_H_ */

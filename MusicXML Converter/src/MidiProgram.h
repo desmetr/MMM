@@ -26,7 +26,8 @@ public:
 private:
 	std::string midiProgram;
 
-	const std::string tagName = "midi-program";
+	std::string tagName = "midi-program";
+//	const std::string tagName = "midi-program";
 };
 
 #endif /* MIDIPROGRAM_H_ */

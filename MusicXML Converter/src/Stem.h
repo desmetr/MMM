@@ -26,7 +26,8 @@ public:
 private:
 	std::string stem;
 
-	const std::string tagName = "stem";
+	std::string tagName = "stem";
+//	const std::string tagName = "stem";
 };
 
 #endif /* STEM_H_ */

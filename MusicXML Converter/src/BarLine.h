@@ -29,7 +29,8 @@ public:
 private:
 	std::string location;
 
-	const std::string tagName = "barline";
+	std::string tagName = "barline";
+//	const std::string tagName = "barline";
 };
 
 #endif /* BARLINE_H_ */

@@ -16,7 +16,7 @@ CPP_SRCS += \
 ../src/MidiChannel.cpp \
 ../src/MidiInstrument.cpp \
 ../src/MidiProgram.cpp \
-../src/MusicXML\ Converter.cpp \
+../src/MusicXMLConverter.cpp \
 ../src/MusicXMLGenerator.cpp \
 ../src/MusicXMLMaps.cpp \
 ../src/MusicXMLParser.cpp \
@@ -51,7 +51,7 @@ OBJS += \
 ./src/MidiChannel.o \
 ./src/MidiInstrument.o \
 ./src/MidiProgram.o \
-./src/MusicXML\ Converter.o \
+./src/MusicXMLConverter.o \
 ./src/MusicXMLGenerator.o \
 ./src/MusicXMLMaps.o \
 ./src/MusicXMLParser.o \
@@ -86,7 +86,7 @@ CPP_DEPS += \
 ./src/MidiChannel.d \
 ./src/MidiInstrument.d \
 ./src/MidiProgram.d \
-./src/MusicXML\ Converter.d \
+./src/MusicXMLConverter.d \
 ./src/MusicXMLGenerator.d \
 ./src/MusicXMLMaps.d \
 ./src/MusicXMLParser.d \
@@ -114,13 +114,6 @@ src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
 	g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-src/MusicXML\ Converter.o: ../src/MusicXML\ Converter.cpp
-	@echo 'Building file: $<'
-	@echo 'Invoking: Cross G++ Compiler'
-	g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"src/MusicXML Converter.d" -MT"src/MusicXML\ Converter.d" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

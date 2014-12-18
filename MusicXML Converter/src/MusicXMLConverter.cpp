@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : Converter.cpp
+// Name        : MusicXMLConverter.cpp
 // Author      : Rafael De Smet
 // Version     :
 // Copyright   : Your copyright notice
@@ -8,21 +8,27 @@
 
 #include <iostream>
 #include "MusicXMLParser.h"
+#include "MusicXMLGenerator.h"
 //#include "MusicXMLMaps.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	MusicXMLParser parser;
+	MusicXMLParser musicXMLParser;
+	MusicXMLGenerator musicXMLGenerator(musicXMLParser.getPartList(), musicXMLParser.getPart());
+
 	if (argc == 2)	{
 		cout << "Opening and parsing " << argv[1] << endl;
-		parser.parse(argv[1]);
+		musicXMLParser.parse(argv[1]);
 	}
 	else	{
 		cerr << "Error, no file specified." << endl;
 	}
 
-	parser.print();
+//	musicXMLParser.print();
+
+	cout << "Generating a MusicXML file..." << endl;
+	musicXMLGenerator.generateMusicXML();
 
 	return 0;
 }

@@ -26,7 +26,8 @@ public:
 private:
 	std::string type;
 
-	const std::string tagName = "type";
+	std::string tagName = "type";
+//	const std::string tagName = "type";
 };
 
 #endif /* TYPE_H_ */

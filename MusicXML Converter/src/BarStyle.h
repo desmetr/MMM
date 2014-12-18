@@ -26,7 +26,8 @@ public:
 private:
 	std::string barStyle;
 
-	const std::string tagName = "bar-style";
+	std::string tagName = "bar-style";
+//	const std::string tagName = "bar-style";
 };
 
 #endif /* BARSTYLE_H_ */

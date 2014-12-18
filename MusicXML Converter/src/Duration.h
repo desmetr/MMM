@@ -26,7 +26,8 @@ public:
 private:
 	std::string duration;
 
-	const std::string tagName = "duration";
+	std::string tagName = "duration";
+//	const std::string tagName = "duration";
 };
 
 #endif /* DURATION_H_ */
