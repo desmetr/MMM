@@ -10,6 +10,10 @@ std::string basic::getContent() const{
 	return content;
 }
 
+std::string basic::getType() const{
+	return type;
+}
+
 void basic::setContent(std::string _content){
 	content = _content;
 }

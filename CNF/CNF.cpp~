@@ -260,7 +260,7 @@ bool CNF::charInVec(std::vector<char> vec, char ch){
 using stringVec = std::vector<std::string>;
 using charVec = std::vector<char>;
 
-stringVec CNF::createEpsylonProd(charVec epsylonVar, std::string prod){
+stringVec CNF::createEpsylonProd(charVec epsylonVar, std::string prod){//fout nog niet af
 	stringVec newProductions;
 	std::vector<int> nullables;//contains the indexes of the nullables
 

@@ -23,7 +23,7 @@ using varptr = std::shared_ptr<variable>;
 using std::string;
 using mapPointer = std::shared_ptr<std::multimap<variable*,vector<basic*> > >;
 
-
+class CNF;
 class CFG{
 public:
 	//constructors.
@@ -33,26 +33,26 @@ public:
 	//getters
 	vector<terminal> getTerminals() const;
 	vector<variable> getVariables() const;
-	varptr getStartVariable() const;
+	variable* getStartVariable() const;
 	multimap<variable*,vector<basic*> > getProductions() const;
+	vector< vector<basic*> > getProductions(variable* var)const;
 	mapPointer getProductionsPointer() const;
 
 
 	//setters
 	void setTerminals(const vector<terminal>& _terminals);
 	void setVariables(const vector<variable>& _variables);
-	void setStartVariable(const varptr _startVariable);
+	void setStartVariable(/*const*/ variable* _startVariable);
 	void setProductions(const multimap<variable*,vector<basic*> > _productions);
 
 	friend std::ostream& operator<<(std::ostream& out, CFG& object);
-
-
+	friend CNF;
 
 private:
 	//basic cfg components.
 	vector<terminal> terminals;
 	vector<variable> variables;
-	varptr startVariable;
+	variable* startVariable;
 	multimap<variable*,vector<basic*> > productions;
 
 	//parser functions

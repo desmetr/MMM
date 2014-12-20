@@ -18,7 +18,7 @@ void CFG::setVariables(const vector<variable>& _variables) {
 	variables = _variables;
 }
 
-void CFG::setStartVariable(const varptr _startVariable) {
+void CFG::setStartVariable(/*const*/ variable* _startVariable) {
 	startVariable = _startVariable;
 }
 
@@ -32,11 +32,21 @@ vector<terminal> CFG::getTerminals() const{
 vector<variable> CFG::getVariables() const{
 	return variables;
 }
-varptr CFG::getStartVariable() const{
+variable* CFG::getStartVariable() const{
 	return startVariable;
 }
 multimap<variable*,vector<basic*> > CFG::getProductions() const{
 	return productions;
+}
+
+vector< vector<basic*> > CFG::getProductions(variable* var)const{
+	vector< vector<basic*> > prod;
+	for (auto product : productions){
+		if (product.first == var){
+			prod.push_back(product.second);
+		}
+	}
+	return prod;
 }
 
 void CFG::parse(string fileName){
@@ -99,10 +109,11 @@ void CFG::parse(string fileName){
 	if(startVariableNode != NULL){
 		bool found = false;
 		std::string ssString = startVariableNode->GetText();
-		for( auto& var : variables ){
-			if(var.getContent() == ssString){
-				startVariable = std::make_shared<variable>(var);
+		for(unsigned int i = 0 ; i != variables.size(); i++){
+			if( variables[i].getContent() == ssString){
+				startVariable = &variables[i];
 				found = true;
+				break;
 			}
 		}
 		if(found == false){
