@@ -7,7 +7,7 @@
   <STARTVAR>MUSIC</STARTVAR>
 
   <PRODUCTIONS>
-    
+
     <HEAD var="MUSIC">
       <BODY>&lt;music&gt;,MDIV,&lt;/music&gt;</BODY>
     </HEAD>
@@ -62,6 +62,10 @@
 
     <HEAD var="NOTE">
       <BODY>NOTE,NOTE</BODY>
+    </HEAD>
+
+    <HEAD var="NOTE">
+      <BODY></BODY>
     </HEAD>
 
     <HEAD var="NOTE">
