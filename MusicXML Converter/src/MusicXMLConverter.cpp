@@ -9,6 +9,7 @@
 #include <iostream>
 #include "MusicXMLParser.h"
 #include "MusicXMLGenerator.h"
+#include "CSVGenerator.h"
 //#include "MusicXMLMaps.h"
 
 using namespace std;
@@ -26,9 +27,13 @@ int main(int argc, char* argv[]) {
 
 //	musicXMLParser.print();
 
-	cout << "Generating a MusicXML file..." << endl;
-	MusicXMLGenerator musicXMLGenerator(musicXMLParser.getPartList(), musicXMLParser.getPart());
-	musicXMLGenerator.generateMusicXML();
+//	cout << "Generating a MusicXML file..." << endl;
+//	MusicXMLGenerator musicXMLGenerator(musicXMLParser.getPartList(), musicXMLParser.getPart());
+//	musicXMLGenerator.generateMusicXML();
+
+	cout << "Generating a CSV file..." << endl;
+	CSVGenerator CSVGenerator_(musicXMLParser.getPartList(), musicXMLParser.getPart());
+	CSVGenerator_.generateCSV();
 
 	return 0;
 }

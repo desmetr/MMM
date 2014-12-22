@@ -9,6 +9,7 @@ CPP_SRCS += \
 ../src/BarStyle.cpp \
 ../src/BeatType.cpp \
 ../src/Beats.cpp \
+../src/CSVGenerator.cpp \
 ../src/Clef.cpp \
 ../src/Division.cpp \
 ../src/Duration.cpp \
@@ -50,6 +51,7 @@ OBJS += \
 ./src/BarStyle.o \
 ./src/BeatType.o \
 ./src/Beats.o \
+./src/CSVGenerator.o \
 ./src/Clef.o \
 ./src/Division.o \
 ./src/Duration.o \
@@ -91,6 +93,7 @@ CPP_DEPS += \
 ./src/BarStyle.d \
 ./src/BeatType.d \
 ./src/Beats.d \
+./src/CSVGenerator.d \
 ./src/Clef.d \
 ./src/Division.d \
 ./src/Duration.d \

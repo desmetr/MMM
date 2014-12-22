@@ -26,7 +26,7 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 	try	{
 		doc.LoadFile(fileName.c_str());
 		if (doc.ErrorID() != 0)		{
-			throw runtime_error("File could not be opened.\n");
+			throw runtime_error("File could not be opened.");
 		}
 
 		root = doc.FirstChildElement();
