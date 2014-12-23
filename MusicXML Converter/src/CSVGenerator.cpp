@@ -12,6 +12,8 @@ using namespace std;
 CSVGenerator::CSVGenerator() {
 	midiInstruments = ioManager.midiInstruments;
 	midiNotes = ioManager.midiNotes;
+
+	ticks = 60000 / (BPM * PPQ);
 }
 
 CSVGenerator::CSVGenerator(PartList partList, Part part) {
@@ -20,6 +22,8 @@ CSVGenerator::CSVGenerator(PartList partList, Part part) {
 
 	midiInstruments = ioManager.midiInstruments;
 	midiNotes = ioManager.midiNotes;
+
+	ticks = 60000 / (BPM * PPQ);
 }
 
 CSVGenerator::~CSVGenerator() {
@@ -27,7 +31,7 @@ CSVGenerator::~CSVGenerator() {
 
 string CSVGenerator::getHeader() {
 	string returnString = "Timing Resolution (pulses per quarter note)\n";
-	returnString += "4\n\n";
+	returnString += Utilities::intToString(PPQ) + "\n\n";
 
 	return returnString;
 }
@@ -56,19 +60,35 @@ string CSVGenerator::getDataSpecification() {
 	return "Tick,Note (0-127),Velocity (0-127)\n";
 }
 
+string CSVGenerator::getTrack() {
+	// Pretty useless method temporary. It is possible that the track is different.
+	// For now we decide that there is only one track.
+	return "1";
+}
+
 string CSVGenerator::getTick(Note note, int& tick) {
 	string returnString = "";
 
 	if (!note.isRest())		{
 		if (note.type.getType() == "quarter")	{
-			returnString = Utilities::intToString(++tick);
+			tick++;
+//			returnString = Utilities::intToString(tick);
+			returnString = Utilities::intToString(tick * ticks);
 		}
 		else if (note.type.getType() == "half")	{
-			returnString = Utilities::intToString(++tick);
+			tick++;
+//			returnString = Utilities::intToString(tick);
+			returnString = Utilities::intToString(tick * ticks);
 			tick++;
 		}
 	}
 	return returnString;
+}
+
+string CSVGenerator::getChannel() {
+	// Pretty useless method temporary. It is possible that the channel is different.
+	// For now we decide that there is only one channel.
+	return "0";
 }
 
 string CSVGenerator::getNote(Note note) {
@@ -86,7 +106,11 @@ string CSVGenerator::getNote(Note note) {
 	return returnString;
 }
 
-string CSVGenerator::getVelocity(Note note) {
+string CSVGenerator::getVelocityOff(Note note) {
+	return "0";
+}
+
+string CSVGenerator::getVelocityOn(Note note) {
 	string volume = "";
 	if (!note.isRest())		{
 		volume = sourcePartList.scorePart.midiInstrument.volume.getVolume();
@@ -110,13 +134,26 @@ void CSVGenerator::generateCSV() {
 	midiAsCSV << getDataSpecification();
 
 	for (const auto& measure : sourcePart.measures)		{
-		for (const auto& note : measure.notes)			{
-			midiAsCSV << getTick(note, tick);
-			midiAsCSV << ",";
-			midiAsCSV << getNote(note);
-			midiAsCSV << ",";
-			midiAsCSV << getVelocity(note);
-			midiAsCSV << endl;
+		for (unsigned int i = 0; i < measure.notes.size(); i++)			{
+			for (unsigned int j = 0; j < 2; j++)	{
+				midiAsCSV << getTrack();
+				midiAsCSV << ",";
+				midiAsCSV << getTick(measure.notes[i], tick);
+				midiAsCSV << ",";
+				midiAsCSV << "Note_on_c";
+				midiAsCSV << ",";
+				midiAsCSV << getChannel();
+				midiAsCSV << ",";
+				midiAsCSV << getNote(measure.notes[i]);
+				midiAsCSV << ",";
+				if ((i + j) % 2 == 0)	{
+					midiAsCSV << getVelocityOn(measure.notes[i]);
+				}
+				else 	{
+					midiAsCSV << getVelocityOff(measure.notes[i]);
+				}
+				midiAsCSV << endl;
+			}
 		}
 	}
 
