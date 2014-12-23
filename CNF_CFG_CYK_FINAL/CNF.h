@@ -25,7 +25,7 @@ using varptr = std::shared_ptr<variable>;
 using rule = std::pair< variable*,vector<basic*> >;
 using mapPointer = std::shared_ptr<std::multimap<variable*,vector<basic*> > >;
 
-
+#include <list>
 class CNF {
 public:
 	CNF(CFG* CFG);
@@ -40,6 +40,7 @@ private:
 	void createEpsilonProd2(vector<basic*> prod, vector<int> indexNullables, vector<vector<basic*>>& _return);
 	void removeUnitProductions();
 	void removeUselessSymbols();
+	void removeFromProductions(const vector<basic*>& usefulVec );
 
 	void terminalsToVariables();
 	void breakBodies();

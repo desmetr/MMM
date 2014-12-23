@@ -15,7 +15,7 @@ using Iterator = multimap<variable*,vector<basic*> >::iterator;
 
 
 template<typename T>
-bool isInVec(T* obj, vector<T*> vec){
+bool isInVec(T* obj, const vector<T*>& vec){
 	return find(vec.begin(), vec.end(), obj) != vec.end();
 }
 
@@ -42,17 +42,13 @@ CFG* CNF::run(){
 	//		2 Arrange that all bodies of length 2 or more consist of only variables
 	//		3 Break bodies of length 3 or more into a cascade of two-variable-bodied productions
 
-	std::cout << "0 CNF::run() - start cnf algorithm" << std::endl;
 	cleanUp();
 
-	std::cout << "1 CNF::run() - cleanup done" << std::endl;
 	terminalsToVariables();
 
-	std::cout << "2 CNF::run() - terminalsToVariables done" << std::endl;
 	breakBodies();
 
-	std::cout << "3 CNF::run() - breakBodies done" << std::endl;
-
+	cout << *cfg << endl;
 	return cfg;
 }
 
@@ -67,13 +63,12 @@ void CNF::cleanUp(){
 	//		3 removing useless symbols
 
 	removeEpsylon();
-	std::cout << "1A CNF::cleanUp() - removeEpsylon done" << std::endl;
 
 	removeUnitProductions();
-	std::cout << "1B CNF::cleanUp() - removeUnitProductions done" << std::endl;
 
 	removeUselessSymbols();
-	std::cout << "1C CNF::cleanUp() - removeUselessSymbols done" << std::endl;
+	cout << "end of removeUselessSymbols in CNF.cpp"<< endl;
+
 }
 
 void CNF::removeEpsylon(){//nieuw
@@ -139,7 +134,7 @@ void CNF::removeEpsylon(){//nieuw
 
 			for (auto& newProd : newProds){
 				if ( newProd.size()>0 && find(newlyAdded.begin(), newlyAdded.end(), newProd)==newlyAdded.end() && find(varProd.begin(), varProd.end(), newProd) == varProd.end( )){
-					if ( newProd.size()==1 && newProd[0]!=&var){//avoid productions of the form A->A
+					if ( !(newProd.size()==1 && newProd[0]==&var)){//avoid productions of the form A->A
 						cfg->productions.insert( {&var, newProd} );
 						newlyAdded.push_back( newProd );
 					}
@@ -165,7 +160,9 @@ vector<vector<basic*>> CNF::createEpsilonProd(const vector<basic*>& prod, const 
 	for (int iii=0; iii<prod.size(); iii++){
 		if (prod[iii]->getType() == "variable"){
 			variable* tempPtr = static_cast<variable*>(prod[iii]);
-			if ( isInVec(tempPtr, nullables) ) indexesNullables.push_back(iii);
+			if ( isInVec(tempPtr, nullables) ){
+				indexesNullables.push_back(iii);
+			}
 		}
 	}
 
@@ -289,11 +286,14 @@ void CNF::removeUselessSymbols(){//nieuw
 		}
 	}
 
+	//Remove non-generating symbols from the productions
+	removeFromProductions( generatingSymbols );
+
+
 	//get reachable symbols
 	//-basis
 	// the start variable is reachable
-	vector<basic*> usefulSymbols{ &(*cfg->startVariable) };
-
+	vector<basic*> reachables{ &(*cfg->startVariable) };
 	//-induction
 	// if a basic element is in a production of a generating variable
 	vector<variable*> newVars{ &(*cfg->startVariable) };
@@ -303,15 +303,15 @@ void CNF::removeUselessSymbols(){//nieuw
 			vector< vector<basic*> > varProductions = cfg->getProductions( var );
 			for (auto& production : varProductions){
 				for (auto& prodEl : production){
-					if ( isInVec(prodEl, generatingSymbols) && !isInVec(prodEl, usefulSymbols)){
+					if ( isInVec(prodEl, generatingSymbols) && !isInVec(prodEl, reachables)){
 						if ( prodEl->getType()=="terminal" ){//if it's a terminal
-							usefulSymbols.push_back(prodEl);
+							reachables.push_back(prodEl);
 						}
 						else {//if it's a variable
 							variable* ptr = static_cast<variable*>(prodEl);
 							if ( !isInVec(ptr, newVars) ){
 								newVars.push_back(ptr);
-								usefulSymbols.push_back(ptr);
+								reachables.push_back(ptr);
 							}
 						}
 					}
@@ -322,46 +322,57 @@ void CNF::removeUselessSymbols(){//nieuw
 		newVars.erase(newVars.begin(), newVars.begin()+size);
 	}
 
-	//remove useless terminals
 
+	//Remove non-reachable symbols from the productions
+	removeFromProductions( reachables );
+
+
+	//remove useless terminals, (they are useless if they are not reachable)
 	for (auto it = cfg->terminals.begin(); it != cfg->terminals.end();){
 		basic* tempPtr = &(*it);
-		if ( !isInVec( tempPtr, usefulSymbols) ){
+		if ( !isInVec( tempPtr, reachables) ){
 			cfg->terminals.erase(it);
 			it = cfg->terminals.begin();
 		}
 		else ++it;
 	}
-
-	//remove useless variables
+	//remove useless variables (they are useless if they are not generating or not reachable)
 	for (auto it = cfg->variables.begin(); it!=cfg->variables.end();){
 		basic* tempPtr = &(*it);
-		if ( !isInVec( tempPtr, usefulSymbols) ){
+		if ( !isInVec( tempPtr, reachables) || !isInVec( tempPtr, generatingSymbols) ){
 			cfg->variables.erase(it);
 			it = cfg->variables.begin();
 		}
 		else ++it;
 	}
 
-	//remove productions containing useless symbols
+}
+
+
+void CNF::removeFromProductions(const vector<basic*>& usefulVec ){
 	for (auto it=cfg->productions.begin(); it!=cfg->productions.end(); ++it){
-		basic* tempPtr = (*it).first;
-		if ( !isInVec( tempPtr, usefulSymbols) ){
-			//remove production
-			cfg->productions.erase(it);
-			//removed = true;
-		}
-		else {
-			for (auto& prodEl : (*it).second){
-				if ( !isInVec(prodEl, usefulSymbols) ){
-					//remove production
-					cfg->productions.erase(it);
+		bool toDelete(false);
+		basic* tempFirst = it->first;
+
+		//check if the production contains a non gen symbol
+		if (!isInVec( tempFirst, usefulVec) ){
+			toDelete=true;
+		} else {
+			for (auto& prodEl : it->second){
+				basic* tempSecond = prodEl;
+				if ( !isInVec( tempSecond, usefulVec) ){
+					toDelete = true;
 					break;
 				}
 			}
+
+		}
+
+		//if the production contains a non generating symbol, delete it
+		if ( toDelete ){
+			cfg->productions.erase(it);
 		}
 	}
-
 }
 
 /////////////////////////
@@ -370,7 +381,6 @@ void CNF::removeUselessSymbols(){//nieuw
 void CNF::terminalsToVariables(){//nieuw
 	string noLiterals = "terminal";
 	vector< std::pair<terminal*, variable*> > terminalReplacers;
-	cout << "terminals to variables"<<endl;
 
 	//get all existing names
 	vector<string> allNames;
@@ -413,7 +423,6 @@ void CNF::terminalsToVariables(){//nieuw
 
 						cfg->variables.emplace_back( name );
 
-						//replacingVar = &(cfg->variables[cfg->variables.size()-1]);
 						replacingVar = &(cfg->variables.back());
 
 						std::pair<terminal*, variable*> pair{ termPtr, replacingVar};
@@ -456,8 +465,6 @@ variable* CNF::findReplacement(terminal* term, const vector< std::pair<terminal*
 //////////////
 
 void CNF::breakBodies(){
-	cout << "break bodies"<<endl;
-	//cout << *cfg << endl;
 	vector<string> allNames;
 	for (auto var : cfg->variables){
 		allNames.push_back(var.getContent());
@@ -498,6 +505,4 @@ void CNF::breakBodies(){
 
 		}
 	}
-	cout <<"end of break bodies"<<endl;
-	//cout << *cfg << endl;
 }
