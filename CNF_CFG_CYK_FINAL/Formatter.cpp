@@ -7,10 +7,16 @@
 
 #include "Formatter.h"
 
-Formatter::Formatter(const string& inputString)
-: s1(inputString), s2(){
-	// TODO Auto-generated constructor stub
-	applyTransformation();
+using std::endl;
+using std::cout;
+
+Formatter::Formatter(string fileName)
+: s1(""), s2(){
+
+	OpenFileAndremoveSpaces(fileName);//result in s1
+	applyTransformation();//reads s1 and puts result in s2
+
+	cout << s2 << endl;
 }
 
 Formatter::~Formatter() {
@@ -25,6 +31,33 @@ string Formatter::getFormatedVersion() const{
 //private//
 //////////
 
+void Formatter::OpenFileAndremoveSpaces(string fileName){
+	std::ifstream file(fileName);
+	string line;
+
+	bool inBrackets{false};
+	while ( std::getline(file, line)){
+		for (auto& ch : line){
+			switch (ch){
+			case ' ':
+				if (inBrackets) s1+=ch;
+				break;
+			case '\t':
+				break;
+			case '<':
+				s1 += ch;
+				inBrackets = true;
+				break;
+			case '>':
+				s1 += ch;
+				inBrackets = false;
+				break;
+			default:
+				s1 += ch;
+			}
+		}
+	}
+}
 //the actual algorithm
 void Formatter::applyTransformation(){
 	//loop over all the chars of the input string s1
