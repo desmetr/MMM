@@ -442,11 +442,16 @@ void CNF::terminalsToVariables(){//nieuw
 }
 
 string CNF::createName( const vector<string>& existingNames, string termName){//nieuw
-	string name;
-	name = termName;
-	name += "1";
+	int iPostFix = 1;
+	string sPostFix = std::to_string(iPostFix);
+
+	//Add the postfix to the name
+	string name = termName + sPostFix;
+
 	while ( find(existingNames.begin(), existingNames.end(), name) != existingNames.end() ){
-		name += "1";
+		iPostFix++;
+		sPostFix = std::to_string(iPostFix);
+		name = termName + sPostFix;
 	}
 	return name;
 }
