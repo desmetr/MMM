@@ -56,10 +56,6 @@ string CSVGenerator::getInstrument() {
 	return returnString;
 }
 
-string CSVGenerator::getDataSpecification() {
-	return "Tick,Note (0-127),Velocity (0-127)\n";
-}
-
 string CSVGenerator::getTrack() {
 	// Pretty useless method temporary. It is possible that the track is different.
 	// For now we decide that there is only one track.
@@ -69,7 +65,7 @@ string CSVGenerator::getTrack() {
 string CSVGenerator::getTick(Note note, int& tick) {
 	string returnString = "";
 
-	if (!note.isRest())		{
+//	if (!note.isRest())		{
 		if (note.type.getType() == "quarter")	{
 			tick++;
 //			returnString = Utilities::intToString(tick);
@@ -81,7 +77,7 @@ string CSVGenerator::getTick(Note note, int& tick) {
 			returnString = Utilities::intToString(tick * ticks);
 			tick++;
 		}
-	}
+//	}
 	return returnString;
 }
 
@@ -102,6 +98,9 @@ string CSVGenerator::getNote(Note note) {
 			}
 		}
 	}
+	else	{
+		returnString = "0";
+	}
 
 	return returnString;
 }
@@ -119,22 +118,29 @@ string CSVGenerator::getVelocityOn(Note note) {
 
 		volume.erase(index, numberOfSymbolsToRemove);
 	}
+	else	{
+		volume = "0";
+	}
 
 	return volume;
 }
 
-void CSVGenerator::generateCSV() {
+void CSVGenerator::generateCSV(string fileName) {
 	ofstream midiAsCSV;
-	midiAsCSV.open("midiAsCSV.csv");
+	int position = fileName.find(".xml");
+	fileName.erase(position, fileName.size() - position);
+	fileName += ".csv";
+	midiAsCSV.open(Utilities::stringToCharPtr(fileName));
 
 	int tick = -1;
+	int currentNote = 0;
+	unsigned int i = 0;
 
 	midiAsCSV << getHeader();
 	midiAsCSV << getInstrument();
-	midiAsCSV << getDataSpecification();
 
 	for (const auto& measure : sourcePart.measures)		{
-		for (unsigned int i = 0; i < measure.notes.size(); i++)			{
+		for (i = 0; i < measure.notes.size(); i++)			{
 			for (unsigned int j = 0; j < 2; j++)	{
 				midiAsCSV << getTrack();
 				midiAsCSV << ",";
@@ -142,11 +148,11 @@ void CSVGenerator::generateCSV() {
 				midiAsCSV << ",";
 				midiAsCSV << "Note_on_c";
 				midiAsCSV << ",";
-				midiAsCSV << getChannel();
+				midiAsCSV << Utilities::intToString(PPQ * currentNote);
 				midiAsCSV << ",";
 				midiAsCSV << getNote(measure.notes[i]);
 				midiAsCSV << ",";
-				if ((i + j) % 2 == 0)	{
+				if (j == 0)	{
 					midiAsCSV << getVelocityOn(measure.notes[i]);
 				}
 				else 	{
@@ -154,8 +160,9 @@ void CSVGenerator::generateCSV() {
 				}
 				midiAsCSV << endl;
 			}
+			currentNote++;
 		}
+		currentNote = i;
 	}
-
 	midiAsCSV.close();
 }

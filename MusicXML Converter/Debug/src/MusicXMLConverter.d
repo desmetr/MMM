@@ -9,7 +9,7 @@ src/MusicXMLConverter.d: ../src/MusicXMLConverter.cpp \
  ../src/Note.h ../src/Pitch.h ../src/Step.h ../src/Octave.h \
  ../src/Duration.h ../src/Voice.h ../src/Type.h ../src/Stem.h \
  ../src/BarLine.h ../src/BarStyle.h ../src/MusicXMLGenerator.h \
- ../src/Utilities.h ../src/CSVGenerator.h
+ ../src/Utilities.h ../src/CSVGenerator.h ../src/InputOutputManager.h
 
 ../src/MusicXMLParser.h:
 
@@ -86,3 +86,5 @@ src/MusicXMLConverter.d: ../src/MusicXMLConverter.cpp \
 ../src/Utilities.h:
 
 ../src/CSVGenerator.h:
+
+../src/InputOutputManager.h:

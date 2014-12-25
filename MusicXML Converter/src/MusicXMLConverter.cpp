@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
 
 	cout << "Generating a CSV file..." << endl;
 	CSVGenerator CSVGenerator_(musicXMLParser.getPartList(), musicXMLParser.getPart());
-	CSVGenerator_.generateCSV();
+	CSVGenerator_.generateCSV(argv[1]);
 
 	return 0;
 }

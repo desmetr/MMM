@@ -24,7 +24,7 @@ public:
 	CSVGenerator(PartList partList, Part part);
 	virtual ~CSVGenerator();
 
-	void generateCSV();
+	void generateCSV(std::string fileName);
 
 private:
 	InputOutputManager ioManager;
@@ -41,7 +41,6 @@ private:
 
 	std::string getHeader();
 	std::string getInstrument();
-	std::string getDataSpecification();
 
 	/// Documentation: http://www.penguinpeepshow.com/programs/csv-to-midi-converter/
 	/// Documentation: http://www.fourmilab.ch/webtools/midicsv/

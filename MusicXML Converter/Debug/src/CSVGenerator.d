@@ -7,7 +7,8 @@ src/CSVGenerator.d: ../src/CSVGenerator.cpp ../src/CSVGenerator.h \
  ../src/Stem.h ../src/BarLine.h ../src/BarStyle.h ../src/PartList.h \
  ../src/ScorePart.h ../src/PartName.h ../src/ScoreInstrument.h \
  ../src/InstrumentName.h ../src/MidiInstrument.h ../src/MidiChannel.h \
- ../src/MidiProgram.h ../src/Volume.h ../src/Pan.h
+ ../src/MidiProgram.h ../src/Volume.h ../src/Pan.h \
+ ../src/InputOutputManager.h
 
 ../src/CSVGenerator.h:
 
@@ -78,3 +79,5 @@ src/CSVGenerator.d: ../src/CSVGenerator.cpp ../src/CSVGenerator.h \
 ../src/Volume.h:
 
 ../src/Pan.h:
+
+../src/InputOutputManager.h:

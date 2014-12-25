@@ -14,6 +14,7 @@ CPP_SRCS += \
 ../src/Division.cpp \
 ../src/Duration.cpp \
 ../src/Fifths.cpp \
+../src/InputOutputManager.cpp \
 ../src/InstrumentName.cpp \
 ../src/Key.cpp \
 ../src/Line.cpp \
@@ -56,6 +57,7 @@ OBJS += \
 ./src/Division.o \
 ./src/Duration.o \
 ./src/Fifths.o \
+./src/InputOutputManager.o \
 ./src/InstrumentName.o \
 ./src/Key.o \
 ./src/Line.o \
@@ -98,6 +100,7 @@ CPP_DEPS += \
 ./src/Division.d \
 ./src/Duration.d \
 ./src/Fifths.d \
+./src/InputOutputManager.d \
 ./src/InstrumentName.d \
 ./src/Key.d \
 ./src/Line.d \
