@@ -1,0 +1,3 @@
+GUI for the MMM program.
+[TODO] Implement conversions -> requires some adaptation to new MusicXML structures first
+[TODO] Implement MusicXML importing + correctness test. Due to bugs in MusicXML Grammar this isn't implemented yet.

@@ -29,7 +29,11 @@
     </HEAD>
 
     <HEAD var="STAFFDEF">
-      <BODY>&lt;staffDef n=",NUMERIC," xml:id=",ALPHA,NUMERIC," label=",ALPHA_C,ALPHA," lines=",NUMERIC," clef.line=",NUMERIC," clef.shape=",ALPHA_C,"/&gt;</BODY>
+      <BODY>&lt;staffDef n=",NUMERIC," xml:id=",ALPHA_C,NUMERIC," label=",ALPHA_C,ALPHA," lines=",NUMERIC," clef.line=",NUMERIC," clef.shape=",ALPHA_C,"/&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="STAFFDEF">
+      <BODY></BODY>
     </HEAD>
     <!-- extendability towards the future. -->
     <HEAD var="SECTION">
@@ -228,8 +232,16 @@
       <BODY>9</BODY>
     </HEAD>
 
+    <HEAD var="NUMERIC">
+      <BODY></BODY>
+    </HEAD>
+
     <HEAD var="DOT">
       <BODY>.</BODY>
+    </HEAD>
+
+    <HEAD var="DOT">
+      <BODY></BODY>
     </HEAD>
 
     <HEAD var="DASH">
@@ -350,7 +362,7 @@
 
     <HEAD var="ALPHA_C">
       <BODY>Z</BODY>
-    </HEAD> -->
+    </HEAD>
 
   </PRODUCTIONS>
 
