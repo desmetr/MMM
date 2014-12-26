@@ -1,5 +1,3 @@
-[DONE]: Parsing, mapping, conversion (basic)
-[TODO]: rests
-[TODO]: adapt to new MusicXML objects
-[TODO]: note names shouldn't be capitalised.
+Resolved all errors, mapping done, added MEI header, conversion in both ways works.
+[TODO] because of the changes in MEI format, the MEI grammar needs to be redone.
 

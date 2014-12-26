@@ -33,12 +33,14 @@ public:
 
 	void debugOut();
 private:
+	void generateHead(tinyxml2::XMLDocument& doc,tinyxml2::XMLElement* meiRoot);
 	//MEI containers.
 	scoreDefData scoreDef;
 	vector<measureData> measures;
 
 	//map the data
 	std::map<string,int> typeMap;
+	std::map<char,char> noteMap;
 };
 
 

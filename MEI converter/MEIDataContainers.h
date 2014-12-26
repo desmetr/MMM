@@ -30,6 +30,7 @@ struct noteData{
 	int NOTE_OCTAVE_VAR;
 	int NOTE_DURATION_VAR;
 	string STEM_DIR_VAR;
+	bool IS_REST; //if it is a rest, only duration is of importance.
 };
 
 

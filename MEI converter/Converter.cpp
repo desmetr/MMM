@@ -11,23 +11,28 @@
 //#include "MusicXMLMaps.h"
 #include "MEIParser.h"
 #include "MEIGenerator.h"
+#include "MusicXMLGenerator.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	MEIParser a;
 
-	MusicXMLParser p;
-	try{
-		p.parse("testOctave.xml");
-		MEIGenerator g(p.getPartList(), p.getPart());
-		g.generateXML("MEITEST.xml");
+	MEIParser meip;
+	MusicXMLParser mxlp;
 
 
+	if(argc >= 2){
+		try{
+			meip.parse(argv[1]);
+			meip.mapData();
+			MusicXMLGenerator mxlg(meip.getPartList(),meip.getPart());
+			mxlg.generateMusicXML();
+
+		}
+		catch(exception& e){
+			cout << e.what() << endl;
+		}
 	}
-	catch(exception& e){
-		cout << e.what() << endl;
-	}
-
+	cout << "Exitted normally." << endl;
 	return 0;
 }

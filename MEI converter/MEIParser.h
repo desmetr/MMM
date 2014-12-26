@@ -62,6 +62,7 @@ private:
 	bool firstMeasure = true;
 	double x = 0.0;
 	std::map<char,double> noteMap;
+	std::map<char,string> noteNameMap;
 	std::map<int,string> typeMap;
 
 

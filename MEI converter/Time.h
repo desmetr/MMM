@@ -10,29 +10,23 @@
 
 #include <string>
 #include <iostream>
+#include "Beats.h"
+#include "BeatType.h"
 
 class Time {
 public:
 	Time();
 	virtual ~Time();
 
-	const std::string& getBeats() const;
-	const std::string& getBeatType() const;
-	const std::string& getTagName() const;
+	Beats beats;
+	BeatType beatType;
 
-	void setBeats(const std::string& beats);
-	void setBeatType(const std::string& beatType);
+	const std::string& getTagName() const;
 
 	void print();
 
 private:
-	std::string beats;
-//	int beats;
-	std::string beatType;
-//	int betaType;
-
 	std::string tagName = "time";
-//	const std::string tagName = "time";
 };
 
 #endif /* TIME_H_ */

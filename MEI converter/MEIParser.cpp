@@ -1,13 +1,21 @@
 #include "MEIParser.h"
 
 MEIParser::MEIParser(){
-	noteMap['C'] = -50.0;
-	noteMap['D'] = -45.0;
-	noteMap['E'] = -40.0;
-	noteMap['F'] = -35.0;
-	noteMap['G'] = -30.0;
-	noteMap['A'] = -25.0;
-	noteMap['B'] = -20.0;
+	noteMap['c'] = -50.0;
+	noteMap['d'] = -45.0;
+	noteMap['e'] = -40.0;
+	noteMap['f'] = -35.0;
+	noteMap['g'] = -30.0;
+	noteMap['a'] = -25.0;
+	noteMap['b'] = -20.0;
+
+	noteNameMap['c'] = "C";
+	noteNameMap['d'] = "D";
+	noteNameMap['e'] = "E";
+	noteNameMap['f'] = "F";
+	noteNameMap['g'] = "G";
+	noteNameMap['a'] = "A";
+	noteNameMap['b'] = "B";
 
 	typeMap[2] = "half";
 	typeMap[4] = "quarter";
@@ -64,8 +72,6 @@ void MEIParser::parse(string fileName){
 }
 
 void MEIParser::parseScoreDef(tinyxml2::XMLElement* elpointer){
-	//IGNORE ALL STOI ERRORS- ECLIPSE , NOT CODE ERROR!!!
-
 	//check whether the element is ok
 	checkElement(elpointer);
 
@@ -87,7 +93,6 @@ void MEIParser::parseScoreDef(tinyxml2::XMLElement* elpointer){
 	if(dataHolder == "") throw std::runtime_error("no key.mode in elpointer tag, aborting.");
 	scoreDefContainer.SCHAAL_VAR = dataHolder;
 
-	//"WE HAVE TO GO DEEPER!" -> parse the staffDef (aka a part 'definition' in music xml);
 	//get the staffDef
 	tinyxml2::XMLElement* stafDef = elpointer->FirstChildElement("staffGrp")->FirstChildElement("staffDef");
 	checkElement(stafDef); // check if it is not null
@@ -119,126 +124,126 @@ void MEIParser::parseScoreDef(tinyxml2::XMLElement* elpointer){
 }
 
 void MEIParser::parseSection(tinyxml2::XMLElement* section){
-	//temporary data holder
+//	//temporary data holder
 	string dataHolder;
 
 	//iterate over all measures, extracting the data
 	for(tinyxml2::XMLElement* maat = section->FirstChildElement("measure"); maat != nullptr; maat = maat->NextSiblingElement()){
-		//Create new measure
+
 		measureData mc;
 
-		//get the measure number.
 		dataHolder = maat->Attribute("n");
 		if(dataHolder == "") throw std::runtime_error("no 'n' attribute in measure tag, aborting");
 		mc.MEASURE_NUMBER_VAR = stoi(dataHolder);
 
 
+		if(maat->Attribute("right") == NULL) mc.GENERATE_MEASURE_END = false;
+		else mc.GENERATE_MEASURE_END = true;
 
-		//check if the measure generates a measure end
-		//this does not produce an error because it is optional.
-		if(maat->Attribute("right") != NULL) mc.GENERATE_MEASURE_END = true;
-		else mc.GENERATE_MEASURE_END = false;
-
-		//parse all notes.
 		for(tinyxml2::XMLElement* noot = maat->FirstChildElement("staff")->FirstChildElement("layer")->FirstChildElement("note"); noot != nullptr; noot = noot->NextSiblingElement()){
 			//TODO: STAFF NUMBER WAS SKIPPED HERE (!)
-
-			//create new note
 			noteData n;
 
-			//get the name of the note
-			dataHolder = noot->Attribute("pname");
-			if(dataHolder == "") throw std::runtime_error("No 'pname' attribute in note tag, aborting");
-			n.NOTE_NAME_VAR = dataHolder;
+			//Check whether it is a rest or a note.
+			string restName = "rest";
+			string elType = noot->Name();
+			bool isRest = (elType == restName);
+			if( !isRest ){
+				dataHolder = noot->Attribute("pname");
+				if(dataHolder == "") throw std::runtime_error("No 'pname' attribute in note tag, aborting");
+				n.NOTE_NAME_VAR = dataHolder;
 
-			//get the octave of the note
-			dataHolder = noot->Attribute("oct");
-			if(dataHolder == "") throw std::runtime_error("No 'oct' attribute in note tag, aborting");
-			n.NOTE_OCTAVE_VAR = stoi(dataHolder);
+				dataHolder = noot->Attribute("oct");
+				if(dataHolder == "") throw std::runtime_error("No 'oct' attribute in note tag, aborting");
+				n.NOTE_OCTAVE_VAR = stoi(dataHolder);
 
-			//get the duration of the note
-			dataHolder = noot->Attribute("dur");
-			if(dataHolder == "") throw std::runtime_error("No 'dur' attribute in note tag, aborting");
-			n.NOTE_DURATION_VAR = stoi(dataHolder);
+				dataHolder = noot->Attribute("dur");
+				if(dataHolder == "") throw std::runtime_error("No 'dur' attribute in note tag, aborting");
+				n.NOTE_DURATION_VAR = stoi(dataHolder);
 
+				dataHolder = noot->Attribute("stem.dir");
+				if(dataHolder == "") throw std::runtime_error("No 'stem.dir' attribute in note tag, aborting");
+				n.STEM_DIR_VAR = dataHolder;
 
-
-			//get the stem direction of the note (d or q)
-			dataHolder = noot->Attribute("stem.dir");
-			if(dataHolder == "") throw std::runtime_error("No 'stem.dir' attribute in note tag, aborting");
-			n.STEM_DIR_VAR = dataHolder;
-
-			//add the note to the measure -> DONE:
-			mc.NOTES.push_back(n);
+				mc.NOTES.push_back(n);
+			}
+			else{
+				dataHolder = noot->Attribute("dur");
+				if(dataHolder == "") throw std::runtime_error("No 'dur' attribute in note tag, aborting");
+				n.NOTE_DURATION_VAR = stoi(dataHolder);
+				n.IS_REST = true;
+				n.NOTE_NAME_VAR = "";
+				n.NOTE_OCTAVE_VAR = 0;
+				n.STEM_DIR_VAR = "und";
+				mc.NOTES.push_back(n);
+			}
 		}
-
-		//finally , add the measure to the parsed measures.
 		measures.push_back(mc);
 	}
-
-	//Yay , done!
-
 }
 
 void MEIParser::mapData(){
-	//IGNORE ALL to_string ERRORS IN ECLIPSE.
+	/* This function maps the parsed MEI data from the
+	 * intermediary MEI dataContainers to MusicXML objects.
+	 * From thereon, MusicXML, CSV and MIDI can be generated.
+	 */
+	bool firstMeasureSet = false;
 
-	//map all data onto the musicXML objects.
-//	partList.setPartGroupType("start");
-//	partList.setPartGroupNumber("1"); //WARNING THIS IS STATIC RIGHT NOW. MORE PARTS = AUTO RISE PART NUMBER
-	//set all scorePart data.
 	partList.scorePart.setId(scoreDefContainer.PART_ID_VAR);
 	partList.scorePart.partName.setName(scoreDefContainer.PART_NAME_VAR);
 	partList.scorePart.scoreInstrument.setId("P1-13");
 	partList.scorePart.scoreInstrument.instrumentName.setInstrumentName(scoreDefContainer.PART_NAME_VAR);
 
-	//midi data
+	partList.scorePart.midiInstrument.setId("P1-13");
 	partList.scorePart.midiInstrument.midiChannel.setMidiChannel("1"); //fixed value.
 	partList.scorePart.midiInstrument.midiProgram.setMidiProgram("1"); //fixed value
 	partList.scorePart.midiInstrument.volume.setVolume("78"); //fixed value.
 	partList.scorePart.midiInstrument.pan.setPan("0"); //Who needs stereo pshhh
 
-	//part data
 	part.setId(scoreDefContainer.PART_ID_VAR);
 	for(measureData& m : measures){
-		//create musicXML measure
 		Measure maat;
 
-		//fill it up with parsed data from MEI
 		maat.setNumber( to_string(m.MEASURE_NUMBER_VAR) );
+		if(!firstMeasureSet){
+			maat.attribute.division.setDivisions("1");
+			maat.attribute.clef.line.setLine(to_string(scoreDefContainer.CLEF_LINE_VAR));
+			maat.attribute.clef.sign.setSign(scoreDefContainer.CLEF_TYPE_VAR );
+			maat.attribute.key.fifths.setFifths("0"); //constant
+			maat.attribute.key.mode.setMode(scoreDefContainer.SCHAAL_VAR);
+			maat.attribute.time.beatType.setBeatType( to_string(scoreDefContainer.MAAT_ONDER_VAR) );
+			maat.attribute.time.beats.setBeats( to_string(scoreDefContainer.MAAT_BOVEN_VAR) );
+			firstMeasureSet = true;
+		}
 
-		maat.attribute.division.setDivisions("1");
-		//maat.attribute.setDivisions("1"); //const;
-
-		maat.attribute.clef.setLine( to_string(scoreDefContainer.CLEF_LINE_VAR));
-		maat.attribute.clef.setSign( scoreDefContainer.CLEF_TYPE_VAR);
-
-		maat.attribute.key.setFifths("0"); //const;
-		maat.attribute.key.setMode( scoreDefContainer.SCHAAL_VAR);
-
-		maat.attribute.time.setBeatType( to_string(scoreDefContainer.MAAT_ONDER_VAR));
-		maat.attribute.time.setBeats( to_string(scoreDefContainer.MAAT_BOVEN_VAR));
-
-		maat.barLine.setLocation("right"); //const
-		maat.barLine.barStyle.setBarStyle("light-heavy");
+		if(m.GENERATE_MEASURE_END){
+			maat.barLine.setLocation("right"); //const
+			maat.barLine.barStyle.setBarStyle("light-heavy");
+		}
 
 		for(noteData& n : m.NOTES ){
-			//create musicXML note.
 			Note noot;
-
-			noot.setDefaultX(to_string(generateNoteX()));
-			noot.setDefaultY( to_string(generateNoteY(n.NOTE_NAME_VAR[0],n.NOTE_OCTAVE_VAR)));
-			noot.setRest(false);
-			noot.duration.setDuration("1");
-			noot.type.setType(generateNoteType(n.NOTE_DURATION_VAR));
-			noot.stem.setStem(n.STEM_DIR_VAR);
-			noot.pitch.step.setStep(n.NOTE_NAME_VAR);
-			noot.pitch.octave.setOctave(to_string(n.NOTE_OCTAVE_VAR));
-			noot.voice.setVoice("1"); //CONST
-			maat.notes.push_back(noot);
+			if(!n.IS_REST){
+				noot.setDefaultX(to_string(generateNoteX()));
+				noot.setDefaultY( to_string(generateNoteY(n.NOTE_NAME_VAR[0],n.NOTE_OCTAVE_VAR)));
+				noot.setRest(false);
+				noot.duration.setDuration("1");
+				noot.type.setType(generateNoteType(n.NOTE_DURATION_VAR));
+				noot.stem.setStem(n.STEM_DIR_VAR);
+				noot.pitch.step.setStep(noteNameMap.find(n.NOTE_NAME_VAR[0])->second);
+				noot.pitch.octave.setOctave(to_string(n.NOTE_OCTAVE_VAR));
+				noot.voice.setVoice("1"); //CONST
+				maat.notes.push_back(noot);
+			}
+			else{
+				noot.setRest(true);
+				noot.duration.setDuration("1"); //const
+				noot.voice.setVoice("1"); //const
+				noot.type.setType(generateNoteType(n.NOTE_DURATION_VAR));
+				maat.notes.push_back(noot);
+			}
 		}
 		part.measures.push_back(maat);
-		//reset start note position
 		x = 12.0;
 	}
 
@@ -256,9 +261,8 @@ double MEIParser::generateNoteX(){
 		return x;
 	}
 	else{
-		double returnVal = x;
 		x += 113.19;
-		return returnVal;
+		return x;
 	}
 }
 
@@ -280,14 +284,17 @@ void MEIParser::debugOut(){
 		cout << "[MAAT]: nummer: " << m.MEASURE_NUMBER_VAR << " [END?] " << m.GENERATE_MEASURE_END << endl;
 		for(noteData& n : m.NOTES){
 			cout << "\t";
-			cout << "[NAAM] " << n.NOTE_NAME_VAR << " [OCTAAF] " << n.NOTE_OCTAVE_VAR << " [DUUR] 1/" << n.NOTE_DURATION_VAR << " maat [STEEL RICHTING] " << n.STEM_DIR_VAR << endl;
+			if(!n.IS_REST){
+				cout << "[NAAM] " << n.NOTE_NAME_VAR << " [OCTAAF] " << n.NOTE_OCTAVE_VAR << " [DUUR] 1/" << n.NOTE_DURATION_VAR << " maat [STEEL RICHTING] " << n.STEM_DIR_VAR << endl;
+			}else{
+				cout << "[RUST] " << " [DUUR] 1/" << n.NOTE_DURATION_VAR << endl;
+			}
 		}
 	}
-
-	cout << "================MUSICXML========================" << endl;
-	partList.print();
-	part.print();
-
+//
+//	cout << "================MUSICXML========================" << endl;
+//	partList.print();
+//	part.print();
 }
 
 PartList MEIParser::getPartList() const{
