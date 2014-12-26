@@ -48,7 +48,7 @@ private:
 	// For example, if the timing resolution is 4 pulses per quarter note, a tick number of 20 will put the note 5 quarter notes after the start of the song.
 	// Tick numbers start at 0.
 	// TODO tick aanpassen
-	int getTick(Note note);
+	int getTicks(Note note);
 
 	// The note number is the note to play. This number can range from 0 to 127. Where 0 is C-1 and 127 is G9.
 	std::string getNote(Note note);

@@ -34,10 +34,7 @@ string CSVGenerator::getHeader() {
 
 string CSVGenerator::getInstrument() {
 	string returnString = "Instrument,";
-	string name = sourcePartList.scorePart.partName.getName();
-	if (name == "Piano")	{
-		name = "Acoustic Grand Piano";
-	}
+	string name = sourcePartList.scorePart.scoreInstrument.instrumentName.getInstrumentName();
 
 	for (const auto& midiInstrument : midiInstruments)	{
 		if (name == midiInstrument.second)	{
@@ -52,12 +49,12 @@ string CSVGenerator::getInstrument() {
 	return returnString;
 }
 
-int CSVGenerator::getTick(Note note) {
+int CSVGenerator::getTicks(Note note) {
 	if (note.type.getType() == "quarter")	{
 		return 3;
 	}
 	else if (note.type.getType() == "half")	{
-		return 7;
+		return 6;
 	}
 }
 
@@ -122,7 +119,7 @@ void CSVGenerator::generateCSV(string fileName) {
 				midiToCSV << getVelocityOn(measure.notes[i]);
 				midiToCSV << "\n";
 
-				tick += getTick(measure.notes[i]);
+				tick += getTicks(measure.notes[i]);
 				midiToCSV << Utilities::intToString(tick);
 				midiToCSV << ",";
 				midiToCSV << getNote(measure.notes[i]);
@@ -131,6 +128,10 @@ void CSVGenerator::generateCSV(string fileName) {
 				midiToCSV << "\n";
 
 				tick++;
+			}
+			else	{
+				tick++;
+				tick += getTicks(measure.notes[i]);
 			}
 			// TODO rest in middle of measure, ticks += duration
 		}
