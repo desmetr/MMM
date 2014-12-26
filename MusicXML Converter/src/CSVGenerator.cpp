@@ -12,8 +12,6 @@ using namespace std;
 CSVGenerator::CSVGenerator() {
 	midiInstruments = ioManager.midiInstruments;
 	midiNotes = ioManager.midiNotes;
-
-	ticks = 60000 / (BPM * PPQ);
 }
 
 CSVGenerator::CSVGenerator(PartList partList, Part part) {
@@ -22,8 +20,6 @@ CSVGenerator::CSVGenerator(PartList partList, Part part) {
 
 	midiInstruments = ioManager.midiInstruments;
 	midiNotes = ioManager.midiNotes;
-
-	ticks = 60000 / (BPM * PPQ);
 }
 
 CSVGenerator::~CSVGenerator() {
@@ -52,39 +48,17 @@ string CSVGenerator::getInstrument() {
 	returnString += ",";
 	returnString += name;
 
-	returnString += "\n\n";
+	returnString += "\n";
 	return returnString;
 }
 
-string CSVGenerator::getTrack() {
-	// Pretty useless method temporary. It is possible that the track is different.
-	// For now we decide that there is only one track.
-	return "1";
-}
-
-string CSVGenerator::getTick(Note note, int& tick) {
-	string returnString = "";
-
-//	if (!note.isRest())		{
-		if (note.type.getType() == "quarter")	{
-			tick++;
-//			returnString = Utilities::intToString(tick);
-			returnString = Utilities::intToString(tick * ticks);
-		}
-		else if (note.type.getType() == "half")	{
-			tick++;
-//			returnString = Utilities::intToString(tick);
-			returnString = Utilities::intToString(tick * ticks);
-			tick++;
-		}
-//	}
-	return returnString;
-}
-
-string CSVGenerator::getChannel() {
-	// Pretty useless method temporary. It is possible that the channel is different.
-	// For now we decide that there is only one channel.
-	return "0";
+int CSVGenerator::getTick(Note note) {
+	if (note.type.getType() == "quarter")	{
+		return 3;
+	}
+	else if (note.type.getType() == "half")	{
+		return 7;
+	}
 }
 
 string CSVGenerator::getNote(Note note) {
@@ -105,7 +79,7 @@ string CSVGenerator::getNote(Note note) {
 	return returnString;
 }
 
-string CSVGenerator::getVelocityOff(Note note) {
+string CSVGenerator::getVelocityOff() {
 	return "0";
 }
 
@@ -126,43 +100,40 @@ string CSVGenerator::getVelocityOn(Note note) {
 }
 
 void CSVGenerator::generateCSV(string fileName) {
-	ofstream midiAsCSV;
+	ofstream midiToCSV;
+
 	int position = fileName.find(".xml");
 	fileName.erase(position, fileName.size() - position);
 	fileName += ".csv";
-	midiAsCSV.open(Utilities::stringToCharPtr(fileName));
+	midiToCSV.open(Utilities::stringToCharPtr(fileName));
 
-	int tick = -1;
-	int currentNote = 0;
-	unsigned int i = 0;
+	int tick = 0;
 
-	midiAsCSV << getHeader();
-	midiAsCSV << getInstrument();
+	midiToCSV << getHeader();
+	midiToCSV << getInstrument();
 
 	for (const auto& measure : sourcePart.measures)		{
-		for (i = 0; i < measure.notes.size(); i++)			{
-			for (unsigned int j = 0; j < 2; j++)	{
-				midiAsCSV << getTrack();
-				midiAsCSV << ",";
-				midiAsCSV << getTick(measure.notes[i], tick);
-				midiAsCSV << ",";
-				midiAsCSV << "Note_on_c";
-				midiAsCSV << ",";
-				midiAsCSV << Utilities::intToString(PPQ * currentNote);
-				midiAsCSV << ",";
-				midiAsCSV << getNote(measure.notes[i]);
-				midiAsCSV << ",";
-				if (j == 0)	{
-					midiAsCSV << getVelocityOn(measure.notes[i]);
-				}
-				else 	{
-					midiAsCSV << getVelocityOff(measure.notes[i]);
-				}
-				midiAsCSV << endl;
+		for (unsigned int i = 0; i < measure.notes.size(); i++)			{
+			if (!measure.notes[i].isRest())	{
+				midiToCSV << Utilities::intToString(tick);
+				midiToCSV << ",";
+				midiToCSV << getNote(measure.notes[i]);
+				midiToCSV << ",";
+				midiToCSV << getVelocityOn(measure.notes[i]);
+				midiToCSV << "\n";
+
+				tick += getTick(measure.notes[i]);
+				midiToCSV << Utilities::intToString(tick);
+				midiToCSV << ",";
+				midiToCSV << getNote(measure.notes[i]);
+				midiToCSV << ",";
+				midiToCSV << getVelocityOff();
+				midiToCSV << "\n";
+
+				tick++;
 			}
-			currentNote++;
+			// TODO rest in middle of measure, ticks += duration
 		}
-		currentNote = i;
 	}
-	midiAsCSV.close();
+	midiToCSV.close();
 }
