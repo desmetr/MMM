@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mei xmlns="http://www.music-encoding.org/ns/mei" xmlns:xlink="http://www.w3.org/1999/xlink" meiversion="2013">
+   <meiHead>
+      <fileDesc>
+         <titleStmt>
+            <title/>
+         </titleStmt>
+         <pubStmt/>
+         <sourceDesc>
+            <source>
+               <titleStmt>
+                  <title/>
+               </titleStmt>
+               <pubStmt/>
+            </source>
+         </sourceDesc>
+      </fileDesc>
+      <encodingDesc>
+         <editorialDecl>
+            <normalization>
+               </p>
+            </normalization>
+         </editorialDecl>
+      </encodingDesc>
+      <revisionDesc>
+         <change n="1">
+            <respStmt/>
+            <changeDesc>
+               </p>
+            </changeDesc>
+            <date>2014-12-26</date>
+         </change>
+      </revisionDesc>
+   </meiHead>
+   <music>
+      <body>
+         <mdiv>
+            <score>
+               <scoreDef meter.count="4" meter.unit="4" key.sig="0" key.mode="major">
+                  <staffGrp>
+                     <staffDef n="1"
+                               xml:id="P1"
+                               label="Piano"
+                               lines="5"
+                               clef.line="2"
+                               clef.shape="G"/>
+                  </staffGrp>
+               </scoreDef>
+               <section>
+                  <measure n="1" xml:id="d1e18">
+                     <staff n="1">
+                        <layer n="1">
+                           <note xml:id="d1e38" pname="c" oct="4" dur="4" stem.dir="up"/>
+                           <note xml:id="d1e52" pname="e" oct="4" dur="4" stem.dir="up"/>
+                           <note xml:id="d1e66" pname="g" oct="4" dur="4" stem.dir="up"/>
+                           <note xml:id="d1e80" pname="c" oct="5" dur="4" stem.dir="down"/>
+                        </layer>
+                     </staff>
+                  </measure>
+                  <measure n="2" xml:id="d1e94" right="end">
+                     <staff n="1">
+                        <layer n="1">
+                           <note xml:id="d1e96" pname="g" oct="4" dur="4" stem.dir="up"/>
+                           <note xml:id="d1e110" pname="e" oct="4" dur="4" stem.dir="up"/>
+                           <note xml:id="d1e124" pname="c" oct="4" dur="4" stem.dir="up"/>
+                           <rest xml:id="d1e138" dur="4"/>
+                        </layer>
+                     </staff>
+                  </measure>
+               </section>
+            </score>
+         </mdiv>
+      </body>
+   </music>
+</mei>

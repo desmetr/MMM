@@ -6,7 +6,7 @@
   <!--&apos;	'	apostrophe -->
   <!--&quot;	"	quotation mark -->
   <!-- A lot of terminals, each on newline to keep it readable. -->
-  <TERMINALS>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;,&lt;!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd"&gt;,&lt;score-partwise&gt;,&lt;/score-partwise&gt;,&lt;part-list&gt;,&lt;/part-list&gt;,&lt;score-part id=","&gt;,&lt;/score-part&gt;,&lt;part-name&gt;,&lt;/part-name&gt;,&lt;score-instrument id=",&lt;/score-instrument&gt;,&lt;instrument-name&gt;,&lt;/instrument-name&gt;,&lt;midi-instrument id=",&lt;/midi-instrument&gt;,&lt;midi-channel&gt;,&lt;/midi-channel&gt;,&lt;midi-program&gt;,&lt;/midi-program&gt;,&lt;volume&gt;,&lt;/volume&gt;,&lt;pan&gt;,&lt;/pan&gt;,&lt;part id=",&lt;/part&gt;,&lt;measure number="," width=",&lt;/measure&gt;,&lt;attributes&gt;,&lt;/attributes&gt;,&lt;divisions&gt;,&lt;/divisions&gt;,&lt;key&gt;,&lt;/key&gt;,&lt;fifths&gt;,&lt;/fifths&gt;,&lt;mode&gt;,&lt;/mode&gt;,&lt;time&gt;,&lt;/time&gt;,&lt;beats&gt;,&lt;/beats&gt;,&lt;beat-type&gt;,&lt;/beat-type&gt;,&lt;clef&gt;,&lt;/clef&gt;,&lt;sign&gt;,&lt;/sign&gt;,&lt;line&gt;,&lt;/line&gt;,&lt;note default-x="," default-y=",&lt;/note&gt;,&lt;pitch&gt;,&lt;/pitch&gt;,&lt;step&gt;,&lt;/step&gt;,&lt;octave&gt;,&lt;/octave&gt;,&lt;duration&gt;,&lt;/duration&gt;,&lt;voice&gt;,&lt;/voice&gt;,&lt;type&gt;,&lt;/type&gt;,&lt;stem&gt;,&lt;/stem&gt;,&lt;rest/&gt;,&lt;barline location=",&lt;bar-style&gt;,&lt;/bar-style&gt;,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,0,1,2,3,4,5,6,7,8,9,.,-,&lt;note&gt,&lt;note&gt;,&lt;barline&gt;</TERMINALS>
+  <TERMINALS>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;,&lt;!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd"&gt;,&lt;score-partwise&gt;,&lt;/score-partwise&gt;,&lt;part-list&gt;,&lt;/part-list&gt;,&lt;score-part id=","&gt;,&lt;/score-part&gt;,&lt;part-name&gt;,&lt;/part-name&gt;,&lt;score-instrument id=",&lt;/score-instrument&gt;,&lt;instrument-name&gt;,&lt;/instrument-name&gt;,&lt;midi-instrument id=",&lt;/midi-instrument&gt;,&lt;midi-channel&gt;,&lt;/midi-channel&gt;,&lt;midi-program&gt;,&lt;/midi-program&gt;,&lt;volume&gt;,&lt;/volume&gt;,&lt;pan&gt;,&lt;/pan&gt;,&lt;part id=",&lt;/part&gt;,&lt;measure number="," width=",&lt;/measure&gt;,&lt;attributes&gt;,&lt;/attributes&gt;,&lt;divisions&gt;,&lt;/divisions&gt;,&lt;key&gt;,&lt;/key&gt;,&lt;fifths&gt;,&lt;/fifths&gt;,&lt;mode&gt;,&lt;/mode&gt;,&lt;time&gt;,&lt;/time&gt;,&lt;beats&gt;,&lt;/beats&gt;,&lt;beat-type&gt;,&lt;/beat-type&gt;,&lt;clef&gt;,&lt;/clef&gt;,&lt;sign&gt;,&lt;/sign&gt;,&lt;line&gt;,&lt;/line&gt;,&lt;note default-x="," default-y=",&lt;/note&gt;,&lt;pitch&gt;,&lt;/pitch&gt;,&lt;step&gt;,&lt;/step&gt;,&lt;octave&gt;,&lt;/octave&gt;,&lt;duration&gt;,&lt;/duration&gt;,&lt;voice&gt;,&lt;/voice&gt;,&lt;type&gt;,&lt;/type&gt;,&lt;stem&gt;,&lt;/stem&gt;,&lt;rest/&gt;,&lt;barline location=",&lt;bar-style&gt;,&lt;/bar-style&gt;,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,0,1,2,3,4,5,6,7,8,9,.,-,&lt;note&gt;,&lt;/note&gt;,&lt;/barline&gt;</TERMINALS>
 
   <VARIABLES>DOCROOT,ALPHA,NUMERIC,DOT,DASH,SCORE,PARTLIST,PART,SCOREPART,ALPHA_C,PARTNAME,SCOREINSTRUMENT,MIDIINSTRUMENT,INSTRUMENTNAME,MIDICHANNEL,MIDIPROGRAM,VOLUME,PAN,MEASURE,ATTRIBUTES,DIVISIONS,KEY,FIFTHS,MODE,TIME,BEATS,BEATTYPE,CLEF,SIGN,LINE,NOTE,REST,BARLINE,PITCH,STEP,OCTAVE,DURATION,VOICE,TYPE,STEM,BARSTYLE</VARIABLES>
 
@@ -135,7 +135,7 @@
     </HEAD>
 
     <HEAD var="NOTE">
-      <BODY>&lt;note&gt;,REST,DURATION,VOICE,TYPE,&lt;note&gt;</BODY>
+      <BODY>&lt;note&gt;,REST,DURATION,VOICE,TYPE,&lt;/note&gt;</BODY>
     </HEAD>
 
     <HEAD var="REST">
@@ -171,7 +171,7 @@
     </HEAD>
 
     <HEAD var="BARLINE">
-      <BODY>&lt;barline location=",ALPHA,"&gt;,BARSTYLE,&lt;barline&gt;</BODY>
+      <BODY>&lt;barline location=",ALPHA,"&gt;,BARSTYLE,&lt;/barline&gt;</BODY>
     </HEAD>
 
     <HEAD var="BARSTYLE">

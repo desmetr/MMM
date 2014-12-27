@@ -1,15 +1,70 @@
 <CFG>
 
-  <TERMINALS>&lt;music&gt;,&lt;/music&gt;,&lt;mdiv&gt;,&lt;/mdiv&gt;,&lt;score&gt;,&lt;/score&gt;,&lt;scoreDef meter.count="," meter.unit="," key.sig="," key.mode=","&gt;,&lt;/scoreDef&gt;,&lt;staffGrp&gt;,&lt;/staffGrp&gt;,&lt;staffDef n="," xml:id="," label="," lines="," clef.line="," clef.shape=","/&gt;,&lt;section&gt;,&lt;/section&gt;,&lt;measure n="," xml:id=",&lt;/measure&gt;," right=",&lt;staff n=",&lt;/staff&gt;,&lt;layer n=",&lt;/layer&gt;,&lt;note xml:id="," pname="," oct="," dur="," stem.dir=",a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9,-,.,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z</TERMINALS>
+  <TERMINALS>" dur=",&lt;rest xml:id=",&lt;/body&gt;,&lt;body&gt;,&lt;/date&gt;,&lt;date&gt;,&lt;/p&gt;,&lt;/changeDesc&gt;,&lt;changeDesc&gt;,&lt;p&gt;,&lt;respStmt/&gt;,&lt;change n=",&lt;/change&gt;,&lt;revisionDesc&gt;,&lt;/revisionDesc&gt;,&lt;encodingDesc&gt;,&lt;editorialDecl&gt;,&lt;normalization&gt;,&lt;p/&gt;,&lt;/normalization&gt;,&lt;editorialDecl&gt;,&lt;encodingDesc&gt;,&lt;/source&gt;,&lt;source&gt;,&lt;sourceDesc&gt;,&lt;/sourceDesc&gt;,&lt;pubStmt/&gt;,&lt;titleStmt&gt;,&lt;title/&gt;,&lt;/titleStmt&gt;,&lt;fileDesc&gt;,&lt;fileDesc&gt;,&lt;/meiHead&gt;,&lt;meiHead&gt;,&lt;mei xmlns="," encoding=",&lt;?xml version="," standalone=","?&gt;," xmlns:xlink=",&lt;/mei&gt;,&lt;music&gt;,&lt;/music&gt;,&lt;mdiv&gt;,&lt;/mdiv&gt;,&lt;score&gt;,&lt;/score&gt;," meiversion=",&lt;scoreDef meter.count="," meter.unit="," key.sig="," key.mode=","&gt;,&lt;/scoreDef&gt;,&lt;staffGrp&gt;,&lt;/staffGrp&gt;,&lt;staffDef n="," xml:id="," label="," lines="," clef.line="," clef.shape=","/&gt;,&lt;section&gt;,&lt;/section&gt;,&lt;measure n="," xml:id=",&lt;/measure&gt;," right=",&lt;staff n=",&lt;/staff&gt;,&lt;layer n=",&lt;/layer&gt;,&lt;note xml:id="," pname="," oct="," dur="," stem.dir=",a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9,-,.,:,/,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z</TERMINALS>
 
-  <VARIABLES>MUSIC,MDIV,SCORE,SCOREDEF,STAFFGRP,STAFFDEF,SECTION,MEASURE,STAFF,LAYER,NOTE,NUMERIC,ALPHA_C,ALPHA,DASH,DOT</VARIABLES>
+  <VARIABLES>BODY,ENCODINGDESC,REVISIONDESC,CHANGE,RESPSTMT,CHANGEDESC,DATE,COLON,SLASH,HEADER,MEI,MEIHEAD,FILEDESC,TITLESTMT,PUBSTMT,SOURCEDESC,SOURCE,MUSIC,MDIV,SCORE,SCOREDEF,STAFFGRP,STAFFDEF,SECTION,MEASURE,STAFF,LAYER,NOTE,NUMERIC,ALPHA_C,ALPHA,DASH,DOT</VARIABLES>
 
-  <STARTVAR>MUSIC</STARTVAR>
+  <STARTVAR>HEADER</STARTVAR>
 
   <PRODUCTIONS>
+    <HEAD var="HEADER">
+      <BODY>&lt;?xml version=",NUMERIC,DOT,NUMERIC," encoding=",ALPHA_C,DASH,NUMERIC," standalone=",ALPHA,"?&gt;,MEI</BODY>
+    </HEAD>
+
+    <HEAD var="MEI">
+      <BODY>&lt;mei xmlns=",ALPHA,COLON,SLASH,SLASH,ALPHA,DOT,ALPHA,DASH,ALPHA,DOT,ALPHA,SLASH,ALPHA,SLASH,ALPHA," xmlns:xlink=",ALPHA,COLON,SLASH,SLASH,ALPHA,DOT,ALPHA,DOT,ALPHA,SLASH,NUMERIC,SLASH,ALPHA," meiversion=",NUMERIC,"&gt;,MEIHEAD,MUSIC,&lt;/mei&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MEIHEAD">
+      <BODY>&lt;meiHead&gt;,FILEDESC,ENCODINGDESC,REVISIONDESC,&lt;/meiHead&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="FILEDESC">
+      <BODY>&lt;fileDesc&gt;,TITLESTMT,PUBSTMT,SOURCEDESC,&lt;fileDesc&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="TITLESTMT">
+      <BODY>&lt;titleStmt&gt;,&lt;title/&gt;,&lt;/titleStmt&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="PUBSTMT">
+      <BODY>&lt;pubStmt/&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="SOURCEDESC">
+      <BODY>&lt;sourceDesc&gt;,&lt;source&gt;,TITLESTMT,&lt;/source&gt;,&lt;/sourceDesc&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="ENCODINGDESC">
+      <BODY>&lt;encodingDesc&gt;,&lt;editorialDecl&gt;,&lt;normalization&gt;,&lt;p/&gt;,&lt;/normalization&gt;,&lt;editorialDecl&gt;,&lt;encodingDesc&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="REVISIONDESC">
+      <BODY>&lt;revisionDesc&gt;,CHANGE,&lt;/revisionDesc&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="CHANGE">
+      <BODY>&lt;change n=",NUMERIC,"&gt;,RESPSTMT,CHANGEDESC,DATE,&lt;/change&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="RESPSTMT">
+      <BODY>&lt;respStmt/&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="CHANGEDESC">
+      <BODY>&lt;changeDesc&gt;,&lt;/p&gt;,&lt;/changeDesc&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="DATE">
+      <BODY>&lt;date&gt;,NUMERIC,DASH,NUMERIC,DASH,NUMERIC,&lt;/date&gt;</BODY>
+    </HEAD>
 
     <HEAD var="MUSIC">
-      <BODY>&lt;music&gt;,MDIV,&lt;/music&gt;</BODY>
+      <BODY>&lt;music&gt;,BODY,&lt;/music&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="BODY">
+      <BODY>&lt;body&gt;,MDIV,&lt;/body&gt;</BODY>
     </HEAD>
 
     <HEAD var="MDIV">
@@ -49,11 +104,11 @@
     </HEAD>
 
     <HEAD var="MEASURE">
-      <BODY>&lt;measure n=",NUMERIC," xml:id=",NUMERIC,"&gt;,STAFF,&lt;/measure&gt;</BODY>
+      <BODY>&lt;measure n=",NUMERIC," xml:id=",ALPHA,NUMERIC,"&gt;,STAFF,&lt;/measure&gt;</BODY>
     </HEAD>
 
     <HEAD var="MEASURE">
-      <BODY>&lt;measure n=",NUMERIC," xml:id=",NUMERIC," right=",ALPHA,"&gt;,STAFF,&lt;/measure&gt;</BODY>
+      <BODY>&lt;measure n=",NUMERIC," xml:id=",ALPHA,NUMERIC," right=",ALPHA,"&gt;,STAFF,&lt;/measure&gt;</BODY>
     </HEAD>
 
     <HEAD var="STAFF">
@@ -73,7 +128,11 @@
     </HEAD>
 
     <HEAD var="NOTE">
-      <BODY>&lt;note xml:id=",NUMERIC," pname=",ALPHA_C," oct=",NUMERIC," dur=",NUMERIC," stem.dir=",ALPHA,"/&gt;</BODY>
+      <BODY>&lt;note xml:id=",ALPHA,NUMERIC," pname=",ALPHA," oct=",NUMERIC," dur=",NUMERIC," stem.dir=",ALPHA,"/&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="NOTE">
+      <BODY>&lt;rest xml:id=",ALPHA,NUMERIC," dur=",NUMERIC,"/&gt;</BODY>
     </HEAD>
 
     <HEAD var="ALPHA">
@@ -250,6 +309,22 @@
 
     <HEAD var="DASH">
       <BODY></BODY>
+    </HEAD>
+
+    <HEAD var="COLON">
+      <BODY>:</BODY>
+    </HEAD>
+
+    <HEAD var="COLON">
+      <BODY></BODY>
+    </HEAD>
+
+    <HEAD var="SLASH">
+      <BODY></BODY>
+    </HEAD>
+
+    <HEAD var="SLASH">
+      <BODY>/</BODY>
     </HEAD>
 
     <HEAD var="ALPHA_C">

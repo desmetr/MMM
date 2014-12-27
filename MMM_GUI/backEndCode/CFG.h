@@ -13,7 +13,7 @@
 #include <list>
 #include <memory>
 #include <map>
-#include "tinyxml2.h"
+#include "../frontEndCode/tinyxml2.h"
 #include <stdexcept>
 #include <iostream>
 #include <vector>

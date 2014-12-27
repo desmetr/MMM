@@ -157,7 +157,7 @@ vector<vector<basic*>> CNF::createEpsilonProd(const vector<basic*>& prod, const 
 
 	vector<int> indexesNullables;
 	//find the indexes of all the variables (of the right side of the prod) that are nullable
-	for (int iii=0; iii<prod.size(); iii++){
+    for (unsigned int iii=0; iii<prod.size(); iii++){
 		if (prod[iii]->getType() == "variable"){
 			variable* tempPtr = static_cast<variable*>(prod[iii]);
 			if ( isInVec(tempPtr, nullables) ){

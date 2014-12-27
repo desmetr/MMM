@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
-#include "backEndCode/tinyxml2.h"
+#include "frontEndCode/tinyxml2.h"
 #include <QFile>
 #include <string>
 #include <iostream>
@@ -169,4 +169,5 @@ bool mainWindow::checkXML(){
 
 
     }
+    return true;
 }

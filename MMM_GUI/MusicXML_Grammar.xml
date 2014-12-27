@@ -1,0 +1,468 @@
+<CFG>
+  <!-- You can't use these symbols in xml: -->
+  <!--&lt;	<	less than -->
+  <!--&gt;	>	greater than -->
+  <!--&amp;	&	ampersand -->
+  <!--&apos;	'	apostrophe -->
+  <!--&quot;	"	quotation mark -->
+  <!-- A lot of terminals, each on newline to keep it readable. -->
+  <TERMINALS>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;,&lt;!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd"&gt;,&lt;score-partwise&gt;,&lt;/score-partwise&gt;,&lt;part-list&gt;,&lt;/part-list&gt;,&lt;score-part id=","&gt;,&lt;/score-part&gt;,&lt;part-name&gt;,&lt;/part-name&gt;,&lt;score-instrument id=",&lt;/score-instrument&gt;,&lt;instrument-name&gt;,&lt;/instrument-name&gt;,&lt;midi-instrument id=",&lt;/midi-instrument&gt;,&lt;midi-channel&gt;,&lt;/midi-channel&gt;,&lt;midi-program&gt;,&lt;/midi-program&gt;,&lt;volume&gt;,&lt;/volume&gt;,&lt;pan&gt;,&lt;/pan&gt;,&lt;part id=",&lt;/part&gt;,&lt;measure number="," width=",&lt;/measure&gt;,&lt;attributes&gt;,&lt;/attributes&gt;,&lt;divisions&gt;,&lt;/divisions&gt;,&lt;key&gt;,&lt;/key&gt;,&lt;fifths&gt;,&lt;/fifths&gt;,&lt;mode&gt;,&lt;/mode&gt;,&lt;time&gt;,&lt;/time&gt;,&lt;beats&gt;,&lt;/beats&gt;,&lt;beat-type&gt;,&lt;/beat-type&gt;,&lt;clef&gt;,&lt;/clef&gt;,&lt;sign&gt;,&lt;/sign&gt;,&lt;line&gt;,&lt;/line&gt;,&lt;note default-x="," default-y=",&lt;/note&gt;,&lt;pitch&gt;,&lt;/pitch&gt;,&lt;step&gt;,&lt;/step&gt;,&lt;octave&gt;,&lt;/octave&gt;,&lt;duration&gt;,&lt;/duration&gt;,&lt;voice&gt;,&lt;/voice&gt;,&lt;type&gt;,&lt;/type&gt;,&lt;stem&gt;,&lt;/stem&gt;,&lt;rest/&gt;,&lt;barline location=",&lt;bar-style&gt;,&lt;/bar-style&gt;,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,0,1,2,3,4,5,6,7,8,9,.,-,&lt;note&gt,&lt;note&gt;,&lt;barline&gt;</TERMINALS>
+
+  <VARIABLES>DOCROOT,ALPHA,NUMERIC,DOT,DASH,SCORE,PARTLIST,PART,SCOREPART,ALPHA_C,PARTNAME,SCOREINSTRUMENT,MIDIINSTRUMENT,INSTRUMENTNAME,MIDICHANNEL,MIDIPROGRAM,VOLUME,PAN,MEASURE,ATTRIBUTES,DIVISIONS,KEY,FIFTHS,MODE,TIME,BEATS,BEATTYPE,CLEF,SIGN,LINE,NOTE,REST,BARLINE,PITCH,STEP,OCTAVE,DURATION,VOICE,TYPE,STEM,BARSTYLE</VARIABLES>
+
+  <STARTVAR>DOCROOT</STARTVAR>
+
+  <PRODUCTIONS>
+    <!-- Document Header & root element (score) -->
+    <HEAD var="DOCROOT">
+      <BODY>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;,&lt;!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd"&gt;,SCORE</BODY>
+    </HEAD>
+
+    <HEAD var="SCORE">
+      <BODY>&lt;score-partwise&gt;,PARTLIST,PART,&lt;/score-partwise&gt;</BODY>
+    </HEAD>
+
+    <!-- part-list and its sub-elements -->
+    <HEAD var="PARTLIST">
+      <BODY>&lt;part-list&gt;,SCOREPART,&lt;/part-list&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="SCOREPART">
+      <BODY>&lt;score-part id=",ALPHA_C,ALPHA_C,"&gt;,PARTNAME,SCOREINSTRUMENT,MIDIINSTRUMENT,&lt;/score-part&gt;,</BODY>
+    </HEAD>
+
+    <HEAD var="PARTNAME">
+      <BODY>&lt;part-name&gt;,ALPHA_C,ALPHA,&lt;/part-name&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="SCOREINSTRUMENT">
+      <BODY>&lt;score-instrument id=",ALPHA_C,NUMERIC,DASH,ALPHA_C,NUMERIC,"&gt;,INSTRUMENTNAME,&lt;/score-instrument&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="INSTRUMENTNAME">
+      <BODY>&lt;instrument-name&gt;,ALPHA_C,ALPHA,&lt;/instrument-name&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MIDIINSTRUMENT">
+      <BODY>&lt;midi-instrument id=",ALPHA_C,NUMERIC,DASH,ALPHA_C,NUMERIC,"&gt;,MIDICHANNEL,MIDIPROGRAM,VOLUME,PAN,&lt;/midi-instrument&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MIDICHANNEL">
+      <BODY>&lt;midi-channel&gt;,NUMERIC,&lt;/midi-channel&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MIDIPROGRAM">
+      <BODY>&lt;midi-program&gt;,NUMERIC,&lt;/midi-program&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="VOLUME">
+      <BODY>&lt;volume&gt;,NUMERIC,DOT,NUMERIC,&lt;/volume&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="PAN">
+      <BODY>&lt;pan&gt;,NUMERIC,&lt;/pan&gt;</BODY>
+    </HEAD>
+
+    <!-- end of part-list -->
+
+    <!-- Start of Part -->
+    <HEAD var="PART">
+      <BODY>PART,PART</BODY>
+    </HEAD>
+
+    <HEAD var="PART">
+      <BODY>&lt;part id=",ALPHA_C,NUMERIC,"&gt;,MEASURE,&lt;/part&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MEASURE">
+      <BODY>&lt;measure number=",NUMERIC," width=",NUMERIC,DOT,NUMERIC,"&gt;,ATTRIBUTES,NOTE,BARLINE,&lt;/measure&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="ATTRIBUTES">
+      <BODY></BODY>
+    </HEAD>
+
+    <HEAD var="ATTRIBUTES">
+      <BODY>&lt;attributes&gt;,DIVISIONS,KEY,TIME,CLEF,&lt;/attributes&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="DIVISIONS">
+      <BODY>&lt;divisions&gt;,NUMERIC,&lt;/divisions&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="KEY">
+      <BODY>&lt;key&gt;,FIFTHS,MODE,&lt;/key&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="FIFTHS">
+      <BODY>&lt;fifths&gt;,NUMERIC,&lt;/fifths&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MODE">
+      <BODY>&lt;mode&gt;,ALPHA,&lt;/mode&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="TIME">
+      <BODY>&lt;time&gt;,BEATS,BEATTYPE,&lt;/time&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="BEATS">
+      <BODY>&lt;beats&gt;,NUMERIC,&lt;/beats&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="BEATTYPE">
+      <BODY>&lt;beat-type&gt;,NUMERIC,&lt;/beat-type&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="CLEF">
+      <BODY>&lt;clef&gt;,SIGN,LINE,&lt;/clef&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="SIGN">
+      <BODY>&lt;sign&gt;,ALPHA_C,&lt;/sign&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="LINE">
+      <BODY>&lt;line&gt;,NUMERIC,&lt;/line&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="NOTE">
+      <BODY>NOTE,NOTE</BODY>
+    </HEAD>
+
+    <HEAD var="NOTE">
+      <BODY>&lt;note default-x=",DASH,NUMERIC,DOT,NUMERIC," default-y=",DASH,NUMERIC,DOT,NUMERIC,"&gt;,PITCH,DURATION,VOICE,TYPE,STEM,&lt;/note&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="NOTE">
+      <BODY>&lt;note&gt;,REST,DURATION,VOICE,TYPE,&lt;note&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="REST">
+      <BODY>&lt;rest/&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="PITCH">
+      <BODY>&lt;pitch&gt;,STEP,OCTAVE,&lt;/pitch&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="STEP">
+      <BODY>&lt;step&gt;,ALPHA_C,&lt;/step&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="OCTAVE">
+      <BODY>&lt;octave&gt;,NUMERIC,&lt;/octave&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="DURATION">
+      <BODY>&lt;duration&gt;,NUMERIC,&lt;/duration&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="VOICE">
+      <BODY>&lt;voice&gt;,NUMERIC,&lt;/voice&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="TYPE">
+      <BODY>&lt;type&gt;,ALPHA,&lt;/type&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="STEM">
+      <BODY>&lt;stem&gt;,ALPHA,&lt;/stem&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="BARLINE">
+      <BODY>&lt;barline location=",ALPHA,"&gt;,BARSTYLE,&lt;barline&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="BARSTYLE">
+      <BODY>&lt;bar-style&gt;,ALPHA,DASH,ALPHA,&lt;/bar-style&gt;</BODY>
+    </HEAD>
+
+
+
+    <!--end of Part -->
+
+    <HEAD var="ALPHA">
+      <BODY>ALPHA,ALPHA</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY></BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>a</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>b</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>c</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>d</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>e</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>f</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>g</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>h</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>i</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>j</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>k</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>l</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>m</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>n</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>o</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>p</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>q</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>r</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>s</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>t</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>u</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>v</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>w</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>x</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>y</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>z</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>NUMERIC,NUMERIC</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>0</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>1</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>2</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>3</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>4</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>5</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>6</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>7</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>8</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>9</BODY>
+    </HEAD>
+
+    <HEAD var="DOT">
+      <BODY>.</BODY>
+    </HEAD>
+
+    <HEAD var="DASH">
+      <BODY>-</BODY>
+    </HEAD>
+
+    <HEAD var="DASH">
+      <BODY></BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>ALPHA_C,ALPHA_C</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY></BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>A</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>B</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>C</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>D</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>E</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>F</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>G</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>H</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>I</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>J</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>K</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>L</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>M</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>N</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>O</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>P</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>Q</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>R</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>S</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>T</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>U</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>V</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>W</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>X</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>Y</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>Z</BODY>
+    </HEAD>
+
+  </PRODUCTIONS>
+
+
+</CFG>

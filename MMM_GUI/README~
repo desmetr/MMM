@@ -1,3 +1,8 @@
-GUI for the MMM program.
-[TODO] Implement conversions -> requires some adaptation to new MusicXML structures first
-[TODO] Implement MusicXML importing + correctness test. Due to bugs in MusicXML Grammar this isn't implemented yet.
+Hoe project bouwen in QtCreator 5.2.1
+
+-Open QtCreator -> Ctrl+n
+-Kies Qt Widgets Application
+-Zet naam naar MMM_GUI, directory waar je zelf wil.
+-Laat kit selection op default staan (Bij mij: Desktop Qt 5.2.1 GCC 64bit en Desktop)
+
+
