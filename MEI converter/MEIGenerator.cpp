@@ -257,7 +257,6 @@ void MEIGenerator::generateHead(tinyxml2::XMLDocument& doc,tinyxml2::XMLElement*
 
 	tinyxml2::XMLElement* p2 = doc.NewElement("p");
 	changeDesc->LinkEndChild(p2);
-	p2->SetText("Transcoded from a MusicXML version 1.0 file by the MMM project.");
 
 	tinyxml2::XMLElement* date = doc.NewElement("date");
 	change->LinkEndChild(date);

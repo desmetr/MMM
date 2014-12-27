@@ -23,18 +23,7 @@
       <encodingDesc>
          <editorialDecl>
             <normalization>
-               <p>Calculation of @tstamp and @tstamp2 values on control events, such as dir, dynam,
-              hairpin, etc., includes MusicXML offset values.</p>
-               <p>The parameters for musicxml2mei.xsl were set as follows: <list>
-                     <li>layout: "strip", </li>
-                     <li>formeWork: "strip", </li>
-                     <li>keepAttributes: "false", </li>
-                     <li>generateMIDI: "false", </li>
-                     <li>articStyle: "elem", </li>
-                     <li>accidStyle: "attr", </li>
-                     <li>tieStyle: "attr", </li>
-                     <li>labelStyle: "attr"</li>
-                  </list>
+               <p>
                </p>
             </normalization>
          </editorialDecl>
@@ -43,7 +32,7 @@
          <change n="1">
             <respStmt/>
             <changeDesc>
-               <p>Transcoded from a MusicXML version 1.0 file using an XSLT stylesheet (musicxml2mei v. 3.0).</p>
+               <p></p>
             </changeDesc>
             <date>2014-12-26</date>
          </change>

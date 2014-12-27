@@ -1,6 +1,6 @@
 <CFG>
 
-  <TERMINALS>" dur=",&lt;rest xml:id=",&lt;/body&gt;,&lt;body&gt;,&lt;/date&gt;,&lt;date&gt;,&lt;/p&gt;,&lt;/changeDesc&gt;,&lt;changeDesc&gt;,&lt;p&gt;,&lt;respStmt/&gt;,&lt;change n=",&lt;/change&gt;,&lt;revisionDesc&gt;,&lt;/revisionDesc&gt;,&lt;encodingDesc&gt;,&lt;editorialDecl&gt;,&lt;normalization&gt;,&lt;p/&gt;,&lt;/normalization&gt;,&lt;editorialDecl&gt;,&lt;encodingDesc&gt;,&lt;/source&gt;,&lt;source&gt;,&lt;sourceDesc&gt;,&lt;/sourceDesc&gt;,&lt;pubStmt/&gt;,&lt;titleStmt&gt;,&lt;title/&gt;,&lt;/titleStmt&gt;,&lt;fileDesc&gt;,&lt;fileDesc&gt;,&lt;/meiHead&gt;,&lt;meiHead&gt;,&lt;mei xmlns="," encoding=",&lt;?xml version="," standalone=","?&gt;," xmlns:xlink=",&lt;music&gt;,&lt;/music&gt;,&lt;mdiv&gt;,&lt;/mdiv&gt;,&lt;score&gt;,&lt;/score&gt;," meiversion=",&lt;scoreDef meter.count="," meter.unit="," key.sig="," key.mode=","&gt;,&lt;/scoreDef&gt;,&lt;staffGrp&gt;,&lt;/staffGrp&gt;,&lt;staffDef n="," xml:id="," label="," lines="," clef.line="," clef.shape=","/&gt;,&lt;section&gt;,&lt;/section&gt;,&lt;measure n="," xml:id=",&lt;/measure&gt;," right=",&lt;staff n=",&lt;/staff&gt;,&lt;layer n=",&lt;/layer&gt;,&lt;note xml:id="," pname="," oct="," dur="," stem.dir=",a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9,-,.,:,/,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,Transcoded from a MusicXML version 1.0 file by the MMM project.</TERMINALS>
+  <TERMINALS>" dur=",&lt;rest xml:id=",&lt;/body&gt;,&lt;body&gt;,&lt;/date&gt;,&lt;date&gt;,&lt;/p&gt;,&lt;/changeDesc&gt;,&lt;changeDesc&gt;,&lt;p&gt;,&lt;respStmt/&gt;,&lt;change n=",&lt;/change&gt;,&lt;revisionDesc&gt;,&lt;/revisionDesc&gt;,&lt;encodingDesc&gt;,&lt;editorialDecl&gt;,&lt;normalization&gt;,&lt;p/&gt;,&lt;/normalization&gt;,&lt;editorialDecl&gt;,&lt;encodingDesc&gt;,&lt;/source&gt;,&lt;source&gt;,&lt;sourceDesc&gt;,&lt;/sourceDesc&gt;,&lt;pubStmt/&gt;,&lt;titleStmt&gt;,&lt;title/&gt;,&lt;/titleStmt&gt;,&lt;fileDesc&gt;,&lt;fileDesc&gt;,&lt;/meiHead&gt;,&lt;meiHead&gt;,&lt;mei xmlns="," encoding=",&lt;?xml version="," standalone=","?&gt;," xmlns:xlink=",&lt;music&gt;,&lt;/music&gt;,&lt;mdiv&gt;,&lt;/mdiv&gt;,&lt;score&gt;,&lt;/score&gt;," meiversion=",&lt;scoreDef meter.count="," meter.unit="," key.sig="," key.mode=","&gt;,&lt;/scoreDef&gt;,&lt;staffGrp&gt;,&lt;/staffGrp&gt;,&lt;staffDef n="," xml:id="," label="," lines="," clef.line="," clef.shape=","/&gt;,&lt;section&gt;,&lt;/section&gt;,&lt;measure n="," xml:id=",&lt;/measure&gt;," right=",&lt;staff n=",&lt;/staff&gt;,&lt;layer n=",&lt;/layer&gt;,&lt;note xml:id="," pname="," oct="," dur="," stem.dir=",a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9,-,.,:,/,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z</TERMINALS>
 
   <VARIABLES>BODY,ENCODINGDESC,REVISIONDESC,CHANGE,RESPSTMT,CHANGEDESC,DATE,COLON,SLASH,HEADER,MEI,MEIHEAD,FILEDESC,TITLESTMT,PUBSTMT,SOURCEDESC,SOURCE,MUSIC,MDIV,SCORE,SCOREDEF,STAFFGRP,STAFFDEF,SECTION,MEASURE,STAFF,LAYER,NOTE,NUMERIC,ALPHA_C,ALPHA,DASH,DOT</VARIABLES>
 
@@ -52,7 +52,7 @@
     </HEAD>
 
     <HEAD var="CHANGEDESC">
-      <BODY>&lt;changeDesc&gt;,&lt;p&gt;,Transcoded from a MusicXML version 1.0 file by the MMM project.,&lt;/p&gt;,&lt;/changeDesc&gt;</BODY>
+      <BODY>&lt;changeDesc&gt;,&lt;/p&gt;,&lt;/changeDesc&gt;</BODY>
     </HEAD>
 
     <HEAD var="DATE">
