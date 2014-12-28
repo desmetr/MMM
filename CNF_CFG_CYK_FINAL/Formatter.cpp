@@ -53,6 +53,10 @@ void Formatter::OpenFileAndremoveSpaces(string fileName){
 				break;
 			case '\t':
 				break;
+			case '\n':
+				break;
+			case '\r':
+				break;
 			case '<':
 				s1 += ch;
 				inBrackets = true;
@@ -72,54 +76,40 @@ void Formatter::applyTransformation(){
 	//loop over all the chars of the input string s1
 	//and create a string s2 that has ',' on the right places
 
-	bool inSpecialCase{false};
-	//don't split <?xml ... > and <!DOCTYPE ... >
-
 	bool inString{false};//check if we had a '"'
 	bool addKomma{false};//if we had '>'we have to add a ',' to s2
 	int brackets{0};
 
-	for (int i=0; i<s1.size(); ++i){
-		switch (s1[i]){
-		case '<':
-			if (i+1<s1.size() && (s1[i+1]=='?' || s1[i+1]=='!') )
-				inSpecialCase = true;
+	for (auto& ch : s1){
+		switch (ch){
+			case '<':
 			brackets++;
 			break;
-		case '>':
-			if ( inSpecialCase )
-				inSpecialCase = false;
+			case '>':
 			brackets--;
 			addKomma = true;
 			break;
-		case '"':
+			case '"':
 			if (inString){
 				s2 += ',';
-				if (inSpecialCase)
-					s2.pop_back();
 				inString = false;
 			}
 			else inString = true;
 			break;
-		default:
+			default:
 			if ( inString ){
 				s2 += ',';
-				if (inSpecialCase)
-					s2.pop_back();
 			}
 		}
-		s2 += s1[i];
+		s2 += ch;
 		if (addKomma){
 			addKomma = false;
 			s2 += ',';
-			if (inSpecialCase)
-				s2.pop_back();
 		}
 		else if ( brackets == 0){
 			s2 += ',';
-			if ( inSpecialCase )
-				s2.pop_back();
 		}
 	}
-	s2.pop_back();//remove the last char (which should be a ',')
+	//Needed for CYK
+	//s2.pop_back();//remove the last char (which should be a ',')
 }
