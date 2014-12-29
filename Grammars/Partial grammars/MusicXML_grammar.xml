@@ -1,18 +1,130 @@
 <CFG>
-  <TERMINALS>&lt;?xml version="," encoding="," ?&gt;,&lt;!DOCTYPE score-partwise PUBLIC "," ","&gt;,&lt;score-partwise&gt;,&lt;/score-partwise&gt;,&lt;part-list&gt;,&lt;/part-list&gt;,&lt;score-part id=",&lt;/score-part&gt;,&lt;part-name&gt;,&lt;/part-name&gt;,&lt;score-instrument id=",&lt;/score-instrument&gt;,&lt;instrument-name&gt;,&lt;/instrument-name&gt;,&lt;midi-instrument id=",&lt;/midi-instrument&gt;,&lt;midi-channel&gt;,&lt;/midi-channel&gt;,&lt;midi-program&gt;,&lt;/midi-program&gt;,&lt;volume&gt;,&lt;/volume&gt;,&lt;pan&gt;,&lt;/pan&gt;</TERMINALS>
+  <TERMINALS>&lt;?xml version="," encoding="," ?&gt;,&lt;!DOCTYPE score-partwise PUBLIC "," ","&gt;,&lt;score-partwise&gt;,&lt;/score-partwise&gt;,&lt;part-list&gt;,&lt;/part-list&gt;,&lt;score-part id=",&lt;/score-part&gt;,&lt;part-name&gt;,&lt;/part-name&gt;,&lt;score-instrument id=",&lt;/score-instrument&gt;,&lt;instrument-name&gt;,&lt;/instrument-name&gt;,&lt;midi-instrument id=",&lt;/midi-instrument&gt;,&lt;midi-channel&gt;,&lt;/midi-channel&gt;,&lt;midi-program&gt;,&lt;/midi-program&gt;,&lt;volume&gt;,&lt;/volume&gt;,&lt;pan&gt;,&lt;/pan&gt;,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,.,:,/, ,-,&lt;part id=",&lt;/part&gt;,&lt;measure number="," width=",&lt;/measure&gt;,&lt;attributes&gt;,&lt;/attributes&gt;,&lt;divisions&gt;,&lt;/divisions&gt;,&lt;key&gt;,&lt;/key&gt;,&lt;fifths&gt;,&lt;/fifths&gt;,&lt;mode&gt;,&lt;/mode&gt;,&lt;time&gt;,&lt;/time&gt;,&lt;beats&gt;,&lt;/beats&gt;,&lt;beat-type&gt;,&lt;/beat-type&gt;,&lt;clef&gt;,&lt;/clef&gt;,&lt;sign&gt;,&lt;/sign&gt;,&lt;line&gt;,&lt;/line&gt;,&lt;note default-x="," default-y=",&lt;/note&gt;,&lt;note&gt;,&lt;pitch&gt;,&lt;/pitch&gt;,&lt;step&gt;,&lt;/step&gt;,&lt;octave&gt;,&lt;/octave&gt;,&lt;duration&gt;,&lt;/duration&gt;,&lt;voice&gt;,&lt;/voice&gt;,&lt;type&gt;,&lt;/type&gt;,&lt;stem&gt;,&lt;/stem&gt;,&lt;rest/&gt;,&lt;barline location=",&lt;/barLine&gt;,&lt;bar-style&gt;,&lt;/bar-style&gt;</TERMINALS>
 
-  <VARIABLES>HEADER,DOCTYPE,SCOREPARTWISE,,PARTLIST,SCOREPART,PARTNAME,SCOREINSTRUMENT,INSTRUMENTNAME,MIDIINSTRUMENT,MIDICHANNEL,MIDIPROGRAM,VOLUME,PAN</VARIABLES>
+  <VARIABLES>HEADER,DOCTYPE,SCOREPARTWISE,PARTLIST,SCOREPART,PARTNAME,SCOREINSTRUMENT,INSTRUMENTNAME,MIDIINSTRUMENT,MIDICHANNEL,MIDIPROGRAM,VOLUME,PAN,NUMERIC,ALPHA,ALPHA_C,DOT,SLASH,COLON,DASH,NUMERIC,SPACE,PART,MEASURE,ATTRIBUTES,DIVISIONS,KEY,FIFTHS,MODE,TIME,BEATS,BEATTYPE,CLEF,SIGN,LINE,NOTE,PITCH,STEP,OCTAVE,DURATION,VOICE,TYPE,STEM,REST,BARLINE,BARSTYLE</VARIABLES>
 
   <STARTVAR>HEADER</STARTVAR>
 
   <PRODUCTIONS>
+    <!-- part section -->
+
+    <HEAD var="PART">
+      <BODY>&lt;part id=",ALPHA_C,NUMERIC,"&gt;,MEASURE,&lt;/part&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MEASURE">
+      <BODY>MEASURE,MEASURE</BODY>
+    </HEAD>
+
+    <HEAD var="MEASURE">
+      <BODY>&lt;measure number=",NUMERIC," width=",NUMERIC,DOT,NUMERIC,"&gt;,ATTRIBUTES,NOTE,BARLINE,&lt;/measure&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="ATTRIBUTES">
+      <BODY>&lt;attributes&gt;,DIVISIONS,KEY,TIME,CLEF,&lt;/attributes&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="ATTRIBUTES">
+      <BODY></BODY>
+    </HEAD>
+
+    <HEAD var="DIVISIONS">
+      <BODY>&lt;divisions&gt;,NUMERIC,&lt;/divisions&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="KEY">
+      <BODY>&lt;key&gt;,FIFTHS,MODE,&lt;/key&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="FIFTHS">
+      <BODY>&lt;fifths&gt;,NUMERIC,&lt;/fifths&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MODE">
+      <BODY>&lt;mode&gt;,ALPHA,&lt;/mode&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="TIME">
+      <BODY>&lt;time&gt;,BEATS,BEATTYPE,&lt;/time&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="BEATS">
+      <BODY>&lt;beats&gt;,NUMERIC,&lt;/beats&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="BEATTYPE">
+      <BODY>&lt;beat-type&gt;,NUMERIC,&lt;/beat-type&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="CLEF">
+      <BODY>&lt;clef&gt;,SIGN,LINE,&lt;/clef&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="SIGN">
+      <BODY>&lt;sign&gt;,ALPHA_C,&lt;/sign&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="LINE">
+      <BODY>&lt;line&gt;,NUMERIC,&lt;/line&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="NOTE">
+      <BODY>&lt;note default-x=",NUMERIC,DOT,NUMERIC," default-y=",DASH,NUMERIC,DOT,NUMERIC,"&gt;,PITCH,DURATION,VOICE,TYPE,STEM,&lt;/note&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="NOTE">
+      <BODY>&lt;note&gt;,REST,DURATION,VOICE,TYPE,&lt;/note&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="PITCH">
+      <BODY>&lt;pitch&gt;,STEP,OCTAVE,&lt;/pitch&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="STEP">
+      <BODY>&lt;step&gt;,ALPHA_C,&lt;/step&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="OCTAVE">
+      <BODY>&lt;octave&gt;,NUMERIC,&lt;/octave&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="DURATION">
+      <BODY>&lt;duration&gt;,NUMERIC,&lt;/duration&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="VOICE">
+      <BODY>&lt;voice&gt;,NUMERIC,&lt;/voice&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="TYPE">
+      <BODY>&lt;type&gt;,ALPHA,&lt;/type&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="STEM">
+      <BODY>&lt;stem&gt;,ALPHA,&lt;/stem&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="REST">
+      <BODY>&lt;rest/&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="BARLINE">
+      <BODY>&lt;barline location=",ALPHA,"&gt;,BARSTYLE,&lt;/barLine&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="BARSTYLE">
+      <BODY>&lt;bar-style&gt;,ALPHA,DASH,ALPHA,&lt;/bar-style&gt;</BODY>
+    </HEAD>
+
+
+    <!-- header section -->
 
     <HEAD var="HEADER">
       <BODY>&lt;?xml version=",NUMERIC,DOT,NUMERIC," encoding=",ALPHA_C,DASH,NUMERIC," ?&gt;,DOCTYPE</BODY>
     </HEAD>
 
     <HEAD var="DOCTYPE">
-      <BODY>&lt;!DOCTYPE score-partwise PUBLIC ",DASH,SLASH,ALPHA_C,ALPHA,SLASH,ALPHA_C,SPACE,NUMERIC,DOT,NUMERIC,SPACE,ALPHA_C,ALPHA,SLASH,ALPHA_C," ",ALPHA,COLON,SLASH,ALPHA,DOT,ALPHA,DOT,ALPHA,SLASH,ALPHA,SLASH,ALPHA,DOT,ALPHA,"&gt;,SCOREPARTWISE</BODY>
+      <BODY>&lt;!DOCTYPE score-partwise PUBLIC ",DASH,SLASH,ALPHA_C,ALPHA,SLASH,ALPHA_C,SPACE,ALPHA_C,ALPHA,ALPHA_C,SPACE,NUMERIC,DOT,NUMERIC,SPACE,ALPHA_C,ALPHA,SLASH,ALPHA_C," ",ALPHA,COLON,SLASH,ALPHA,DOT,ALPHA,DOT,ALPHA,SLASH,ALPHA,SLASH,ALPHA,DOT,ALPHA,"&gt;,SCOREPARTWISE</BODY>
     </HEAD>
 
     <HEAD var="SCOREPARTWISE">
@@ -40,7 +152,7 @@
     </HEAD>
 
     <HEAD var="MIDIINSTRUMENT">
-      <BODY>&lt;midi-instrument id=",ALPHA_C,NUMERIC,DASH,ALHA_C,NUMERIC,"&gt;,MIDICHANNEL,MIDIPROGRAM,VOLUME,PAN,&lt;/midi-instrument&gt;</BODY>
+      <BODY>&lt;midi-instrument id=",ALPHA_C,NUMERIC,DASH,ALPHA_C,NUMERIC,"&gt;,MIDICHANNEL,MIDIPROGRAM,VOLUME,PAN,&lt;/midi-instrument&gt;</BODY>
     </HEAD>
 
     <HEAD var="MIDICHANNEL">
@@ -180,6 +292,10 @@
     </HEAD>
 
     <HEAD var="NUMERIC">
+      <BODY></BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
       <BODY>0</BODY>
     </HEAD>
 
@@ -231,6 +347,10 @@
 
     <HEAD var="DASH">
       <BODY>-</BODY>
+    </HEAD>
+
+    <HEAD var="DASH">
+      <BODY></BODY>
     </HEAD>
 
     <HEAD var="COLON">
