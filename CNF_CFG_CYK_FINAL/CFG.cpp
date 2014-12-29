@@ -185,12 +185,12 @@ list<variable> CFG::parseVariables(string parsedVariables){
 }
 
 void CFG::parseProductions(tinyxml2::XMLElement* productionNode){
+	string space = "SPACE";
 
 	//get the first productions head
 	tinyxml2::XMLElement* headNode = productionNode->FirstChildElement( "HEAD" );
 
 	while(headNode != NULL){
-		string variableName;
 
 		const tinyxml2::XMLAttribute* headNodeAttr = headNode->FirstAttribute();
 
@@ -206,6 +206,9 @@ void CFG::parseProductions(tinyxml2::XMLElement* productionNode){
 				//allow for empty bodies(epsilon).
 				if(bodyNode->GetText() != NULL){
 					body = bodyNode->GetText();
+				}
+				else if(bodyNode->GetText() == NULL && head->getContent().compare(space) ==0 ){
+					body = " ";
 				}
 				else{
 					body = "";
@@ -255,7 +258,7 @@ vector<basic*> CFG::createBody(string body){
 			}
 			else{
 
-				throw std::runtime_error("Error: Variable or terminal in production body not found, aborting.");
+				throw std::runtime_error("Error: Variable or terminal in production body not found, aborting. " +bodyComponent + " // " + body);
 			}
 			bodyComponent.clear();
 		}
@@ -272,7 +275,7 @@ vector<basic*> CFG::createBody(string body){
 		}
 		else{
 
-			throw std::runtime_error("Error: Variable or terminal in production body not found, aborting.");
+			throw std::runtime_error("Error: Variable or terminal in production body not found, aborting. " +bodyComponent + " // " + body);
 		}
 	}
 
@@ -306,6 +309,7 @@ std::ostream& operator<<(std::ostream& out, CFG& object) {
 		for(auto& b : it->second){
 			out << b->getContent() << ",";
 		}
+		out << " |" << it->second.size() << "| " << endl;
 		out << std::endl;
 	}
 

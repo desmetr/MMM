@@ -15,7 +15,9 @@ Formatter::Formatter(string fileName)
 : s1(""), s2(){
 
 	OpenFileAndremoveSpaces(fileName);//result in s1
+	cout << s1 << endl;
 	applyTransformation();//reads s1 and puts result in s2
+	//cout << s2 << endl;
 
 }
 
@@ -45,11 +47,12 @@ void Formatter::OpenFileAndremoveSpaces(string fileName){
 	string line;
 
 	bool inBrackets{false};
+	bool inString{false}; /* Added this little bit to allow spaces in strings. Used in <!DOCTYPE... */
 	while ( std::getline(file, line)){
 		for (auto& ch : line){
 			switch (ch){
 			case ' ':
-				if (inBrackets) s1+=ch;
+				if (inBrackets || inString) s1+=ch;
 				break;
 			case '\t':
 				break;
@@ -64,6 +67,10 @@ void Formatter::OpenFileAndremoveSpaces(string fileName){
 			case '>':
 				s1 += ch;
 				inBrackets = false;
+				break;
+			case '"':
+				s1 += ch;
+				inString = !inString;
 				break;
 			default:
 				s1 += ch;
@@ -82,21 +89,21 @@ void Formatter::applyTransformation(){
 
 	for (auto& ch : s1){
 		switch (ch){
-			case '<':
+		case '<':
 			brackets++;
 			break;
-			case '>':
+		case '>':
 			brackets--;
 			addKomma = true;
 			break;
-			case '"':
+		case '"':
 			if (inString){
 				s2 += ',';
 				inString = false;
 			}
 			else inString = true;
 			break;
-			default:
+		default:
 			if ( inString ){
 				s2 += ',';
 			}
@@ -110,6 +117,5 @@ void Formatter::applyTransformation(){
 			s2 += ',';
 		}
 	}
-	//Needed for CYK
-	//s2.pop_back();//remove the last char (which should be a ',')
+	//s2.pop_back(); //remove extra comma at the end.
 }
