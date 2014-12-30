@@ -1,5 +1,5 @@
 <CFG>
-  <TERMINALS>&lt;?xml version="," encoding="," ?&gt;,&lt;!DOCTYPE score-partwise PUBLIC "," ","&gt;,&lt;score-partwise&gt;,&lt;/score-partwise&gt;,&lt;part-list&gt;,&lt;/part-list&gt;,&lt;score-part id=",&lt;/score-part&gt;,&lt;part-name&gt;,&lt;/part-name&gt;,&lt;score-instrument id=",&lt;/score-instrument&gt;,&lt;instrument-name&gt;,&lt;/instrument-name&gt;,&lt;midi-instrument id=",&lt;/midi-instrument&gt;,&lt;midi-channel&gt;,&lt;/midi-channel&gt;,&lt;midi-program&gt;,&lt;/midi-program&gt;,&lt;volume&gt;,&lt;/volume&gt;,&lt;pan&gt;,&lt;/pan&gt;,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,.,:,/, ,-,&lt;part id=",&lt;/part&gt;,&lt;measure number="," width=",&lt;/measure&gt;,&lt;attributes&gt;,&lt;/attributes&gt;,&lt;divisions&gt;,&lt;/divisions&gt;,&lt;key&gt;,&lt;/key&gt;,&lt;fifths&gt;,&lt;/fifths&gt;,&lt;mode&gt;,&lt;/mode&gt;,&lt;time&gt;,&lt;/time&gt;,&lt;beats&gt;,&lt;/beats&gt;,&lt;beat-type&gt;,&lt;/beat-type&gt;,&lt;clef&gt;,&lt;/clef&gt;,&lt;sign&gt;,&lt;/sign&gt;,&lt;line&gt;,&lt;/line&gt;,&lt;note default-x="," default-y=",&lt;/note&gt;,&lt;note&gt;,&lt;pitch&gt;,&lt;/pitch&gt;,&lt;step&gt;,&lt;/step&gt;,&lt;octave&gt;,&lt;/octave&gt;,&lt;duration&gt;,&lt;/duration&gt;,&lt;voice&gt;,&lt;/voice&gt;,&lt;type&gt;,&lt;/type&gt;,&lt;stem&gt;,&lt;/stem&gt;,&lt;rest/&gt;,&lt;barline location=",&lt;/barLine&gt;,&lt;bar-style&gt;,&lt;/bar-style&gt;</TERMINALS>
+  <TERMINALS>&lt;?xml version="," encoding="," ?&gt;,&lt;!DOCTYPE score-partwise PUBLIC "," ","&gt;,&lt;score-partwise&gt;,&lt;/score-partwise&gt;,&lt;part-list&gt;,&lt;/part-list&gt;,&lt;score-part id=",&lt;/score-part&gt;,&lt;part-name&gt;,&lt;/part-name&gt;,&lt;score-instrument id=",&lt;/score-instrument&gt;,&lt;instrument-name&gt;,&lt;/instrument-name&gt;,&lt;midi-instrument id=",&lt;/midi-instrument&gt;,&lt;midi-channel&gt;,&lt;/midi-channel&gt;,&lt;midi-program&gt;,&lt;/midi-program&gt;,&lt;volume&gt;,&lt;/volume&gt;,&lt;pan&gt;,&lt;/pan&gt;,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,.,:,/, ,-,&lt;part id=",&lt;/part&gt;,&lt;measure number="," width=",&lt;/measure&gt;,&lt;attributes&gt;,&lt;/attributes&gt;,&lt;divisions&gt;,&lt;/divisions&gt;,&lt;key&gt;,&lt;/key&gt;,&lt;fifths&gt;,&lt;/fifths&gt;,&lt;mode&gt;,&lt;/mode&gt;,&lt;time&gt;,&lt;/time&gt;,&lt;beats&gt;,&lt;/beats&gt;,&lt;beat-type&gt;,&lt;/beat-type&gt;,&lt;clef&gt;,&lt;/clef&gt;,&lt;sign&gt;,&lt;/sign&gt;,&lt;line&gt;,&lt;/line&gt;,&lt;note default-x="," default-y=",&lt;/note&gt;,&lt;note&gt;,&lt;pitch&gt;,&lt;/pitch&gt;,&lt;step&gt;,&lt;/step&gt;,&lt;octave&gt;,&lt;/octave&gt;,&lt;duration&gt;,&lt;/duration&gt;,&lt;voice&gt;,&lt;/voice&gt;,&lt;type&gt;,&lt;/type&gt;,&lt;stem&gt;,&lt;/stem&gt;,&lt;rest/&gt;,&lt;barline location=",&lt;/barline&gt;,&lt;bar-style&gt;,&lt;/bar-style&gt;</TERMINALS>
 
   <VARIABLES>HEADER,DOCTYPE,SCOREPARTWISE,PARTLIST,SCOREPART,PARTNAME,SCOREINSTRUMENT,INSTRUMENTNAME,MIDIINSTRUMENT,MIDICHANNEL,MIDIPROGRAM,VOLUME,PAN,NUMERIC,ALPHA,ALPHA_C,DOT,SLASH,COLON,DASH,NUMERIC,SPACE,PART,MEASURE,ATTRIBUTES,DIVISIONS,KEY,FIFTHS,MODE,TIME,BEATS,BEATTYPE,CLEF,SIGN,LINE,NOTE,PITCH,STEP,OCTAVE,DURATION,VOICE,TYPE,STEM,REST,BARLINE,BARSTYLE</VARIABLES>
 
@@ -76,6 +76,14 @@
       <BODY>&lt;note&gt;,REST,DURATION,VOICE,TYPE,&lt;/note&gt;</BODY>
     </HEAD>
 
+    <HEAD var="NOTE">
+      <BODY>NOTE,NOTE</BODY>
+    </HEAD>
+
+    <HEAD var="NOTE">
+      <BODY></BODY>
+    </HEAD>
+
     <HEAD var="PITCH">
       <BODY>&lt;pitch&gt;,STEP,OCTAVE,&lt;/pitch&gt;</BODY>
     </HEAD>
@@ -109,7 +117,11 @@
     </HEAD>
 
     <HEAD var="BARLINE">
-      <BODY>&lt;barline location=",ALPHA,"&gt;,BARSTYLE,&lt;/barLine&gt;</BODY>
+      <BODY>&lt;barline location=",ALPHA,"&gt;,BARSTYLE,&lt;/barline&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="BARLINE">
+      <BODY></BODY>
     </HEAD>
 
     <HEAD var="BARSTYLE">
@@ -128,7 +140,7 @@
     </HEAD>
 
     <HEAD var="SCOREPARTWISE">
-      <BODY>&lt;score-partwise&gt;,PARTLIST,&lt;/score-partwise&gt;</BODY>
+      <BODY>&lt;score-partwise&gt;,PARTLIST,PART,&lt;/score-partwise&gt;</BODY>
     </HEAD>
 
     <HEAD var="PARTLIST">
