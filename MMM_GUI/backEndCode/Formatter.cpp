@@ -6,6 +6,7 @@
  */
 
 #include "Formatter.h"
+#include <fstream>
 
 using std::endl;
 using std::cout;
@@ -14,7 +15,9 @@ Formatter::Formatter(string fileName)
 : s1(""), s2(){
 
 	OpenFileAndremoveSpaces(fileName);//result in s1
+
 	applyTransformation();//reads s1 and puts result in s2
+
 }
 
 Formatter::~Formatter() {
@@ -22,6 +25,15 @@ Formatter::~Formatter() {
 }
 
 string Formatter::getFormatedVersion() const{
+	/*std::ofstream file;
+	file.open("form.txt");
+	for (int i=0; i<s2.size(); ++i){
+		file << s2[i];
+		if (s2[i]=='>' && i+2<s2.size() && s2[i+2]=='<'){
+			file << endl;
+		}
+	}
+	file.close();*/
 	return s2;
 }
 
@@ -34,13 +46,18 @@ void Formatter::OpenFileAndremoveSpaces(string fileName){
 	string line;
 
 	bool inBrackets{false};
+	bool inString{false}; /* Added this little bit to allow spaces in strings. Used in <!DOCTYPE... */
 	while ( std::getline(file, line)){
 		for (auto& ch : line){
 			switch (ch){
 			case ' ':
-				if (inBrackets) s1+=ch;
+				if (inBrackets || inString) s1+=ch;
 				break;
 			case '\t':
+				break;
+			case '\n':
+				break;
+			case '\r':
 				break;
 			case '<':
 				s1 += ch;
@@ -49,6 +66,10 @@ void Formatter::OpenFileAndremoveSpaces(string fileName){
 			case '>':
 				s1 += ch;
 				inBrackets = false;
+				break;
+			case '"':
+				s1 += ch;
+				inString = !inString;
 				break;
 			default:
 				s1 += ch;
@@ -95,5 +116,5 @@ void Formatter::applyTransformation(){
 			s2 += ',';
 		}
 	}
-
+	//s2.pop_back(); //remove extra comma at the end.
 }

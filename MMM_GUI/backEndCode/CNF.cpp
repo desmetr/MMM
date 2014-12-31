@@ -45,10 +45,8 @@ CFG* CNF::run(){
 	cleanUp();
 
 	terminalsToVariables();
-
 	breakBodies();
-
-    //cout << *cfg << endl;
+	//cout << *cfg << endl;
 	return cfg;
 }
 
@@ -67,7 +65,7 @@ void CNF::cleanUp(){
 	removeUnitProductions();
 
 	removeUselessSymbols();
-    //cout << "end of removeUselessSymbols in CNF.cpp"<< endl;
+	//cout << "end of removeUselessSymbols in CNF.cpp"<< endl;
 
 }
 
@@ -123,14 +121,13 @@ void CNF::removeEpsylon(){//nieuw
 		}
 
 	}
-
 	//now we know all nullable variables
 	//we create the production rule for every variable of epsylonVar
 	for (auto& var: cfg->variables){
 		vector< vector<basic*> > varProd = cfg->getProductions(&var);
 		vector< vector<basic*> > newlyAdded;
 		for (auto& production : varProd){
-			vector<vector<basic*>> newProds = createEpsilonProd(production, nullables);
+			vector<vector<basic*> > newProds = createEpsilonProd(production, nullables);
 
 			for (auto& newProd : newProds){
 				if ( newProd.size()>0 && find(newlyAdded.begin(), newlyAdded.end(), newProd)==newlyAdded.end() && find(varProd.begin(), varProd.end(), newProd) == varProd.end( )){
@@ -142,6 +139,7 @@ void CNF::removeEpsylon(){//nieuw
 			}
 
 		}
+
 	}
 
 	//delete all rules of the form A->epsilon
@@ -156,8 +154,9 @@ vector<vector<basic*>> CNF::createEpsilonProd(const vector<basic*>& prod, const 
 	vector<vector<basic*>> _return;
 
 	vector<int> indexesNullables;
+
 	//find the indexes of all the variables (of the right side of the prod) that are nullable
-    for (unsigned int iii=0; iii<prod.size(); iii++){
+	for (unsigned int iii=0; iii<prod.size(); iii++){
 		if (prod[iii]->getType() == "variable"){
 			variable* tempPtr = static_cast<variable*>(prod[iii]);
 			if ( isInVec(tempPtr, nullables) ){
@@ -167,14 +166,17 @@ vector<vector<basic*>> CNF::createEpsilonProd(const vector<basic*>& prod, const 
 	}
 
 	//make all the possible combinations
+
 	if (indexesNullables.size() > 0){
+
 		createEpsilonProd2( prod, indexesNullables, _return);
+
 	}
 
 	return _return;
 }
 
-void CNF::createEpsilonProd2(vector<basic*> prod, vector<int> indexNullables, vector<vector<basic*>>& _return){
+void CNF::createEpsilonProd2(vector<basic*> prod, vector<int>& indexNullables, vector<vector<basic*>>& _return){
 	for (int iii=indexNullables.size()-1; iii>=0; iii--){
 		vector<basic*> temp = prod;
 		temp.erase( temp.begin()+indexNullables[iii]);
@@ -442,17 +444,18 @@ void CNF::terminalsToVariables(){//nieuw
 }
 
 string CNF::createName( const vector<string>& existingNames, string termName){//nieuw
+	//std::cout << termName << std::endl;
 	int iPostFix = 1;
 	string sPostFix = std::to_string(iPostFix);
 
 	//Add the postfix to the name
 	string name = termName + sPostFix;
 
-	while ( find(existingNames.begin(), existingNames.end(), name) != existingNames.end() ){
-		iPostFix++;
-		sPostFix = std::to_string(iPostFix);
-		name = termName + sPostFix;
-	}
+//	while ( find(existingNames.begin(), existingNames.end(), name) != existingNames.end() ){
+//		iPostFix++;
+//		sPostFix = std::to_string(iPostFix);
+//		name = termName + sPostFix;
+//	}
 	return name;
 }
 

@@ -1,0 +1,454 @@
+<CFG>
+
+  <TERMINALS>&lt;?xml version="," encoding="," standalone=","?&gt;,&lt;mei xmlns="," xmlns:xlink="," meiversion=","&gt;,&lt;/mei&gt;,&lt;meiHead&gt;,&lt;/meiHead&gt;,&lt;fileDesc&gt;,&lt;/fileDesc&gt;,&lt;titleStmt&gt;,&lt;/titleStmt&gt;,&lt;title/&gt;,&lt;pubStmt/&gt;,&lt;sourceDesc&gt;,&lt;/sourceDesc&gt;,&lt;source&gt;,&lt;/source&gt;,&lt;encodingDesc&gt;,&lt;/encodingDesc&gt;,&lt;editorialDecl&gt;,&lt;/editorialDecl&gt;,&lt;normalization&gt;,&lt;/normalization&gt;,&lt;p/&gt;,&lt;revisionDesc&gt;,&lt;/revisionDesc&gt;,&lt;change n=",&lt;/change&gt;,&lt;respStmt/&gt;,&lt;changeDesc&gt;,&lt;/changeDesc&gt;,&lt;date&gt;,&lt;/date&gt;,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,0,1,2,3,4,5,6,7,8,9,-,.,/,:,&lt;music&gt;,&lt;/music&gt;,&lt;body&gt;,&lt;/body&gt;,&lt;mdiv&gt;,&lt;/mdiv&gt;,&lt;score&gt;,&lt;/score&gt;,&lt;scoreDef meter.count="," meter.unit="," key.sig="," key.mode=",&lt;/scoreDef&gt;,&lt;staffGrp&gt;,&lt;/staffGrp&gt;,&lt;staffDef n="," xml:id="," label="," lines="," clef.line="," clef.shape=",&lt;section&gt;,&lt;/section&gt;,&lt;measure n="," xml:id=","&gt;,&lt;/measure&gt;," right=",&lt;staff n=",&lt;/staff&gt;,&lt;layer n=",&lt;/layer&gt;,&lt;note xml:id="," pname="," oct="," dur="," stem.dir=",&lt;rest xml:id=","/&gt;</TERMINALS>
+
+  <VARIABLES>HEADER,MEI,MEIHEAD,FILEDESC,TITLESTMT,TITLE,PUBSTMT,SOURCEDESC,SOURCE,ENCODINGDESC,EDITORIALDECL,NORMALIZATION,_P,REVISIONDESC,CHANGE,RESPSTMT,CHANGEDESC,DATE,ALPHA,ALPHA_C,DASH,DOT,SLASH,COLON,NUMERIC,MUSIC,BODY,MDIV,SCORE,SCOREDEF,STAFFGRP,STAFFDEF,SECTION,MEASURE,STAFF,LAYER,NOTE,REST</VARIABLES>
+
+  <STARTVAR>HEADER</STARTVAR>
+
+  <PRODUCTIONS>
+    <!-- this section defines the MUSIC part of the mei grammar.
+    it contains all actual music data. -->
+
+    <HEAD var="MUSIC">
+      <BODY>&lt;music&gt;,BODY,&lt;/music&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="BODY">
+      <BODY>&lt;body&gt;,MDIV,&lt;/body&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MDIV">
+      <BODY>&lt;mdiv&gt;,SCORE,&lt;/mdiv&gt;</BODY>
+    </HEAD>
+
+    <HEAD VAR="SCORE">
+      <BODY>&lt;score&gt;,SCOREDEF,SECTION,&lt;/score&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="SCOREDEF">
+      <BODY>&lt;scoreDef meter.count=",NUMERIC," meter.unit=",NUMERIC," key.sig=",NUMERIC," key.mode=",ALPHA,"&gt;,STAFFGRP,&lt;/scoreDef&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="STAFFGRP">
+      <BODY>&lt;staffGrp&gt;,STAFFDEF,&lt;/staffGrp&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="STAFFDEF">
+      <BODY>&lt;staffDef n=",NUMERIC," xml:id=",ALPHA_C,NUMERIC," label=",ALPHA_C,ALPHA," lines=",NUMERIC," clef.line=",NUMERIC," clef.shape=",ALPHA_C,"/&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="SECTION">
+      <BODY>&lt;section&gt;,MEASURE,&lt;/section&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MEASURE">
+      <BODY>MEASURE,MEASURE</BODY>
+    </HEAD>
+
+    <HEAD var="MEASURE">
+      <BODY>&lt;measure n=",NUMERIC," xml:id=",ALPHA,NUMERIC,"&gt;,STAFF,&lt;/measure&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MEASURE">
+      <BODY>&lt;measure n=",NUMERIC," xml:id=",ALPHA,NUMERIC," right=",ALPHA,"&gt;,STAFF,&lt;/measure&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="STAFF">
+      <BODY>&lt;staff n=",NUMERIC,"&gt;,LAYER,&lt;/staff&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="LAYER">
+      <BODY>&lt;layer n=",NUMERIC,"&gt;,NOTE,&lt;/layer&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="NOTE">
+      <BODY>NOTE,NOTE</BODY>
+    </HEAD>
+
+    <HEAD var="NOTE">
+      <BODY>&lt;note xml:id=",ALPHA,NUMERIC," pname=",ALPHA," oct=",NUMERIC," dur=",NUMERIC," stem.dir=",ALPHA,"/&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="NOTE">
+      <BODY>REST</BODY>
+    </HEAD>
+
+    <HEAD var="REST">
+      <BODY>&lt;rest xml:id=",ALPHA,NUMERIC," dur=",NUMERIC,"/&gt;</BODY>
+    </HEAD>
+
+    <!-- This section defines the first part of a document
+    it is the xml version, mei version and the MEI metadata. -->
+
+    <HEAD var="HEADER">
+      <BODY>&lt;?xml version=",NUMERIC,DOT,NUMERIC," encoding=",ALPHA_C,DASH,NUMERIC," standalone=",ALPHA,"?&gt;,MEI</BODY>
+    </HEAD>
+
+    <HEAD var="MEI">
+      <BODY>&lt;mei xmlns=",ALPHA,COLON,SLASH,ALPHA,DOT,ALPHA,DASH,ALPHA,DOT,ALPHA,SLASH,ALPHA,SLASH,ALPHA," xmlns:xlink=",ALPHA,COLON,SLASH,ALPHA,DOT,ALPHA,NUMERIC,DOT,ALPHA,SLASH,NUMERIC,SLASH,ALPHA," meiversion=",NUMERIC,"&gt;,MEIHEAD,MUSIC,&lt;/mei&gt;</BODY>
+    </HEAD>
+
+    <HEAD var="MEIHEAD">
+      <BODY>&lt;meiHead&gt;,FILEDESC,ENCODINGDESC,REVISIONDESC,&lt;/meiHead&gt;</BODY>
+    </HEAD>
+
+      <HEAD var="FILEDESC">
+        <BODY>&lt;fileDesc&gt;,TITLESTMT,PUBSTMT,SOURCEDESC,&lt;/fileDesc&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="TITLESTMT">
+        <BODY>&lt;titleStmt&gt;,TITLE,&lt;/titleStmt&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="TITLE">
+        <BODY>&lt;title/&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="PUBSTMT">
+        <BODY>&lt;pubStmt/&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="SOURCEDESC">
+        <BODY>&lt;sourceDesc&gt;,SOURCE,&lt;/sourceDesc&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="SOURCE">
+        <BODY>&lt;source&gt;,TITLESTMT,PUBSTMT,&lt;/source&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="ENCODINGDESC">
+        <BODY>&lt;encodingDesc&gt;,EDITORIALDECL,&lt;/encodingDesc&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="EDITORIALDECL">
+        <BODY>&lt;editorialDecl&gt;,NORMALIZATION,&lt;/editorialDecl&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="NORMALIZATION">
+        <BODY>&lt;normalization&gt;,_P,&lt;/normalization&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="_P">
+        <BODY>&lt;p/&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="REVISIONDESC">
+        <BODY>&lt;revisionDesc&gt;,CHANGE,&lt;/revisionDesc&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="CHANGE">
+        <BODY>&lt;change n=",NUMERIC,"&gt;,RESPSTMT,CHANGEDESC,DATE,&lt;/change&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="RESPSTMT">
+        <BODY>&lt;respStmt/&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="CHANGEDESC">
+        <BODY>&lt;changeDesc&gt;,_P,&lt;/changeDesc&gt;</BODY>
+      </HEAD>
+
+      <HEAD var="DATE">
+        <BODY>&lt;date&gt;,NUMERIC,DASH,NUMERIC,DASH,NUMERIC,&lt;/date&gt;</BODY>
+      </HEAD>
+
+    <!-- LOWER CASE ALPHA -->
+
+    <HEAD var="ALPHA">
+      <BODY>ALPHA,ALPHA</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY></BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>a</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>b</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>c</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>d</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>e</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>f</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>g</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>h</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>i</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>j</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>k</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>l</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>m</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>n</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>o</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>p</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>q</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>r</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>s</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>t</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>u</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>v</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>w</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>x</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>y</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA">
+      <BODY>z</BODY>
+    </HEAD>
+
+    <!-- NUMERIC VALUES -->
+
+    <HEAD var="NUMERIC">
+      <BODY>NUMERIC,NUMERIC</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>0</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>1</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>2</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>3</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>4</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>5</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>6</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>7</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>8</BODY>
+    </HEAD>
+
+    <HEAD var="NUMERIC">
+      <BODY>9</BODY>
+    </HEAD>
+
+    <!-- PUNCTUATION -->
+
+    <HEAD var="DOT">
+      <BODY>.</BODY>
+    </HEAD>
+
+    <HEAD var="DASH">
+      <BODY>-</BODY>
+    </HEAD>
+
+    <HEAD var="COLON">
+      <BODY>:</BODY>
+    </HEAD>
+
+    <HEAD var="SLASH">
+      <BODY>/</BODY>
+    </HEAD>
+
+    <HEAD var="SLASH">
+      <BODY>SLASH,SLASH</BODY>
+    </HEAD>
+
+    <!-- CAPITAL LETTERS -->
+
+    <HEAD var="ALPHA_C">
+      <BODY>ALPHA_C,ALPHA_C</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY></BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>A</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>B</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>C</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>D</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>E</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>F</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>G</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>H</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>I</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>J</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>K</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>L</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>M</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>N</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>O</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>P</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>Q</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>R</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>S</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>T</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>U</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>V</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>W</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>X</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>Y</BODY>
+    </HEAD>
+
+    <HEAD var="ALPHA_C">
+      <BODY>Z</BODY>
+    </HEAD>
+
+  </PRODUCTIONS>
+
+</CFG>
