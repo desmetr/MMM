@@ -22,14 +22,16 @@ public:
 	MusicXMLGenerator(PartList partList, Part part);
 	virtual ~MusicXMLGenerator();
 
-	void generateMusicXML();
-//	void generateMusicXML(MEI meiDocument);
+	void generateMusicXML(std::string fileName);
 
 private:
 	Part sourcePart;
 	PartList sourcePartList;
 
 	tinyxml2::XMLDocument xmlDoc;
+
+	tinyxml2::XMLDeclaration* getDeclaration();
+//	tinyxml2::XMLUnknown* getDocType();
 
 	tinyxml2::XMLElement* getPartList();
 	tinyxml2::XMLElement* getScorePart();

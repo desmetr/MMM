@@ -21,6 +21,17 @@ MusicXMLGenerator::MusicXMLGenerator(PartList partList, Part part) {
 MusicXMLGenerator::~MusicXMLGenerator() {
 }
 
+XMLDeclaration* MusicXMLGenerator::getDeclaration() {
+	return xmlDoc.NewDeclaration();
+}
+
+// Doens't work, maybe not neccessary anymore.
+//XMLUnknown* MusicXMLGenerator::getDocType() {
+//	XMLUnknown* docType = xmlDoc.NewUnknown("DOCTYPE");
+//	docType->("score-partwise PUBLIC \"-//Recordare//DTD MusicXML 2.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">");
+//	return docType;
+//}
+
 XMLElement* MusicXMLGenerator::getPartName() {
 	XMLElement* partNameElement = xmlDoc.NewElement(Utilities::stringToCharPtr(sourcePartList.scorePart.partName.getTagName()));
 
@@ -354,8 +365,9 @@ XMLElement* MusicXMLGenerator::getBarStyle(Measure currentMeasure) {
 	return barStyleElement;
 }
 
-void MusicXMLGenerator::generateMusicXML() {
+void MusicXMLGenerator::generateMusicXML(string fileName) {
 	// The root of a MusicXML file is always "score-partwise". So this is mandatory for every file we want to generate.
+
 	XMLNode* root = xmlDoc.NewElement("score-partwise");
 	XMLNode* previousElement;
 
@@ -363,5 +375,10 @@ void MusicXMLGenerator::generateMusicXML() {
 	previousElement = root->InsertAfterChild(previousElement, getPart());
 
 	xmlDoc.InsertFirstChild(root);
-	xmlDoc.SaveFile("MusicXMLFile.xml");
+//	xmlDoc.InsertFirstChild(getDocType());
+	xmlDoc.InsertFirstChild(getDeclaration());
+
+	int position = fileName.find(".xml");
+	fileName.insert(position, "AsMusicXML");
+	xmlDoc.SaveFile(Utilities::stringToCharPtr(fileName));
 }
