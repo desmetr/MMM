@@ -26,6 +26,7 @@ public:
 
 	//visual representation of the table for debug.
 	void visualRepresentation();
+
 private:
 
 	//grammar we are testing on.
@@ -37,7 +38,7 @@ private:
 	//temporary copy of the productions map.
 	mapPointer tempMap;
 	//find the variables that generates the string
-	set<variable*> findHeadVariable(const string testContent);
+	set<variable*> findHeadVariable(const string& testContent);
 	string variablesToString(variable* a, variable* b);
 
 	int termSize(string& toCount);

@@ -165,6 +165,8 @@ void MEIParser::parseSection(tinyxml2::XMLElement* section){
 				if(dataHolder == "") throw std::runtime_error("No 'stem.dir' attribute in note tag, aborting");
 				n.STEM_DIR_VAR = dataHolder;
 
+                n.IS_REST = false;
+
 				mc.NOTES.push_back(n);
 			}
 			else{

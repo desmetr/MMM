@@ -22,6 +22,12 @@ public:
 private slots:
     void on_browseButton_clicked();
 
+    void on_MusicXMLButton_clicked();
+
+    void on_MEIButton_clicked();
+
+    void on_CSVButton_clicked();
+
 private:
     Ui::mainWindow *ui;
 };

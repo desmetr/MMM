@@ -22,7 +22,7 @@ public:
 	MusicXMLGenerator(PartList partList, Part part);
 	virtual ~MusicXMLGenerator();
 
-	void generateMusicXML();
+    void generateMusicXML(std::string fileName);
 //	void generateMusicXML(MEI meiDocument);
 
 private:

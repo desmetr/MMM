@@ -50,6 +50,7 @@ MEIGenerator::MEIGenerator(const PartList& partList,const Part& part){
 				noot.NOTE_NAME_VAR = noteMap.find(n.pitch.step.getStep()[0])->second;
 				noot.NOTE_OCTAVE_VAR = stoi(n.pitch.octave.getOctave());
 				maat.NOTES.push_back(noot);
+                noot.IS_REST = false;
 			}
 			else{
 				noot.NOTE_DURATION_VAR = typeMap.find(n.type.getType())->second;
@@ -257,7 +258,6 @@ void MEIGenerator::generateHead(tinyxml2::XMLDocument& doc,tinyxml2::XMLElement*
 
 	tinyxml2::XMLElement* p2 = doc.NewElement("p");
 	changeDesc->LinkEndChild(p2);
-	p2->SetText("Transcoded from a MusicXML version 1.0 file by the MMM project.");
 
 	tinyxml2::XMLElement* date = doc.NewElement("date");
 	change->LinkEndChild(date);

@@ -34,11 +34,10 @@ public:
 	CFG* run();
 
 private:
-	int counter;
 	void cleanUp();
 	void removeEpsylon();
 	vector<vector<basic*>> createEpsilonProd(const vector<basic*>& prod, const vector<variable*>& nullables );
-	void createEpsilonProd2(vector<basic*> prod, vector<int> indexNullables, vector<vector<basic*>>& _return);
+	void createEpsilonProd2(vector<basic*> prod, vector<int>& indexNullables, vector<vector<basic*>>& _return);
 	void removeUnitProductions();
 	void removeUselessSymbols();
 	void removeFromProductions(const vector<basic*>& usefulVec );

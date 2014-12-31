@@ -6,8 +6,6 @@ CYK::CYK(CFG& _grammar){
 
 	//set productions
 	this->tempMap = _grammar.getProductionsPointer();
-
-
 }
 
 void CYK::generateTable(unsigned int stringSize){
@@ -42,7 +40,6 @@ bool CYK::testString(string& _test){
 			posCount++;
 		}
 	}
-
 	//the main chunk of the algorithm, set all the other rows.
 
 	//for each substring length (starting from one , because the first row was handled above.
@@ -56,36 +53,34 @@ bool CYK::testString(string& _test){
 				set<basic*> rightVariables = table[j+l+1][j+i];
 				//iterate over the contents of the cells
 				//by doing so we create evey possible combination of variables that could generate the substring.
-				for(set<basic*>::iterator lit = leftVariables.begin(); lit != leftVariables.end(); lit ++){
-					for(set<basic*>::iterator rit = rightVariables.begin(); rit != rightVariables.end(); rit ++){
+				for(set<basic*>::iterator lit = leftVariables.begin(); lit != leftVariables.end(); ++lit){
+					for(set<basic*>::iterator rit = rightVariables.begin(); rit != rightVariables.end(); ++rit){
 						//look for variables of the form X -> lit,rit
 						string totalContent = (*lit)->getContent() +  (*rit)->getContent();
 						set<variable*> found = findHeadVariable(totalContent);
-                        table[j][j+i].insert(found.begin(),found.end());
+						table[j][j+i].insert(found.begin(),found.end());
 					}
 				}
 			}
 		}
 
 	}
-
-	for(auto v : table[0][n-1]){
+	for(auto& v : table[0][n-1]){
 		if(v->getContent()==grammar->getStartVariable()->getContent()) return true;
 	}
 	return false;
 
 }
 
-set<variable*> CYK::findHeadVariable(const string testContent){
+set<variable*> CYK::findHeadVariable(const string& testContent){
 	set<variable*> foundVariables;
 
 	for(std::multimap<variable*,vector<basic*> >::iterator it = tempMap->begin(); it != tempMap->end(); it++){
 		string productionContent;
-		for(auto v : it->second){
+		for(auto& v : it->second){
 			productionContent.append( v->getContent() );
 		}
 		if(productionContent == testContent){
-			//std::cout << testContent << " [pb->] " << it->first->getContent() << std::endl;
 			foundVariables.insert(it->first);
 		}
 	}
@@ -95,10 +90,10 @@ set<variable*> CYK::findHeadVariable(const string testContent){
 	 * meaning that there were no variables to create the substring
 	 * which in turn means that the string could be invalid.
 	 */
-	//if(foundVariables.size() != 0) std::cout  << testContent << " [VV] " << std::endl;
 	return foundVariables;
 
 }
+
 
 void CYK::visualRepresentation(){
 
@@ -106,7 +101,7 @@ void CYK::visualRepresentation(){
 		for(unsigned int j = 0; j < table[i].size(); j++){
 			std::cout << "[" << i << "][" << j << "]:{";
 			for(auto& a : table[i][j]){
-				std::cout << a->getContent() << std::endl;
+				std::cout << a->getContent();
 			}
 			std::cout << "}" << std::endl;
 		}

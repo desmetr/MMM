@@ -354,7 +354,7 @@ XMLElement* MusicXMLGenerator::getBarStyle(Measure currentMeasure) {
 	return barStyleElement;
 }
 
-void MusicXMLGenerator::generateMusicXML() {
+void MusicXMLGenerator::generateMusicXML(std::string fileName) {
 	// The root of a MusicXML file is always "score-partwise". So this is mandatory for every file we want to generate.
 	XMLNode* root = xmlDoc.NewElement("score-partwise");
 	XMLNode* previousElement;
@@ -363,5 +363,5 @@ void MusicXMLGenerator::generateMusicXML() {
 	previousElement = root->InsertAfterChild(previousElement, getPart());
 
 	xmlDoc.InsertFirstChild(root);
-	xmlDoc.SaveFile("MusicXMLFile_CONV.xml");
+    xmlDoc.SaveFile(fileName.c_str());
 }
