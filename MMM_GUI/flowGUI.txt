@@ -1,0 +1,11 @@
+1) open GUI : browse button  [OK]
+2) als MusicXML file wordt geselecteerd :
+      convert to MusicXML button DISABLED
+      convert to MEI button ENABLED
+      convert to CSV ENABLED
+      convert to CSV to MIDI  ENABLED
+3) als MEI file wordt geselecteerd :
+      convert to MusicXML button ENABLED
+      convert to MEI button DISABLED
+      convert to CSV ENABLED    (achter de schermen wordt de MEI file geconverteerd naar een MusicXML file, dan naar CSV)
+      convert to CSV to MIDI  ENABLED   (achter de schermen wordt de MEI file geconverteerd naar een MusicXML file, dan naar CSV, dan naar MIDI)

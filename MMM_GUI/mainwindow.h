@@ -28,6 +28,8 @@ private slots:
 
     void on_CSVButton_clicked();
 
+    void on_MIDIButton_clicked();
+
 private:
     Ui::mainWindow *ui;
 };

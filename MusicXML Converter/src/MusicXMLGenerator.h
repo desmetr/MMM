@@ -10,6 +10,7 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 #include "tinyxml2.h"
 #include "MusicXMLParser.h"
 #include "Part.h"
@@ -31,7 +32,6 @@ private:
 	tinyxml2::XMLDocument xmlDoc;
 
 	tinyxml2::XMLDeclaration* getDeclaration();
-//	tinyxml2::XMLUnknown* getDocType();
 
 	tinyxml2::XMLElement* getPartList();
 	tinyxml2::XMLElement* getScorePart();
@@ -71,6 +71,8 @@ private:
 
 	tinyxml2::XMLElement* getBarLine(Measure currentMeasure);
 	tinyxml2::XMLElement* getBarStyle(Measure currentMeasure);
+
+	void addDoctype(std::string fileName);
 };
 
 #endif /* MUSICXMLGENERATOR_H_ */

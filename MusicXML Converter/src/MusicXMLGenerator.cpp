@@ -379,6 +379,33 @@ void MusicXMLGenerator::generateMusicXML(string fileName) {
 	xmlDoc.InsertFirstChild(getDeclaration());
 
 	int position = fileName.find(".xml");
-	fileName.insert(position, "AsMusicXML");
+	fileName.insert(position, "AsMusicXMLTemp");
 	xmlDoc.SaveFile(Utilities::stringToCharPtr(fileName));
+
+	addDoctype(fileName);
+}
+
+void MusicXMLGenerator::addDoctype(string fileName) {
+	ifstream infile(fileName);
+	ofstream outfile;
+	int counter = 0;
+
+	string localFileName = fileName;
+	localFileName.erase(localFileName.find("Temp"), 4);
+	outfile.open(Utilities::stringToCharPtr(localFileName));
+
+	string line;
+
+	while (getline(infile, line))	{
+		if (counter == 1)	{
+			outfile << "<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 2.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">\n";
+//			counter++;
+		}
+		outfile << line << endl;
+
+		counter++;
+	}
+
+	infile.close();
+	outfile.close();
 }

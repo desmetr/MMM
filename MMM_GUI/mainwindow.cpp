@@ -332,3 +332,8 @@ void mainWindow::on_CSVButton_clicked()
     }
 
 }
+
+void mainWindow::on_MIDIButton_clicked()
+{
+    cout << "You pressed the MIDI button!" << endl;
+}

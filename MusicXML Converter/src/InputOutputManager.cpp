@@ -26,6 +26,8 @@ void InputOutputManager::readInstruments() {
 		midiInstruments.insert(make_pair(index - 1, instrument));
 		index++;
 	}
+
+	infile.close();
 }
 
 void InputOutputManager::readNotes() {
@@ -37,4 +39,6 @@ void InputOutputManager::readNotes() {
 		midiNotes.insert(make_pair(index - 1, note));
 		index++;
 	}
+
+	infile.close();
 }
