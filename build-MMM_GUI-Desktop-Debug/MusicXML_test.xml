@@ -5,7 +5,7 @@
     <score-part id="P1">
       <part-name>Piano</part-name>
       <score-instrument id="P1-I3">
-        <instrument-name>Piano</instrument-name>
+        <instrument-name>Acoustic Grand Piano</instrument-name>
       </score-instrument>
       <midi-instrument id="P1-I3">
         <midi-channel>1</midi-channel>

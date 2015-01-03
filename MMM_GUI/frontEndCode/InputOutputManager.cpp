@@ -18,7 +18,7 @@ InputOutputManager::~InputOutputManager() {
 }
 
 void InputOutputManager::readInstruments() {
-    ifstream infile("../../Other Files/midiInstruments.txt");
+    ifstream infile("../workingDirectory/MidiData/midiInstruments.txt");
 	unsigned int index = 1;
 	string instrument;
 
@@ -29,7 +29,7 @@ void InputOutputManager::readInstruments() {
 }
 
 void InputOutputManager::readNotes() {
-    ifstream infile("../../Other Files/midiNotes.txt");
+    ifstream infile("../workingDirectory/MidiData/midiNotes.txt");
 	unsigned int index = 1;
 	string note;
 

@@ -31,9 +31,9 @@ int main(int argc, char* argv[]) {
 //	MusicXMLGenerator musicXMLGenerator(musicXMLParser.getPartList(), musicXMLParser.getPart());
 //	musicXMLGenerator.generateMusicXML(argv[1]);
 
-//	cout << "Generating a CSV file..." << endl;
-//	CSVGenerator CSVGenerator_(musicXMLParser.getPartList(), musicXMLParser.getPart());
-//	CSVGenerator_.generateCSV(argv[1]);
+	cout << "Generating a CSV file..." << endl;
+	CSVGenerator CSVGenerator_(musicXMLParser.getPartList(), musicXMLParser.getPart());
+	CSVGenerator_.generateCSV(argv[1]);
 
 	return 0;
 }

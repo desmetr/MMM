@@ -72,10 +72,3 @@ private:
 };
 
 #endif /* MUSICXMLGENERATOR_H_ */
-
-/*
- * TODO declaration and doctype
- * 	XMLNode* previousElement;
-	previousElement = xmlDoc.InsertFirstChild(xmlDoc.NewDeclaration());
-	cout << previousElement->Value() << endl;
- */

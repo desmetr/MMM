@@ -87,7 +87,9 @@ string CSVGenerator::getVelocityOn(Note note) {
 		int index = volume.find(".");
 		int numberOfSymbolsToRemove = volume.size() - index;
 
-		volume.erase(index, numberOfSymbolsToRemove);
+        if (index >= 0) {
+            volume.erase(index, numberOfSymbolsToRemove);
+        }
 	}
 	else	{
 		volume = "0";
@@ -97,33 +99,32 @@ string CSVGenerator::getVelocityOn(Note note) {
 }
 
 void CSVGenerator::generateCSV(string fileName) {
-	ofstream midiToCSV;
+    ofstream musicXmlToCSV;
 
-    fileName += ".csv";
-	midiToCSV.open(Utilities::stringToCharPtr(fileName));
+    musicXmlToCSV.open(Utilities::stringToCharPtr(fileName));
 
 	int tick = 0;
 
-	midiToCSV << getHeader();
-	midiToCSV << getInstrument();
+    musicXmlToCSV << getHeader();
+    musicXmlToCSV << getInstrument();
 
 	for (const auto& measure : sourcePart.measures)		{
 		for (unsigned int i = 0; i < measure.notes.size(); i++)			{
 			if (!measure.notes[i].isRest())	{
-				midiToCSV << Utilities::intToString(tick);
-				midiToCSV << ",";
-				midiToCSV << getNote(measure.notes[i]);
-				midiToCSV << ",";
-				midiToCSV << getVelocityOn(measure.notes[i]);
-				midiToCSV << "\n";
+                musicXmlToCSV << Utilities::intToString(tick);
+                musicXmlToCSV << ",";
+                musicXmlToCSV << getNote(measure.notes[i]);
+                musicXmlToCSV << ",";
+                musicXmlToCSV << getVelocityOn(measure.notes[i]);
+                musicXmlToCSV << "\n";
 
 				tick += getTicks(measure.notes[i]);
-				midiToCSV << Utilities::intToString(tick);
-				midiToCSV << ",";
-				midiToCSV << getNote(measure.notes[i]);
-				midiToCSV << ",";
-				midiToCSV << getVelocityOff();
-				midiToCSV << "\n";
+                musicXmlToCSV << Utilities::intToString(tick);
+                musicXmlToCSV << ",";
+                musicXmlToCSV << getNote(measure.notes[i]);
+                musicXmlToCSV << ",";
+                musicXmlToCSV << getVelocityOff();
+                musicXmlToCSV << "\n";
 
 				tick++;
 			}
@@ -134,5 +135,5 @@ void CSVGenerator::generateCSV(string fileName) {
 			// TODO rest in middle of measure, ticks += duration
 		}
 	}
-	midiToCSV.close();
+    musicXmlToCSV.close();
 }

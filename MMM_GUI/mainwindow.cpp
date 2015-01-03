@@ -331,6 +331,41 @@ void mainWindow::on_CSVButton_clicked()
         ui->logBox->insertPlainText("\nConversion complete.");
     }
 
+    else if (std::strcmp(mei.c_str(),fileType.toStdString().c_str()) == 0)  {
+        ui->logBox->clear();
+        ui->progressBar->setValue(0);
+        ui->logBox->insertPlainText("Starting Conversion...");
+
+        MEIParser meiParser;
+        meiParser.parse(filePath.toStdString());
+        meiParser.mapData();
+
+        ui->progressBar->setValue(50);
+        ui->logBox->insertPlainText("\nXML file parsed...");
+
+//        MusicXMLGenerator musicXMLGenerator(meiParser.getPartList(), meiParser.getPart());
+
+        CSVGenerator csvGenerator(meiParser.getPartList(), meiParser.getPart());
+
+        ui->progressBar->setValue(75);
+
+        QString savePath = QFileDialog::getSaveFileName(this,tr("Save Converted File"), "",tr("Comma Seperated Value File (*.csv);;All Files (*)"));
+
+        try{
+           csvGenerator.generateCSV(savePath.toStdString());
+        }
+
+        catch(std::exception& e){
+            string errMsg = "\n[ERROR]";
+            errMsg.append(e.what());
+            ui->logBox->insertPlainText(errMsg.c_str());
+            ui->progressBar->setValue(0);
+        }
+
+        ui->progressBar->setValue(100);
+        ui->logBox->insertPlainText("\nConversion complete.");
+    }
+
 }
 
 void mainWindow::on_MIDIButton_clicked()

@@ -84,10 +84,10 @@ string CSVGenerator::getVelocityOn(Note note) {
 	string volume = "";
 	if (!note.isRest())		{
 		volume = sourcePartList.scorePart.midiInstrument.volume.getVolume();
-		int index = volume.find(".");
-		int numberOfSymbolsToRemove = volume.size() - index;
-
-		volume.erase(index, numberOfSymbolsToRemove);
+//		int index = volume.find(".");
+//		int numberOfSymbolsToRemove = volume.size() - index;
+//
+//		volume.erase(index, numberOfSymbolsToRemove);
 	}
 	else	{
 		volume = "0";
