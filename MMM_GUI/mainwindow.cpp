@@ -48,7 +48,7 @@ void mainWindow::on_browseButton_clicked()
     ui->CSVButton->setEnabled(false);
     ui->MIDIButton->setEnabled(false);
 
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),"",tr("Files (*.*)"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),"",tr("Files (*.xml)"));
     filePath = fileName;
 
     /* update log and textBox + progressbar. */

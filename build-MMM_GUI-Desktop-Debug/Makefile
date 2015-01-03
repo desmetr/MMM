@@ -769,6 +769,61 @@ mainwindow.o: ../MMM_GUI/mainwindow.cpp ../MMM_GUI/mainwindow.h \
 		/usr/include/qt5/QtWidgets/qtabwidget.h \
 		/usr/include/qt5/QtGui/qicon.h \
 		ui_mainwindow.h \
+		/usr/include/qt5/QtCore/QVariant \
+		/usr/include/qt5/QtWidgets/QAction \
+		/usr/include/qt5/QtWidgets/qaction.h \
+		/usr/include/qt5/QtWidgets/qactiongroup.h \
+		/usr/include/qt5/QtWidgets/QApplication \
+		/usr/include/qt5/QtWidgets/qapplication.h \
+		/usr/include/qt5/QtCore/qcoreapplication.h \
+		/usr/include/qt5/QtCore/qeventloop.h \
+		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
+		/usr/include/qt5/QtGui/qguiapplication.h \
+		/usr/include/qt5/QtGui/qinputmethod.h \
+		/usr/include/qt5/QtWidgets/QButtonGroup \
+		/usr/include/qt5/QtWidgets/qbuttongroup.h \
+		/usr/include/qt5/QtWidgets/QFrame \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/QHeaderView \
+		/usr/include/qt5/QtWidgets/qheaderview.h \
+		/usr/include/qt5/QtWidgets/qabstractitemview.h \
+		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
+		/usr/include/qt5/QtCore/qabstractitemmodel.h \
+		/usr/include/qt5/QtCore/qitemselectionmodel.h \
+		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
+		/usr/include/qt5/QtWidgets/qstyleoption.h \
+		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
+		/usr/include/qt5/QtGui/qvalidator.h \
+		/usr/include/qt5/QtCore/qregularexpression.h \
+		/usr/include/qt5/QtWidgets/qslider.h \
+		/usr/include/qt5/QtWidgets/qabstractslider.h \
+		/usr/include/qt5/QtWidgets/qstyle.h \
+		/usr/include/qt5/QtWidgets/qtabbar.h \
+		/usr/include/qt5/QtWidgets/qrubberband.h \
+		/usr/include/qt5/QtWidgets/QLabel \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/QLineEdit \
+		/usr/include/qt5/QtWidgets/qlineedit.h \
+		/usr/include/qt5/QtGui/qtextcursor.h \
+		/usr/include/qt5/QtGui/qtextformat.h \
+		/usr/include/qt5/QtGui/qpen.h \
+		/usr/include/qt5/QtGui/qtextoption.h \
+		/usr/include/qt5/QtWidgets/QMenuBar \
+		/usr/include/qt5/QtWidgets/qmenubar.h \
+		/usr/include/qt5/QtWidgets/qmenu.h \
+		/usr/include/qt5/QtWidgets/QProgressBar \
+		/usr/include/qt5/QtWidgets/qprogressbar.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtWidgets/QStatusBar \
+		/usr/include/qt5/QtWidgets/qstatusbar.h \
+		/usr/include/qt5/QtWidgets/QTextEdit \
+		/usr/include/qt5/QtWidgets/qtextedit.h \
+		/usr/include/qt5/QtGui/qtextdocument.h \
+		/usr/include/qt5/QtWidgets/QToolBar \
+		/usr/include/qt5/QtWidgets/qtoolbar.h \
+		/usr/include/qt5/QtWidgets/QWidget \
 		/usr/include/qt5/QtWidgets/QFileDialog \
 		/usr/include/qt5/QtWidgets/qfiledialog.h \
 		/usr/include/qt5/QtCore/qdir.h \
@@ -780,7 +835,48 @@ mainwindow.o: ../MMM_GUI/mainwindow.cpp ../MMM_GUI/mainwindow.h \
 		../MMM_GUI/backEndCode/basics.h \
 		../MMM_GUI/backEndCode/CNF.h \
 		../MMM_GUI/backEndCode/CYK.h \
-		../MMM_GUI/backEndCode/Formatter.h
+		../MMM_GUI/backEndCode/Formatter.h \
+		../MMM_GUI/frontEndCode/MEIParser.h \
+		../MMM_GUI/frontEndCode/PartList.h \
+		../MMM_GUI/frontEndCode/ScorePart.h \
+		../MMM_GUI/frontEndCode/PartName.h \
+		../MMM_GUI/frontEndCode/ScoreInstrument.h \
+		../MMM_GUI/frontEndCode/InstrumentName.h \
+		../MMM_GUI/frontEndCode/MidiInstrument.h \
+		../MMM_GUI/frontEndCode/MidiChannel.h \
+		../MMM_GUI/frontEndCode/MidiProgram.h \
+		../MMM_GUI/frontEndCode/Volume.h \
+		../MMM_GUI/frontEndCode/Pan.h \
+		../MMM_GUI/frontEndCode/Part.h \
+		../MMM_GUI/frontEndCode/Measure.h \
+		../MMM_GUI/frontEndCode/Attribute.h \
+		../MMM_GUI/frontEndCode/Division.h \
+		../MMM_GUI/frontEndCode/Key.h \
+		../MMM_GUI/frontEndCode/Fifths.h \
+		../MMM_GUI/frontEndCode/Mode.h \
+		../MMM_GUI/frontEndCode/Time.h \
+		../MMM_GUI/frontEndCode/Beats.h \
+		../MMM_GUI/frontEndCode/BeatType.h \
+		../MMM_GUI/frontEndCode/Clef.h \
+		../MMM_GUI/frontEndCode/Sign.h \
+		../MMM_GUI/frontEndCode/Line.h \
+		../MMM_GUI/frontEndCode/Note.h \
+		../MMM_GUI/frontEndCode/Pitch.h \
+		../MMM_GUI/frontEndCode/Step.h \
+		../MMM_GUI/frontEndCode/Octave.h \
+		../MMM_GUI/frontEndCode/Duration.h \
+		../MMM_GUI/frontEndCode/Voice.h \
+		../MMM_GUI/frontEndCode/Type.h \
+		../MMM_GUI/frontEndCode/Stem.h \
+		../MMM_GUI/frontEndCode/BarLine.h \
+		../MMM_GUI/frontEndCode/BarStyle.h \
+		../MMM_GUI/frontEndCode/MEIDataContainers.h \
+		../MMM_GUI/frontEndCode/MusicXMLGenerator.h \
+		../MMM_GUI/frontEndCode/MusicXMLParser.h \
+		../MMM_GUI/frontEndCode/Utilities.h \
+		../MMM_GUI/frontEndCode/MEIGenerator.h \
+		../MMM_GUI/frontEndCode/CSVGenerator.h \
+		../MMM_GUI/frontEndCode/InputOutputManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../MMM_GUI/mainwindow.cpp
 
 Formatter.o: ../MMM_GUI/backEndCode/Formatter.cpp ../MMM_GUI/backEndCode/Formatter.h

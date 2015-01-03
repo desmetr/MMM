@@ -99,9 +99,7 @@ string CSVGenerator::getVelocityOn(Note note) {
 void CSVGenerator::generateCSV(string fileName) {
 	ofstream midiToCSV;
 
-	int position = fileName.find(".xml");
-	fileName.erase(position, fileName.size() - position);
-	fileName += ".csv";
+    fileName += ".csv";
 	midiToCSV.open(Utilities::stringToCharPtr(fileName));
 
 	int tick = 0;

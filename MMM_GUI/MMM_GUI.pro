@@ -116,6 +116,10 @@ FORMS    += mainwindow.ui
 
 OTHER_FILES += \
     ../workspace/CFGV3/MusicXML_Grammar.xml \
-    ../workspace/CFGV3/MEI_Grammar.xml
+    ../workspace/CFGV3/MEI_Grammar.xml \
+    ../MusicXML Converter/src/midiInstruments.txt \
+    ../MusicXML Converter/src/midiNotes.txt \
+    midiInstruments.txt \
+    midiNotes.txt
 
 QMAKE_CXXFLAGS += -std=c++11

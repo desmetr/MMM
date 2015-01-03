@@ -112,7 +112,7 @@ public:
         logBox->raise();
         menuBar = new QMenuBar(mainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 797, 23));
+        menuBar->setGeometry(QRect(0, 0, 797, 25));
         mainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(mainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -136,7 +136,7 @@ public:
         MusicXMLButton->setText(QApplication::translate("mainWindow", "Convert to MusicXML", 0));
         MEIButton->setText(QApplication::translate("mainWindow", "Convert to MEI", 0));
         CSVButton->setText(QApplication::translate("mainWindow", "Convert to CSV", 0));
-        MIDIButton->setText(QApplication::translate("mainWindow", "Convert to MIDI", 0));
+        MIDIButton->setText(QApplication::translate("mainWindow", "Convert to CSV to MIDI", 0));
     } // retranslateUi
 
 };
