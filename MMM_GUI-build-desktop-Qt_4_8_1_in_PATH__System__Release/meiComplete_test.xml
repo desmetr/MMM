@@ -38,7 +38,7 @@
             <score>
                <scoreDef meter.count="4" meter.unit="4" key.sig="0" key.mode="major">
                   <staffGrp>
-                     <staffDef n="1" xml:id="P1" label="Piano" lines="5" clef.line="2" clef.shape="G"/>
+                     <staffDef n="1" xml:id="P1" label="Acoustic Grand Piano" lines="5" clef.line="2" clef.shape="G"/>
                   </staffGrp>
                </scoreDef>
                <section>

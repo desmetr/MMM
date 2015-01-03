@@ -10,6 +10,7 @@
 
 #include "CFG.h"
 #include <set>
+#include <stdexcept>
 
 using std::set;
 using std::vector;

@@ -35,6 +35,9 @@ bool CYK::testString(string& _test){
 		if(_test[i] != ',') term.push_back(_test[i]);
 		else{
 			set<variable*> found = findHeadVariable(term);
+            if(found.size() == 0){
+                throw std::runtime_error("[Syntax error]: " + term + " is not a valid symbol.");
+            }
 			table[posCount][posCount].insert(found.begin(),found.end());
 			term.clear();
 			posCount++;

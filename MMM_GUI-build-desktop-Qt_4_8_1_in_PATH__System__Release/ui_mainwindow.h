@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed Dec 31 15:06:58 2014
+** Created: Sat Jan 3 18:09:21 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -113,7 +113,7 @@ public:
         logBox->raise();
         menuBar = new QMenuBar(mainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 797, 23));
+        menuBar->setGeometry(QRect(0, 0, 797, 25));
         mainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(mainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -137,7 +137,7 @@ public:
         MusicXMLButton->setText(QApplication::translate("mainWindow", "Convert to MusicXML", 0, QApplication::UnicodeUTF8));
         MEIButton->setText(QApplication::translate("mainWindow", "Convert to MEI", 0, QApplication::UnicodeUTF8));
         CSVButton->setText(QApplication::translate("mainWindow", "Convert to CSV", 0, QApplication::UnicodeUTF8));
-        MIDIButton->setText(QApplication::translate("mainWindow", "Convert to MIDI", 0, QApplication::UnicodeUTF8));
+        MIDIButton->setText(QApplication::translate("mainWindow", "Convert to CSV to MIDI", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
