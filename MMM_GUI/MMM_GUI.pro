@@ -117,8 +117,8 @@ FORMS    += mainwindow.ui
 OTHER_FILES += \
     ../workspace/CFGV3/MusicXML_Grammar.xml \
     ../workspace/CFGV3/MEI_Grammar.xml \
-    ../MusicXML Converter/src/midiInstruments.txt \
-    ../MusicXML Converter/src/midiNotes.txt \
+    ../workingDirectory/MidiData/midiInstruments.txt \
+    ../workingDirectory/MidiData/midiNotes.txt \
     midiInstruments.txt \
     midiNotes.txt
 

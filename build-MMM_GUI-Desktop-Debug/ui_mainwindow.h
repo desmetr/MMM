@@ -42,6 +42,8 @@ public:
     QPushButton *CSVButton;
     QPushButton *MIDIButton;
     QTextEdit *logBox;
+    QPushButton *MuseScoreButton;
+    QFrame *line_2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -50,7 +52,7 @@ public:
     {
         if (mainWindow->objectName().isEmpty())
             mainWindow->setObjectName(QStringLiteral("mainWindow"));
-        mainWindow->resize(797, 371);
+        mainWindow->resize(852, 467);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -68,14 +70,14 @@ public:
         browseBox->setReadOnly(true);
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(10, 120, 151, 16));
+        label->setGeometry(QRect(10, 170, 151, 16));
         progressBar = new QProgressBar(centralWidget);
         progressBar->setObjectName(QStringLiteral("progressBar"));
-        progressBar->setGeometry(QRect(10, 270, 781, 23));
+        progressBar->setGeometry(QRect(10, 370, 781, 23));
         progressBar->setValue(100);
         line = new QFrame(centralWidget);
         line->setObjectName(QStringLiteral("line"));
-        line->setGeometry(QRect(450, 0, 21, 141));
+        line->setGeometry(QRect(450, 0, 21, 181));
         line->setFrameShape(QFrame::VLine);
         line->setFrameShadow(QFrame::Sunken);
         MusicXMLButton = new QPushButton(centralWidget);
@@ -95,10 +97,18 @@ public:
         MIDIButton->setGeometry(QRect(470, 100, 321, 27));
         logBox = new QTextEdit(centralWidget);
         logBox->setObjectName(QStringLiteral("logBox"));
-        logBox->setGeometry(QRect(10, 140, 781, 121));
+        logBox->setGeometry(QRect(10, 190, 781, 171));
         logBox->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
         logBox->setAutoFormatting(QTextEdit::AutoBulletList);
         logBox->setReadOnly(true);
+        MuseScoreButton = new QPushButton(centralWidget);
+        MuseScoreButton->setObjectName(QStringLiteral("MuseScoreButton"));
+        MuseScoreButton->setGeometry(QRect(470, 150, 321, 27));
+        line_2 = new QFrame(centralWidget);
+        line_2->setObjectName(QStringLiteral("line_2"));
+        line_2->setGeometry(QRect(470, 130, 321, 20));
+        line_2->setFrameShape(QFrame::HLine);
+        line_2->setFrameShadow(QFrame::Sunken);
         mainWindow->setCentralWidget(centralWidget);
         browseButton->raise();
         browseBox->raise();
@@ -110,9 +120,11 @@ public:
         CSVButton->raise();
         MIDIButton->raise();
         logBox->raise();
+        MuseScoreButton->raise();
+        line_2->raise();
         menuBar = new QMenuBar(mainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 797, 25));
+        menuBar->setGeometry(QRect(0, 0, 852, 25));
         mainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(mainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -137,6 +149,7 @@ public:
         MEIButton->setText(QApplication::translate("mainWindow", "Convert to MEI", 0));
         CSVButton->setText(QApplication::translate("mainWindow", "Convert to CSV", 0));
         MIDIButton->setText(QApplication::translate("mainWindow", "Convert to CSV to MIDI", 0));
+        MuseScoreButton->setText(QApplication::translate("mainWindow", "Open with MuseScore", 0));
     } // retranslateUi
 
 };

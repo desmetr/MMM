@@ -24,7 +24,11 @@
 
 mainWindow::mainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::mainWindow)
+    ui(new Ui::mainWindow),
+    savePathMidiFile(""),
+    savePathMusicXMLFile(""),
+    openTheMidiFile(false),
+    openTheMusicXMLFile(false)
 {
     ui->setupUi(this);
     //initally disable all Buttons.
@@ -52,7 +56,7 @@ void mainWindow::on_browseButton_clicked()
     filePath = fileName;
 
     /* update log and textBox + progressbar. */
-    ui->logBox->insertPlainText("\nSelected file: " + fileName + " for conversion.");
+    ui->logBox->insertPlainText("Selected file " + fileName + " for conversion.");
     ui->browseBox->setText(fileName);
     ui->progressBar->setValue(25);
 
@@ -78,18 +82,18 @@ void mainWindow::on_browseButton_clicked()
 
 
     if( !strcmp(docRoot_s.c_str(),"<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 2.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">") ){
-        ui->logBox->insertPlainText("\n[OK] this is a musicXML file.");
+        ui->logBox->insertPlainText("\n[OK] This is a MusicXML file.");
         fileType = "MusicXML";
         checkXML();
     }
 
     else if( !strcmp(docRoot_s.c_str() ,"<mei xmlns=\"http://www.music-encoding.org/ns/mei\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" meiversion=\"2013\">") ){
-        ui->logBox->insertPlainText("\n[OK] this is an MEI file.");
+        ui->logBox->insertPlainText("\n[OK] This is an MEI file.");
         fileType = "MEI";
         checkXML();
     }
     else{
-        ui->logBox->insertPlainText("\n[ERROR] Could not detect file format. Please ensure you have selected a musicXML or MEI file.");
+        ui->logBox->insertPlainText("\n[ERROR] Could not detect file format. Please ensure you have selected a MusicXML or MEI file.");
         ui->progressBar->setValue(0);
     }
 
@@ -126,21 +130,21 @@ bool mainWindow::checkXML(){
             CNF mxlCNF(&mxlGrammar);
             mxlCNF.run();
 
-            ui->logBox->insertPlainText("\n[OK] Grammar loaded");
+            ui->logBox->insertPlainText("\n[OK] Grammar loaded.");
             ui->progressBar->setValue(50);
 
             Formatter xmlFormatter(filePath.toStdString());
 
-            ui->logBox->insertPlainText("\n[OK] preformatted XML input.");
+            ui->logBox->insertPlainText("\n[OK] Preformatted MusicXML input.");
             ui->progressBar->setValue(75);
 
             CYK mxlCYK(mxlGrammar);
             string formattedString = xmlFormatter.getFormatedVersion();
 
-            ui->logBox->insertPlainText("\n[OK] Validating XML file.");
+            ui->logBox->insertPlainText("\n[OK] Validating MusicXML file.");
 
             if(mxlCYK.testString(formattedString)){
-                ui->logBox->insertPlainText("\n[OK] XML File is valid, ready for conversion.");
+                ui->logBox->insertPlainText("\n[OK] MusicXML file is valid, ready for conversion.");
 
                 /* enable all buttons that do valid conversions for the file. */
                 ui->MusicXMLButton->setEnabled(false);
@@ -152,7 +156,7 @@ bool mainWindow::checkXML(){
             }
             else{
 
-                ui->logBox->insertPlainText("\n[ERROR] Invalid XML File, check the file for errors.");
+                ui->logBox->insertPlainText("\n[ERROR] Invalid MusicXML file, check the file for errors.");
                 ui->progressBar->setValue(0);
 
             }
@@ -172,19 +176,19 @@ bool mainWindow::checkXML(){
             CNF meiCNF(&meiGrammar);
             meiCNF.run();
 
-            ui->logBox->insertPlainText("\n[OK] Grammar loaded");
+            ui->logBox->insertPlainText("\n[OK] Grammar loaded.");
             ui->progressBar->setValue(50);
 
             Formatter xmlFormatter(filePath.toStdString());
 
-            ui->logBox->insertPlainText("\n[OK] preformatted XML input.");
+            ui->logBox->insertPlainText("\n[OK] Preformatted MEI input.");
             ui->progressBar->setValue(75);
 
             CYK meiCYK(meiGrammar);
             string formattedString = xmlFormatter.getFormatedVersion();
 
             if(meiCYK.testString(formattedString)){
-                ui->logBox->insertPlainText("\n[OK] XML File is valid, ready for conversion.");
+                ui->logBox->insertPlainText("\n[OK] MEI file is valid, ready for conversion.");
 
                 /* enable all buttons that do valid conversions for the file. */
                 ui->MusicXMLButton->setEnabled(true);
@@ -194,7 +198,7 @@ bool mainWindow::checkXML(){
                 ui->progressBar->setValue(100);
             }
             else{
-                ui->logBox->insertPlainText("\n[ERROR] Invalid XML File, check the file for errors.");
+                ui->logBox->insertPlainText("\n[ERROR] Invalid MEI file, check the file for errors.");
                 ui->progressBar->setValue(0);
             }
         }
@@ -224,23 +228,23 @@ void mainWindow::on_MusicXMLButton_clicked()
     if( std::strcmp(mei.c_str(),fileType.toStdString().c_str()) == 0){
         ui->logBox->clear();
         ui->progressBar->setValue(0);
-        ui->logBox->insertPlainText("Starting Conversion...");
+        ui->logBox->insertPlainText("Parsing the MEI file...");
 
         MEIParser meiParser;
         meiParser.parse(filePath.toStdString());
         meiParser.mapData();
 
         ui->progressBar->setValue(50);
-        ui->logBox->insertPlainText("\nXML file parsed.");
+        ui->logBox->insertPlainText("\nConverting to a MusicXML file...");
 
         MusicXMLGenerator musicXMLGenerator(meiParser.getPartList(),meiParser.getPart());
 
         ui->progressBar->setValue(75);
 
-        QString savePath = QFileDialog::getSaveFileName(this,tr("Save Converted File"), "",tr("MusicXML File (*.xml);;All Files (*)"));
+        savePathMusicXMLFile = QFileDialog::getSaveFileName(this,tr("Save Converted File"), "",tr("MusicXML File (*.xml);;All Files (*)"));
 
         try{
-            musicXMLGenerator.generateMusicXML(savePath.toStdString());
+            musicXMLGenerator.generateMusicXML(savePathMusicXMLFile.toStdString());
         }
 
         catch(std::exception& e){
@@ -252,6 +256,8 @@ void mainWindow::on_MusicXMLButton_clicked()
 
         ui->progressBar->setValue(100);
         ui->logBox->insertPlainText("\nConversion complete.");
+        openTheMidiFile = false;
+        openTheMusicXMLFile = true;
     }
 }
 
@@ -262,13 +268,13 @@ void mainWindow::on_MEIButton_clicked()
     if(std::strcmp(mxl.c_str(),fileType.toStdString().c_str()) == 0){
         ui->logBox->clear();
         ui->progressBar->setValue(0);
-        ui->logBox->insertPlainText("Starting Conversion...");
+        ui->logBox->insertPlainText("Parsing the musicXML file...");
 
         MusicXMLParser musicXMLParser;
         musicXMLParser.parse(filePath.toStdString());
 
         ui->progressBar->setValue(50);
-        ui->logBox->insertPlainText("\nXML file parsed.");
+        ui->logBox->insertPlainText("\nCoverting to a Mei file...");
 
         MEIGenerator meiGenerator(musicXMLParser.getPartList(),musicXMLParser.getPart());
 
@@ -302,13 +308,13 @@ void mainWindow::on_CSVButton_clicked()
     if(std::strcmp(mxl.c_str(),fileType.toStdString().c_str()) == 0){
         ui->logBox->clear();
         ui->progressBar->setValue(0);
-        ui->logBox->insertPlainText("Starting Conversion...");
+        ui->logBox->insertPlainText("Parsing the musicXML file...");
 
         MusicXMLParser musicXMLParser;
         musicXMLParser.parse(filePath.toStdString());
 
         ui->progressBar->setValue(50);
-        ui->logBox->insertPlainText("\nXML file parsed.");
+        ui->logBox->insertPlainText("\nConverting to a CSV file...");
 
         CSVGenerator csvGenerator(musicXMLParser.getPartList(), musicXMLParser.getPart());
 
@@ -334,16 +340,14 @@ void mainWindow::on_CSVButton_clicked()
     else if (std::strcmp(mei.c_str(),fileType.toStdString().c_str()) == 0)  {
         ui->logBox->clear();
         ui->progressBar->setValue(0);
-        ui->logBox->insertPlainText("Starting Conversion...");
+        ui->logBox->insertPlainText("Parsing the MEI file...");
 
         MEIParser meiParser;
         meiParser.parse(filePath.toStdString());
         meiParser.mapData();
 
         ui->progressBar->setValue(50);
-        ui->logBox->insertPlainText("\nXML file parsed...");
-
-//        MusicXMLGenerator musicXMLGenerator(meiParser.getPartList(), meiParser.getPart());
+        ui->logBox->insertPlainText("\nConverting to a CSV file...");
 
         CSVGenerator csvGenerator(meiParser.getPartList(), meiParser.getPart());
 
@@ -370,5 +374,120 @@ void mainWindow::on_CSVButton_clicked()
 
 void mainWindow::on_MIDIButton_clicked()
 {
-    cout << "You pressed the MIDI button!" << endl;
+    std::string mxl = "MusicXML";
+    std::string mei = "MEI";
+
+    if(std::strcmp(mxl.c_str(),fileType.toStdString().c_str()) == 0){
+        ui->logBox->clear();
+        ui->progressBar->setValue(0);
+        ui->logBox->insertPlainText("Parsing the MusicXML file...");
+
+        MusicXMLParser musicXMLParser;
+        musicXMLParser.parse(filePath.toStdString());
+
+        ui->progressBar->setValue(50);
+        ui->logBox->insertPlainText("\nConverting to a CSV file...");
+
+        CSVGenerator csvGenerator(musicXMLParser.getPartList(), musicXMLParser.getPart());
+
+        ui->progressBar->setValue(75);
+
+        QString savePathCSVFile = QFileDialog::getSaveFileName(this,tr("Save Converted File"), "",tr("Comma Seperated Value File (*.csv);;All Files (*)"));
+
+        try{
+           csvGenerator.generateCSV(savePathCSVFile.toStdString());
+
+           ui->progressBar->setValue(75);
+           ui->logBox->insertPlainText("\nConverting to a MIDI file...");
+
+           savePathMidiFile = QFileDialog::getSaveFileName(this,tr("Save Converted File"), "",tr("Midi File (*.midi);;All Files (*.midi)"));
+
+           std::string jarLocation = "../workingDirectory/csv2midi.jar";
+           std::string command = "java -jar " + jarLocation + " " + savePathCSVFile.toStdString()+ " " + savePathMidiFile.toStdString();
+           system(command.c_str());
+        }
+
+        catch(std::exception& e){
+            string errMsg = "\n[ERROR]";
+            errMsg.append(e.what());
+            ui->logBox->insertPlainText(errMsg.c_str());
+            ui->progressBar->setValue(0);
+        }
+
+        ui->progressBar->setValue(100);
+        ui->logBox->insertPlainText("\nConversion complete.");
+
+        openTheMidiFile = true;
+        openTheMusicXMLFile = false;
+    }
+
+    else if (std::strcmp(mei.c_str(),fileType.toStdString().c_str()) == 0)  {
+        ui->logBox->clear();
+        ui->progressBar->setValue(0);
+        ui->logBox->insertPlainText("Parsing the MEI file...");
+
+        MEIParser meiParser;
+        meiParser.parse(filePath.toStdString());
+        meiParser.mapData();
+
+        ui->progressBar->setValue(50);
+        ui->logBox->insertPlainText("\nConverting to a CSV file...");
+
+        CSVGenerator csvGenerator(meiParser.getPartList(), meiParser.getPart());
+
+        ui->progressBar->setValue(75);
+
+        QString savePathCSVFile = QFileDialog::getSaveFileName(this,tr("Save Converted File"), "",tr("Comma Seperated Value File (*.csv);;All Files (*)"));
+
+        try{
+           csvGenerator.generateCSV(savePathCSVFile.toStdString());
+
+           ui->progressBar->setValue(75);
+           ui->logBox->insertPlainText("\nConverting to a MIDI file...");
+
+           savePathMidiFile = QFileDialog::getSaveFileName(this,tr("Save Converted File"), "",tr("Midi File (*.midi);;All Files (*.midi)"));
+
+
+           std::string jarLocation = "../workingDirectory/csv2midi.jar";
+           std::string command = "java -jar " + jarLocation + " " + savePathCSVFile.toStdString() + " " + savePathMidiFile.toStdString();
+           system(command.c_str());
+        }
+
+        catch(std::exception& e){
+            string errMsg = "\n[ERROR]";
+            errMsg.append(e.what());
+            ui->logBox->insertPlainText(errMsg.c_str());
+            ui->progressBar->setValue(0);
+        }
+
+        ui->progressBar->setValue(100);
+        ui->logBox->insertPlainText("\nConversion complete.");
+
+        openTheMidiFile = true;
+        openTheMusicXMLFile = false;
+    }
+}
+
+void mainWindow::on_MuseScoreButton_clicked()
+{
+    try {
+/*      ui->MusicXMLButton->setEnabled(false);
+        ui->MEIButton->setEnabled(false);
+        ui->CSVButton->setEnabled(false);
+        ui->MIDIButton->setEnabled(false);
+        ui->MuseScoreButton->setEnabled(true);*/
+
+        std::string command = "musescore ";
+        if (openTheMidiFile == true and openTheMusicXMLFile == false)   {
+            command += savePathMidiFile.toStdString();
+        }
+        else if (openTheMidiFile == false and openTheMusicXMLFile == true )    {
+            command += savePathMusicXMLFile.toStdString();
+        }
+
+        system(command.c_str());
+    }
+    catch (std::exception& e)   {
+        std::cout << e.what() << std::endl;
+    }
 }
