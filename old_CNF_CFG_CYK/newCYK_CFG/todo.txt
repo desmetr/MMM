@@ -1,2 +1,0 @@
-TODO: Add check for var="..." in head, non existing head gives segfault atm.
-TODO: Adapt varptr -> to variable* in STARTVAR.
