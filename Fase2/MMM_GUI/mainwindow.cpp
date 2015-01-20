@@ -130,7 +130,7 @@ bool mainWindow::checkXML(){
     */
     if( std::strcmp(mxl.c_str(),fileType.toStdString().c_str()) == 0){
         try{
-            CFG mxlGrammar("MusicXML_grammar.xml");
+            CFG mxlGrammar("../Grammars/MusicXML_grammar.xml");
             CNF mxlCNF(&mxlGrammar);
             mxlCNF.run();
 
@@ -180,7 +180,7 @@ bool mainWindow::checkXML(){
 
     if( std::strcmp(mei.c_str(),fileType.toStdString().c_str()) == 0){
         try{
-            CFG meiGrammar("meiComplete_grammar.xml");
+            CFG meiGrammar("../Grammars/meiComplete_grammar.xml");
             CNF meiCNF(&meiGrammar);
             meiCNF.run();
 
