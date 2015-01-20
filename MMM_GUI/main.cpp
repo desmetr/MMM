@@ -6,9 +6,9 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     mainWindow w;
-    //create a fixed size 800,600 window.
-    w.setFixedHeight(371);
-    w.setFixedWidth(797);
+    //create a fixed size windows
+    w.setFixedHeight(467);
+    w.setFixedWidth(852);
     w.setWindowTitle("Music Meets Machines");
     w.show();
     
