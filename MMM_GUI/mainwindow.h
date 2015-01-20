@@ -30,16 +30,17 @@ private slots:
 
     void on_MIDIButton_clicked();
 
-    void on_pushButton_clicked();
-
     void on_MuseScoreButton_clicked();
 
+
+
+    void on_MuseScoreButton_released();
+
+private:
     QString savePathMusicXMLFile;
     QString savePathMidiFile;
     bool openTheMidiFile;
     bool openTheMusicXMLFile;
-
-private:
     Ui::mainWindow *ui;
 };
 

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Sat Jan 3 18:09:27 2015
+** Created: Tue Jan 20 10:41:12 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_mainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,6 +36,8 @@ static const uint qt_meta_data_mainWindow[] = {
       66,   11,   11,   11, 0x08,
       89,   11,   11,   11, 0x08,
      112,   11,   11,   11, 0x08,
+     136,   11,   11,   11, 0x08,
+     165,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -45,6 +47,8 @@ static const char qt_meta_stringdata_mainWindow[] = {
     "on_MusicXMLButton_clicked()\0"
     "on_MEIButton_clicked()\0on_CSVButton_clicked()\0"
     "on_MIDIButton_clicked()\0"
+    "on_MuseScoreButton_clicked()\0"
+    "on_MuseScoreButton_released()\0"
 };
 
 void mainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -58,6 +62,8 @@ void mainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 2: _t->on_MEIButton_clicked(); break;
         case 3: _t->on_CSVButton_clicked(); break;
         case 4: _t->on_MIDIButton_clicked(); break;
+        case 5: _t->on_MuseScoreButton_clicked(); break;
+        case 6: _t->on_MuseScoreButton_released(); break;
         default: ;
         }
     }
@@ -96,9 +102,9 @@ int mainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }

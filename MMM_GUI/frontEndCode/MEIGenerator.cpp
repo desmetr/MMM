@@ -83,13 +83,13 @@ void MEIGenerator::generateXML(string fileName){
 	/*generates an MEI object out of intermediary MEI objects*/
 	tinyxml2::XMLDocument doc;
 
-	tinyxml2::XMLDeclaration* declaration = doc.NewDeclaration( "xml version=\"1.0\" ");
+    tinyxml2::XMLDeclaration* declaration = doc.NewDeclaration( "xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"");
 	doc.LinkEndChild( declaration );
 
 	tinyxml2::XMLElement* meiElement =doc.NewElement("mei");
 	doc.LinkEndChild(meiElement);
 	meiElement->SetAttribute("xmlns","http://www.music-encoding.org/ns/mei");
-	meiElement->SetAttribute("xmlns::xlink","http://www.w3.org/1999/xlink");
+    meiElement->SetAttribute("xmlns:xlink","http://www.w3.org/1999/xlink");
 	meiElement->SetAttribute("meiversion","2013");
 
 

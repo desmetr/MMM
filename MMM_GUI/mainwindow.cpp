@@ -36,6 +36,7 @@ mainWindow::mainWindow(QWidget *parent) :
     ui->MusicXMLButton->setEnabled(false);
     ui->CSVButton->setEnabled(false);
     ui->MIDIButton->setEnabled(false);
+    ui->MuseScoreButton->setEnabled(false);
 }
 
 mainWindow::~mainWindow()
@@ -51,6 +52,9 @@ void mainWindow::on_browseButton_clicked()
     ui->MusicXMLButton->setEnabled(false);
     ui->CSVButton->setEnabled(false);
     ui->MIDIButton->setEnabled(false);
+    ui->MuseScoreButton->setEnabled(false);
+    openTheMidiFile = false;
+    openTheMusicXMLFile = false;
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),"",tr("Files (*.xml)"));
     filePath = fileName;
@@ -60,7 +64,7 @@ void mainWindow::on_browseButton_clicked()
     ui->browseBox->setText(fileName);
     ui->progressBar->setValue(25);
 
-    /* enable or disable buttons based on file content */
+
     QFile userFile(fileName);
 
     if(!userFile.open(QIODevice::ReadOnly | QIODevice::Text)){
@@ -152,6 +156,7 @@ bool mainWindow::checkXML(){
                 ui->CSVButton->setEnabled(true);
                 ui->MIDIButton->setEnabled(true);
                 ui->progressBar->setValue(100);
+                ui->MuseScoreButton->setEnabled(true); //Button enabled, filepath set to mxl file.
 
             }
             else{
@@ -160,6 +165,9 @@ bool mainWindow::checkXML(){
                 ui->progressBar->setValue(0);
 
             }
+            openTheMidiFile = false;
+            openTheMusicXMLFile = true;
+            savePathMusicXMLFile = filePath; /* the input for museScore is just the file we just opened. */
         }
         catch(std::exception& e){
             string errMsg = "\n";
@@ -196,6 +204,7 @@ bool mainWindow::checkXML(){
                 ui->CSVButton->setEnabled(true);
                 ui->MIDIButton->setEnabled(true);
                 ui->progressBar->setValue(100);
+                ui->MuseScoreButton->setEnabled(false); //disable open in museScore.
             }
             else{
                 ui->logBox->insertPlainText("\n[ERROR] Invalid MEI file, check the file for errors.");
@@ -256,6 +265,7 @@ void mainWindow::on_MusicXMLButton_clicked()
 
         ui->progressBar->setValue(100);
         ui->logBox->insertPlainText("\nConversion complete.");
+        ui->MuseScoreButton->setEnabled(true);
         openTheMidiFile = false;
         openTheMusicXMLFile = true;
     }
@@ -404,6 +414,7 @@ void mainWindow::on_MIDIButton_clicked()
 
            std::string jarLocation = "../workingDirectory/csv2midi.jar";
            std::string command = "java -jar " + jarLocation + " " + savePathCSVFile.toStdString()+ " " + savePathMidiFile.toStdString();
+           std::cout << command << std::endl;
            system(command.c_str());
         }
 
@@ -416,6 +427,7 @@ void mainWindow::on_MIDIButton_clicked()
 
         ui->progressBar->setValue(100);
         ui->logBox->insertPlainText("\nConversion complete.");
+        ui->MuseScoreButton->setEnabled(true);
 
         openTheMidiFile = true;
         openTheMusicXMLFile = false;
@@ -462,6 +474,7 @@ void mainWindow::on_MIDIButton_clicked()
 
         ui->progressBar->setValue(100);
         ui->logBox->insertPlainText("\nConversion complete.");
+        ui->MuseScoreButton->setEnabled(true);
 
         openTheMidiFile = true;
         openTheMusicXMLFile = false;
@@ -471,23 +484,29 @@ void mainWindow::on_MIDIButton_clicked()
 void mainWindow::on_MuseScoreButton_clicked()
 {
     try {
-/*      ui->MusicXMLButton->setEnabled(false);
-        ui->MEIButton->setEnabled(false);
-        ui->CSVButton->setEnabled(false);
-        ui->MIDIButton->setEnabled(false);
-        ui->MuseScoreButton->setEnabled(true);*/
-
+        /*
+          Moved the system call into the statements.
+          otherwise museScore can be started with no input. (which is an error).
+         */
         std::string command = "musescore ";
-        if (openTheMidiFile == true and openTheMusicXMLFile == false)   {
+        if (openTheMidiFile == true && openTheMusicXMLFile == false)   {
+            std::cout << "opening midi file." << std::endl;
             command += savePathMidiFile.toStdString();
+            system(command.c_str());
         }
-        else if (openTheMidiFile == false and openTheMusicXMLFile == true )    {
+        else if (openTheMidiFile == false && openTheMusicXMLFile == true )    {
+            std::cout << "opening mxl file." << std::endl;
             command += savePathMusicXMLFile.toStdString();
+            system(command.c_str());
         }
-
-        system(command.c_str());
     }
     catch (std::exception& e)   {
         std::cout << e.what() << std::endl;
     }
+}
+
+void mainWindow::on_MuseScoreButton_released()
+{
+    //Keep this in, it makes sure Qt links the button functions
+    //in a correct manner.
 }
