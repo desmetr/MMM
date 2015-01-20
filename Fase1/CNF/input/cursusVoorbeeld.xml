@@ -1,0 +1,66 @@
+<CFG>
+<!--  {a^i b^j c^i | i,j > 0}  -->
+	<TERMINALS>a,b,0,1,*,+,(,),x,y,z</TERMINALS>
+	<VARIABLES>E,T,F,I,X,Y,Z</VARIABLES>
+	<STARTVAR>E</STARTVAR>
+	<PRODUCTIONS>
+	
+		<HEAD var="E">
+			<BODY>T</BODY>
+		</HEAD>
+		<HEAD var="E">
+			<BODY>E,+,T</BODY>
+		</HEAD>		
+
+		<HEAD var="T">
+			<BODY>F</BODY>
+		</HEAD>	
+		<HEAD var="T">
+			<BODY>T,*,F</BODY>
+		</HEAD>	
+
+		<HEAD var="F">
+			<BODY>I</BODY>
+		</HEAD>	
+		<HEAD var="F">
+			<BODY>(,E,)</BODY>
+		</HEAD>	
+
+		<HEAD var="I">
+			<BODY>a</BODY>
+		</HEAD>
+		<HEAD var="I">
+			<BODY>b</BODY>
+		</HEAD>	
+		<HEAD var="I">
+			<BODY>I,a</BODY>
+		</HEAD>
+		<HEAD var="I">
+			<BODY>I,b</BODY>
+		</HEAD>	
+		<HEAD var="I">
+			<BODY>I,0</BODY>
+		</HEAD>
+		<HEAD var="I">
+			<BODY>I,1</BODY>
+		</HEAD>
+		<HEAD var="I">
+			<BODY>Y</BODY>
+		</HEAD>
+		<HEAD var="I">
+			<BODY>Y,Z</BODY>
+		</HEAD>
+		
+		<HEAD var="X">
+			<BODY>x</BODY>
+		</HEAD>
+		<HEAD var="Y">
+			<BODY>Y,Y</BODY>
+		</HEAD>
+		<HEAD var="Z">
+			<BODY>X,Y</BODY>
+		</HEAD>
+		
+	</PRODUCTIONS>
+	<CNF>true</CNF>
+</CFG>

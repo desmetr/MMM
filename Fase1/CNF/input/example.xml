@@ -1,0 +1,39 @@
+<CFG>
+
+	<TERMINALS>a,b,c,d,e,f</TERMINALS>
+
+	<VARIABLES>X,Y,Z,H,G</VARIABLES>
+
+	<STARTVAR>X</STARTVAR>
+
+	<PRODUCTIONS>
+		<HEAD var="X">
+			<BODY>a,b</BODY>
+		</HEAD>
+
+		<HEAD var="X">
+			<BODY>Y</BODY>
+		</HEAD>
+		
+		<HEAD var="Y">
+			<BODY>d,e,f</BODY>
+		</HEAD>
+
+		<HEAD var="Y">
+			<BODY>H</BODY>
+		</HEAD>
+
+		<HEAD var="Y">
+			<BODY>Z</BODY>
+		</HEAD>
+
+		<HEAD var="Z">
+			<BODY>c</BODY>
+		</HEAD>
+
+		<HEAD var="G">
+			<BODY>a</BODY>
+		</HEAD>
+
+	</PRODUCTIONS>
+</CFG>

@@ -1,0 +1,6 @@
+cd build/
+cmake ..
+make
+make install
+cd ../
+./bin/mmm input/MusicXML_Grammar.xml input/MusicXML_testOctave_Rest.xml

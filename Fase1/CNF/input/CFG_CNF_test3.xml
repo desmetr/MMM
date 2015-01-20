@@ -1,0 +1,219 @@
+<CFG>
+
+	<TERMINALS>a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z</TERMINALS>
+
+	<VARIABLES>A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z</VARIABLES>
+
+	<STARTVAR>S</STARTVAR>
+
+	<PRODUCTIONS>
+		<HEAD var="S">
+			<BODY>A,B,C,A,B,C,F,G,H</BODY>
+		</HEAD>
+
+		<HEAD var="A">
+			<BODY>A,B,C,A,B,C,F,G,H</BODY>
+		</HEAD>
+		
+		<HEAD var="B">
+			<BODY>A,B,C,A,B,C,F,G,H</BODY>
+		</HEAD>
+		
+		<HEAD var="C">
+			<BODY>A,B,C,A,B,C,F,G,H</BODY>
+		</HEAD>
+		
+		<HEAD var="D">
+			<BODY>A,B,C,A,B,C,F,G,H</BODY>
+		</HEAD>
+		
+		<HEAD var="E">
+			<BODY>A,B,C,A,B,C,F,G,H</BODY>
+		</HEAD>
+		
+		<HEAD var="F">
+			<BODY>A,B,C,A,B,C,F,G,H</BODY>
+		</HEAD>
+		
+		<HEAD var="G">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="H">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="I">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="J">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="K">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="L">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="M">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="N">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="O">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="P">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="Q">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="R">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="T">
+			<BODY>M,O,N,Q,P,R,U,T</BODY>
+		</HEAD>
+		
+		<HEAD var="U">
+			<BODY>V</BODY>
+		</HEAD>
+		
+		<HEAD var="V">
+			<BODY>W</BODY>
+		</HEAD>
+		
+		<HEAD var="W">
+			<BODY>X</BODY>
+		</HEAD>
+		
+		<HEAD var="X">
+			<BODY>Y</BODY>
+		</HEAD>
+		
+		<HEAD var="Y">
+			<BODY>Z</BODY>
+		</HEAD>
+		
+		<HEAD var="Z">
+			<BODY>Z</BODY>
+		</HEAD>
+		
+		<HEAD var="S">
+			<BODY>s</BODY>
+		</HEAD>
+
+		<HEAD var="A">
+			<BODY>a</BODY>
+		</HEAD>
+		
+		<HEAD var="B">
+			<BODY>b</BODY>
+		</HEAD>
+		
+		<HEAD var="C">
+			<BODY>c</BODY>
+		</HEAD>
+		
+		<HEAD var="D">
+			<BODY>d</BODY>
+		</HEAD>
+		
+		<HEAD var="E">
+			<BODY>e</BODY>
+		</HEAD>
+		
+		<HEAD var="F">
+			<BODY>f</BODY>
+		</HEAD>
+		
+		<HEAD var="G">
+			<BODY>g</BODY>
+		</HEAD>
+		
+		<HEAD var="H">
+			<BODY>h</BODY>
+		</HEAD>
+		
+		<HEAD var="I">
+			<BODY>i</BODY>
+		</HEAD>
+		
+		<HEAD var="J">
+			<BODY>j</BODY>
+		</HEAD>
+		
+		<HEAD var="K">
+			<BODY>k</BODY>
+		</HEAD>
+		
+		<HEAD var="L">
+			<BODY>l</BODY>
+		</HEAD>
+		
+		<HEAD var="M">
+			<BODY>m</BODY>
+		</HEAD>
+		
+		<HEAD var="N">
+			<BODY>n</BODY>
+		</HEAD>
+		
+		<HEAD var="O">
+			<BODY>o</BODY>
+		</HEAD>
+		
+		<HEAD var="P">
+			<BODY>p</BODY>
+		</HEAD>
+		
+		<HEAD var="Q">
+			<BODY>Q</BODY>
+		</HEAD>
+		
+		<HEAD var="R">
+			<BODY>r</BODY>
+		</HEAD>
+		
+		<HEAD var="T">
+			<BODY>t</BODY>
+		</HEAD>
+		
+		<HEAD var="U">
+			<BODY>u</BODY>
+		</HEAD>
+		
+		<HEAD var="V">
+			<BODY>v</BODY>
+		</HEAD>
+		
+		<HEAD var="W">
+			<BODY>w</BODY>
+		</HEAD>
+		
+		<HEAD var="X">
+			<BODY>x</BODY>
+		</HEAD>
+		
+		<HEAD var="Y">
+			<BODY>y</BODY>
+		</HEAD>
+		
+		<HEAD var="Z">
+			<BODY>z</BODY>
+		</HEAD>
+
+	</PRODUCTIONS>
+</CFG>

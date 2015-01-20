@@ -1,0 +1,29 @@
+<CFG>
+	<TERMINALS>a,b</TERMINALS>
+
+	<VARIABLES>A,S,B</VARIABLES>
+
+	<STARTVAR>S</STARTVAR>
+
+	<PRODUCTIONS>
+		<HEAD var="S">
+			<BODY>a,b,a</BODY>
+		</HEAD>
+		
+		<HEAD var="S">
+			<BODY>A</BODY>
+		</HEAD>
+
+		<HEAD var="A">
+			<BODY>A,A</BODY>
+		</HEAD>
+		
+		<HEAD var="A">
+			<BODY>a</BODY>
+		</HEAD>
+		
+		<HEAD var="B">
+			<BODY></BODY>
+		</HEAD>
+	</PRODUCTIONS>
+</CFG>

@@ -1,0 +1,31 @@
+<CFG>
+	<!-- {a^i b^j c^i | i,j > 0} -->
+	<TERMINALS>a,b,c</TERMINALS>
+
+	<VARIABLES>S,A,C</VARIABLES>
+
+	<STARTVAR>S</STARTVAR>
+
+	<PRODUCTIONS>
+		<HEAD var="S">
+			<BODY>A,C</BODY>
+		</HEAD>
+
+		<HEAD var="A">
+            <BODY>a,A,b</BODY>
+		</HEAD>
+
+		<HEAD var="A">
+            <BODY>a,b</BODY>
+		</HEAD>
+      
+		<HEAD var="C">
+            <BODY>C,C</BODY>
+		</HEAD>
+      
+		<HEAD var="C">
+			<BODY>c</BODY>
+		</HEAD>
+
+	</PRODUCTIONS>
+</CFG>
