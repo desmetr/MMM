@@ -19,36 +19,36 @@ const std::stack<std::string>& PDA::getPdaStack() const 		{	return PDAStack;		}
 
 void PDA::setPdaStack(const std::stack<std::string>& pdaStack) 	{	PDAStack = pdaStack;	}
 
-void PDA::convertToEmptyStack()	{	
+void PDA::convertToEmptyStack()	{
 	// First we create two additional states. These will be the start state and the last state of the new PDA.
 	State newStartState("q", "start");	// The new start state will get the name p to show the difference between the original states and the new ones.
-	State newFinalState("p", "normal");	// The new final state will get the name q, for the same reasons as above. 
-										// And it will be a normal state, because in a PDA that accepts with an empty stack, there is no accept state. 
-	
+	State newFinalState("p", "normal");	// The new final state will get the name q, for the same reasons as above.
+										// And it will be a normal state, because in a PDA that accepts with an empty stack, there is no accept state.
+
 	for (auto& state : states)	{
 		if (state.getType() == "start")	{
 			Transition newStartTransition("e", "Y", startStackSymbol + "Y", state.getStateName());
-			
+
 			stackAlphabet.insert('Y');
 			startStackSymbol = "Y";
 			newStartState.transitions.push_back(newStartTransition);
 			newStartState.endStates.insert(state.getStateName());
-			
+
 			state.setType("normal");
 		}
-	}	
+	}
 
-	states.insert(states.begin(), newStartState);	// Add the new start state to the beginning of the states vector.	
+	states.insert(states.begin(), newStartState);	// Add the new start state to the beginning of the states vector.
 	states.push_back(newFinalState);				// Push back the new final state to the end of the states vector.
-	
+
 	for (auto& state : states)	{
 		if (state.getType() == "accept")	{
 			Transition newFinalTransition("e", "any", "e", newFinalState.getStateName());	// TODO any in stack alphabet?
 			state.transitions.push_back(newFinalTransition);
 			state.endStates.insert(newFinalState.getStateName());
-		}	
+		}
 	}
-	
+
 	Transition lastStateTransition("e", "any", "e", newFinalState.getStateName());
 	states.back().transitions.push_back(lastStateTransition);
 	states.back().endStates.insert(newFinalState.getStateName());
@@ -85,10 +85,10 @@ void PDA::convertToEmptyStack()	{
 					}
 				}
 			}
-		}	
+		}
 	}
 	catch (ValidateException& e){
-		
+
 		result = false;
 	}
 	return result;
@@ -124,14 +124,14 @@ SuccessEnum PDA::parseXML(const char* fileName) {
 		// Start parsing the general information of the PDA.
 		for (TiXmlElement* elem = root->FirstChildElement(); elem != nullptr; elem = elem->NextSiblingElement())	{
 			string elemName = elem->Value();
-			
+
 			if (elemName == "meta-data"){
 				for (TiXmlElement* metaDataElem = elem->FirstChildElement(); metaDataElem != nullptr; metaDataElem = metaDataElem->NextSiblingElement())	{
 					string metaDataElemName = metaDataElem->Value();
 					if (metaDataElemName == "input-alphabet")	{
 						string inputAlphabetString = metaDataElem->GetText();
 						numberOfInputChars = inputAlphabetString.size();
-			
+
 						for (unsigned int i = 0; i < numberOfInputChars; i++)	{
 							inputAlphabet.insert(inputAlphabetString[i]);
 						}
@@ -139,7 +139,7 @@ SuccessEnum PDA::parseXML(const char* fileName) {
 					if (metaDataElemName == "stack-alphabet")	{
 						string stackAlphabetString = metaDataElem->GetText();
 						numberOfStackChars = stackAlphabetString.size();
-			
+
 						for (unsigned int i = 0; i < numberOfStackChars; i++)	{
 							stackAlphabet.insert(stackAlphabetString[i]);
 						}
@@ -150,30 +150,30 @@ SuccessEnum PDA::parseXML(const char* fileName) {
 					}
 				}
 			}
-			
+
 			if (elemName == "states")	{
 				const char* numberOfStatesString = elem->Attribute("numberOfStates");
 				const int numberOfStates = Utilities::constCharToInt(numberOfStatesString);
-				
+
 				for (TiXmlElement* stateElem = elem->FirstChildElement(); stateElem != nullptr; stateElem = stateElem->NextSiblingElement())	{
 					string stateElemName = stateElem->Value();
-						
+
 					if (stateElemName == "state")	{
 						const char* numberOfStateString = stateElem->Attribute("number");
 						const int numberOfState = Utilities::constCharToInt(numberOfStateString);
 						const char* type = stateElem->Attribute("type");
-						
+
 						State newState(numberOfStateString, type);
-						
+
 						for (TiXmlElement* transElem = stateElem->FirstChildElement(); transElem != nullptr; transElem = transElem->NextSiblingElement())	{
 							string transElemName = transElem->Value();
-							
+
 							if (transElemName == "transition")	{
 								Transition newTransition(numberOfState);
-								
+
 								const char* numberOfTransString = transElem->Attribute("number");
 								int numberOfTrans = Utilities::constCharToInt(numberOfTransString);
-								
+
 								for (TiXmlElement* transInfoElem = transElem->FirstChildElement(); transInfoElem != nullptr; transInfoElem = transInfoElem->NextSiblingElement())	{
 									string transInfoElemName = transInfoElem->Value();
 									if (transInfoElemName == "input")	{
@@ -201,7 +201,6 @@ SuccessEnum PDA::parseXML(const char* fileName) {
 					}
 				}
 			}
-			cout << "eeee" << endl;
 			if (elemName == "algorithm")	{
 				string algorithm = elem->GetText();
 				if (algorithm == "empty")	{
@@ -209,7 +208,7 @@ SuccessEnum PDA::parseXML(const char* fileName) {
 				}
 			}
 		}
-		
+
 		doc.Clear();
 		return SUCCESS;
 	}
@@ -229,16 +228,16 @@ void PDA::print()	{
 			cout << inputSymbol << " ";
 		}
 		cout << endl;
-		
+
 		cout << "\tStack alphabet:\t";
 		for (const auto& stackSymbol : stackAlphabet)	{
 			cout << stackSymbol << " ";
 		}
 		cout << endl;
-	
+
 		cout << "\tStart stack symbol:";
 		cout << " " << startStackSymbol << endl;
-		
+
 		cout << "\nStates:\n";
 		for (auto& state : states)	{
 			cout << "\t" << state.toString() << endl;
@@ -253,7 +252,7 @@ void PDA::print()	{
 ostream& operator<< (ostream& out, PDA& pda)	{
 	out << "digraph PDA {" << endl;
 	out << "\trankdir=LR;" << endl;
-	
+
 	for (const auto& state : pda.states)	{
 		if (state.getType() == "accept")	{
 			out << "\t" << state.getStateName() << " [shape=doublecircle];" << endl;
@@ -261,8 +260,8 @@ ostream& operator<< (ostream& out, PDA& pda)	{
 		else	{
 			out << "\t" << state.getStateName() << " [shape=circle];" << endl;
 		}
-		
-		string localLabel = "";		
+
+		string localLabel = "";
  		for (const auto& endState : state.endStates)	{
 			out << "\t" << state.getStateName() << " -> " << endState << "[label=\"";
 			for (const auto& transition : state.transitions)	{
