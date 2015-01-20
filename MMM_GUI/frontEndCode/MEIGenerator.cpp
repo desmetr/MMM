@@ -49,8 +49,9 @@ MEIGenerator::MEIGenerator(const PartList& partList,const Part& part){
 				noot.STEM_DIR_VAR = n.stem.getStem();
 				noot.NOTE_NAME_VAR = noteMap.find(n.pitch.step.getStep()[0])->second;
 				noot.NOTE_OCTAVE_VAR = stoi(n.pitch.octave.getOctave());
-				maat.NOTES.push_back(noot);
                 noot.IS_REST = false;
+				maat.NOTES.push_back(noot);
+
 			}
 			else{
 				noot.NOTE_DURATION_VAR = typeMap.find(n.type.getType())->second;

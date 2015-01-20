@@ -323,6 +323,7 @@ void mainWindow::on_CSVButton_clicked()
         MusicXMLParser musicXMLParser;
         musicXMLParser.parse(filePath.toStdString());
 
+
         ui->progressBar->setValue(50);
         ui->logBox->insertPlainText("\nConverting to a CSV file...");
 
@@ -394,7 +395,6 @@ void mainWindow::on_MIDIButton_clicked()
 
         MusicXMLParser musicXMLParser;
         musicXMLParser.parse(filePath.toStdString());
-
         ui->progressBar->setValue(50);
         ui->logBox->insertPlainText("\nConverting to a CSV file...");
 

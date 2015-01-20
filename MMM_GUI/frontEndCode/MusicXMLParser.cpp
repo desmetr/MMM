@@ -187,7 +187,6 @@ SuccessEnum MusicXMLParser::parse(string fileName) {
 										string noteElemName = noteElem->Value();
 
 										if (noteElemName == "rest")	{
-                                            std::cout << "got a rest" << std::endl;
 											tempNote.setRest(true);
 										}
 										if (noteElemName == "duration")	{
