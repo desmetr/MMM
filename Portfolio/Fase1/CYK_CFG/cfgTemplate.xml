@@ -1,0 +1,17 @@
+<CFG>
+
+	<TERMINALS></TERMINALS>
+
+	<VARIABLES></VARIABLES>
+
+	<STARTVAR></STARTVAR>
+
+	<PRODUCTIONS>
+		
+		<HEAD var="">
+			<BODY></BODY>
+		</HEAD>
+
+	</PRODUCTIONS>
+
+</CFG>

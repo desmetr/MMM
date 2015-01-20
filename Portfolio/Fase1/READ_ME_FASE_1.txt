@@ -5,7 +5,15 @@ Deze READ_ME legt uit welke algoritmes we hebben geïmplementeerd.
 
 1) Jago heeft de CFG klasse en het CYK algoritme geïmplementeerd.
 
-// TODO uitleg over hoe je jouw testen runt.
+De source code staat in de folder CYK_CFG. De cfg source code staat in de CFG subfolder daarvan.
+Een test kan je runnen met het volgende commandline commando:
+./CYK grammar.xml teststring1 teststring2 ...
+Waarbij grammar.xml de naam van de grammatica in CNF vorm is die CYK moet gebruiken en
+teststring een string is waarvan je wil weten of hij tot de taal behoort.
+
+Er zijn een aantal voorbeeld CFG's voorzien in de map, alsook een template om CFG's aan te maken.
+CYK1 t.e.m 3 zijn testen van Wannes van op de conferentie. cfgExample is het de grammatica
+die in de cursus gebruikt werd om het CYK algoritme te illustreren.
 
 2) Benoitphilippe heeft het CNF algoritme geïmplementeerd.
 

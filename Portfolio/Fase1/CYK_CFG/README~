@@ -1,0 +1,16 @@
+[COMPILING]
+
+Compile with
+g++ -o CYK -std=c++11 CYK_main.cpp CYK.cpp CFG/CFG.cpp CFG/tinyxml2.cpp
+
+[RUNNING]
+
+Run from terminal with:
+./CYK grammar.xml testString1 testString2 testString3 ...
+
+[GRAMMARS]
+
+There is a grammar template available.
+
+There is also an example available in standardExample.xml, this is the grammar used to demonstrate
+the CYK algorithm in the notes.

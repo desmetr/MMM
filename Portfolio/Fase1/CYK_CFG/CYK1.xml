@@ -1,0 +1,51 @@
+<CFG>
+	<!-- {a^i b^j c^i | i,j > 0} -->
+	<TERMINALS>abc</TERMINALS>
+
+	<VARIABLES>SABCZX</VARIABLES>
+
+	<STARTVAR>S</STARTVAR>
+
+	<PRODUCTIONS>
+
+		<HEAD var="S">
+			<BODY>AZ</BODY>
+		</HEAD>
+
+		<HEAD var="S">
+            <BODY>XX</BODY>
+		</HEAD>
+      
+		<HEAD var="S">
+            <BODY>b</BODY>
+		</HEAD>
+      
+		<HEAD var="Z">
+			<BODY>SC</BODY>
+		</HEAD>
+
+		<HEAD var="X">
+			<BODY>b</BODY>
+		</HEAD>
+
+		<HEAD var="X">
+			<BODY>XX</BODY>
+		</HEAD>
+
+        <!-- terminals -->
+      
+		<HEAD var="A">
+			<BODY>a</BODY>
+		</HEAD>
+      
+		<HEAD var="B">
+			<BODY>b</BODY>
+		</HEAD>
+      
+		<HEAD var="C">
+			<BODY>c</BODY>
+		</HEAD>
+		
+	</PRODUCTIONS>
+
+</CFG>

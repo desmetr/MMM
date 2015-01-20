@@ -1,0 +1,11 @@
+digraph PDA {
+	rankdir=LR;
+	0 [shape=circle];
+	0 -> 0[label="a, X/XX\nb, X/XX"]
+	0 -> 1[label="c, X/Z"]
+	1 [shape=circle];
+	1 -> 2[label="a, Z/e"]
+	2 [shape=circle];
+	2 -> 3[label="c, Z/X"]
+	3 [shape=doublecircle];
+}

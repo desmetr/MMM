@@ -1,0 +1,70 @@
+<pda>
+	<!-- The following tags contain the general information of the PDA. -->
+	<meta-data>
+		<input-alphabet>e)(x</input-alphabet>
+		<stack-alphabet>e$(xt</stack-alphabet>
+		<start-stack-symbol>$</start-stack-symbol>
+	</meta-data>
+	
+	<states numberOfStates="5">
+		<state number="0" type="start">
+			<transition number="0">
+				<input>e</input> 								
+				<stack-symbol-to-pop>e</stack-symbol-to-pop> 	
+				<stack-symbol-to-push>$</stack-symbol-to-push>		
+				<end-state>1</end-state>
+			</transition>
+		</state>
+		<state number="1" type="normal">
+			<transition number="0">
+				<input>)</input>
+				<stack-symbol-to-pop>(</stack-symbol-to-pop>
+				<stack-symbol-to-push>t</stack-symbol-to-push>  
+				<end-state>1</end-state>
+			</transition>
+			<transition number="1">
+				<input>(</input>
+				<stack-symbol-to-pop>e</stack-symbol-to-pop>
+				<stack-symbol-to-push>(</stack-symbol-to-push>  
+				<end-state>1</end-state>
+			</transition>
+			<transition number="2">
+				<input>x</input>
+				<stack-symbol-to-pop>e</stack-symbol-to-pop>
+				<stack-symbol-to-push>x</stack-symbol-to-push>  
+				<end-state>1</end-state>
+			</transition>
+			<transition number="3">
+				<input>e</input>
+				<stack-symbol-to-pop>t</stack-symbol-to-pop>
+				<stack-symbol-to-push>e</stack-symbol-to-push>  
+				<end-state>2</end-state>
+			</transition>
+		</state>
+		<state number="2" type="normal">
+			<transition number="0">
+				<input>e</input>
+				<stack-symbol-to-pop>$</stack-symbol-to-pop>
+				<stack-symbol-to-push>e</stack-symbol-to-push>  
+				<end-state>4</end-state>
+			</transition>		
+			<transition number="1">
+				<input>e</input>
+				<stack-symbol-to-pop>t</stack-symbol-to-pop>
+				<stack-symbol-to-push>e</stack-symbol-to-push>  
+				<end-state>3</end-state>
+			</transition>
+		</state>
+		<state number="3" type="normal">
+			<transition number="0">
+				<input>e</input>
+				<stack-symbol-to-pop>x</stack-symbol-to-pop>
+				<stack-symbol-to-push>e</stack-symbol-to-push>  
+				<end-state>1</end-state>
+			</transition>
+		</state>
+		<state number="4" type="accept"/>
+	</states>
+	
+	<algorithm>none</algorithm>
+</pda>
