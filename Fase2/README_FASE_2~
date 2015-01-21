@@ -8,10 +8,11 @@ Het project kan vervolgens gebuild worden door MMM_GUI.pro te openen met Qt crea
 	Fase2
 	|-- Grammars			::Grammatica's voor MusicXML & MEI
 	|-- MMM_GUI			::Bevat de main voor de programmacode
-	|	|-- backEndCode		::Code van Fase1 die gebruikt wordt in het programma.
+	|	|-- backEndCode		::Code van Fase1 die gebruikt wordt in het programma, deze is enorm uitgebreid tegenover die van fase1 om de eisen van ons programma te vervullen.
 	|	|-- frontEndCode	::De code van alle conversies.
-	|-- workingDirectory 		::Bevat csv2midi, het programma dat CSV naar midi files omzet.
-	|	|-- midiData		::Instrument & nootlijsten nodig voor de conversie.
+	|	|-- TestFiles		::De test files die worde gebruikt tijdens de presentatie en de verdediging.
+	|-- workingDirectory 		::Bevat csv2midi.jar, het JAVA programma dat CSV naar midi files omzet.
+	|	|-- midiData		::Instrument- en nootlijsten nodig voor de conversie.
 
 [Ondersteunde conversies]
 
@@ -24,6 +25,6 @@ MEI -> MIDI --via CSV--
 
 [Bijkomende dependencies.]
 
-Om de CSV -> Midi conversie te runnen is java vereist.
-Om MusicXML/Midi files door het programma te laten openen is musescore vereist.
+Om de CSV -> Midi conversie te runnen is JAVA vereist.
+Om MusicXML/Midi files door het programma te laten openen en te laten afspelen is musescore vereist (zie http://musescore.org/en/download).
 

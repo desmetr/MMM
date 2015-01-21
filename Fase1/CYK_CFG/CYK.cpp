@@ -48,7 +48,7 @@ bool CYK::testString(string newTest) {
 
 	//Temporarily put the productions in the temp map.
 	tempMap = grammar.getProductions();
-//
+
 	//Generate the table.
 	generateTable(n);
 
@@ -120,7 +120,7 @@ void CYK::generateTable(unsigned int stringSize) {
 }
 
 void CYK::visualRepresentation(){
-
+	//Print a representation of the table, can be a bit confusing though.
 	for(unsigned int i = 0; i < table.size(); i++){
 		for(unsigned int j = 0; j < table[i].size(); j++){
 			cout << "[" << i << "][" << j << "]:{";
