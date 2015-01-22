@@ -17,7 +17,7 @@ die in de cursus gebruikt werd om het CYK algoritme te illustreren.
 
 2) Benoitphilippe heeft het CNF algoritme geïmplementeerd.
 
-CNF staat in de CNF-directory, het kan gerund worden met het commando "sh run.sh" in de terminal. De inputbestanden zijn verzameld in de subdirectory "input". Om een  ander bestand te lezen moet het run bestand aangepast worden op regel 6.
+// TODO uitleg over je jouw testen runt.
 
 3) Rafael heeft de PDA klasse en het converteren van een PDA die accepteert via accept state
 naar een PDA die accepteert via een lege stack.
