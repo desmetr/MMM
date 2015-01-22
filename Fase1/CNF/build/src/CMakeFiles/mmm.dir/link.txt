@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11    CMakeFiles/mmm.dir/main.cpp.o CMakeFiles/mmm.dir/basics.cpp.o CMakeFiles/mmm.dir/CFG.cpp.o CMakeFiles/mmm.dir/CNF.cpp.o CMakeFiles/mmm.dir/tinyxml2.cpp.o  -o mmm -rdynamic 
